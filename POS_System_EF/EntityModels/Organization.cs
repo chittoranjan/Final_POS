@@ -26,13 +26,5 @@ namespace POS_System_EF.EntityModels
         [MaxLength(11)]
         public string ContactNo { get; set; }
         public bool IsDelete { get; set; }
-        //public string GenerateCode(string Name, string address)
-        //{
-        //    int code=0;
-        //    var firstThreeChars = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-        //    var firstThreeCharsAddress = address.Length <= 3 ? address : address.Substring(0, 3);
-        //    return firstThreeChars + "-" + firstThreeCharsAddress+"-"+code++;
-        //}
-        
     }
 }

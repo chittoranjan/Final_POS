@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrganizationForm));
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.txtAddress = new System.Windows.Forms.TextBox();
@@ -45,7 +46,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBoxOrg = new System.Windows.Forms.PictureBox();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.tabControlOrg = new System.Windows.Forms.TabControl();
+            this.TabControlOrgPrint = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtCodeManual = new System.Windows.Forms.TextBox();
             this.tpDisplay = new System.Windows.Forms.TabPage();
@@ -54,15 +55,19 @@
             this.txtShowCode = new System.Windows.Forms.TextBox();
             this.txtShowContact = new System.Windows.Forms.TextBox();
             this.txtShowAddress = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBoxSrc = new System.Windows.Forms.TextBox();
+            this.textSrcQuick = new System.Windows.Forms.TextBox();
             this.txtSearchCode = new System.Windows.Forms.TextBox();
             this.buttonHome = new System.Windows.Forms.Button();
             this.dgvOrganization = new System.Windows.Forms.DataGridView();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnSrcClear = new System.Windows.Forms.Button();
+            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnHome = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOrg)).BeginInit();
-            this.tabControlOrg.SuspendLayout();
+            this.TabControlOrgPrint.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tpDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOrg)).BeginInit();
@@ -196,6 +201,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.Red;
             this.textBox1.Location = new System.Drawing.Point(220, 100);
@@ -237,15 +243,15 @@
             this.btnDelete.Visible = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // tabControlOrg
+            // TabControlOrgPrint
             // 
-            this.tabControlOrg.Controls.Add(this.tabPage1);
-            this.tabControlOrg.Controls.Add(this.tpDisplay);
-            this.tabControlOrg.Location = new System.Drawing.Point(12, 12);
-            this.tabControlOrg.Name = "tabControlOrg";
-            this.tabControlOrg.SelectedIndex = 0;
-            this.tabControlOrg.Size = new System.Drawing.Size(438, 437);
-            this.tabControlOrg.TabIndex = 128;
+            this.TabControlOrgPrint.Controls.Add(this.tabPage1);
+            this.TabControlOrgPrint.Controls.Add(this.tpDisplay);
+            this.TabControlOrgPrint.Location = new System.Drawing.Point(12, 12);
+            this.TabControlOrgPrint.Name = "TabControlOrgPrint";
+            this.TabControlOrgPrint.SelectedIndex = 0;
+            this.TabControlOrgPrint.Size = new System.Drawing.Size(438, 437);
+            this.TabControlOrgPrint.TabIndex = 128;
             // 
             // tabPage1
             // 
@@ -291,7 +297,7 @@
             this.tpDisplay.Controls.Add(this.txtShowCode);
             this.tpDisplay.Controls.Add(this.txtShowContact);
             this.tpDisplay.Controls.Add(this.txtShowAddress);
-            this.tpDisplay.Controls.Add(this.button5);
+            this.tpDisplay.Controls.Add(this.btnPrint);
             this.tpDisplay.Location = new System.Drawing.Point(4, 22);
             this.tpDisplay.Name = "tpDisplay";
             this.tpDisplay.Padding = new System.Windows.Forms.Padding(3);
@@ -346,42 +352,43 @@
             this.txtShowAddress.Size = new System.Drawing.Size(263, 73);
             this.txtShowAddress.TabIndex = 133;
             // 
-            // button5
+            // btnPrint
             // 
-            this.button5.Location = new System.Drawing.Point(295, 373);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 138;
-            this.button5.Text = "Print";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnPrint.Location = new System.Drawing.Point(295, 373);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
+            this.btnPrint.TabIndex = 138;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(456, 50);
+            this.label6.Location = new System.Drawing.Point(456, 47);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(104, 20);
             this.label6.TabIndex = 20;
             this.label6.Text = "Quick Search";
             // 
-            // textBoxSrc
+            // textSrcQuick
             // 
-            this.textBoxSrc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxSrc.Location = new System.Drawing.Point(566, 44);
-            this.textBoxSrc.Name = "textBoxSrc";
-            this.textBoxSrc.Size = new System.Drawing.Size(154, 26);
-            this.textBoxSrc.TabIndex = 25;
-            this.textBoxSrc.TextChanged += new System.EventHandler(this.textBoxSrc_TextChanged);
+            this.textSrcQuick.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textSrcQuick.Location = new System.Drawing.Point(566, 44);
+            this.textSrcQuick.Name = "textSrcQuick";
+            this.textSrcQuick.Size = new System.Drawing.Size(154, 26);
+            this.textSrcQuick.TabIndex = 25;
+            this.textSrcQuick.TextChanged += new System.EventHandler(this.textSrcQuick_TextChanged);
             // 
             // txtSearchCode
             // 
             this.txtSearchCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchCode.Location = new System.Drawing.Point(833, 44);
+            this.txtSearchCode.Location = new System.Drawing.Point(881, 44);
             this.txtSearchCode.Name = "txtSearchCode";
             this.txtSearchCode.Size = new System.Drawing.Size(154, 26);
             this.txtSearchCode.TabIndex = 25;
-            this.txtSearchCode.TextChanged += new System.EventHandler(this.textBoxSrc_TextChanged);
+            this.txtSearchCode.TextChanged += new System.EventHandler(this.txtSearchCode_TextChanged);
             // 
             // buttonHome
             // 
@@ -402,37 +409,73 @@
             this.dgvOrganization.RowHeadersVisible = false;
             this.dgvOrganization.RowTemplate.Height = 70;
             this.dgvOrganization.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrganization.Size = new System.Drawing.Size(701, 315);
+            this.dgvOrganization.Size = new System.Drawing.Size(701, 349);
             this.dgvOrganization.TabIndex = 28;
             this.dgvOrganization.DoubleClick += new System.EventHandler(this.dgvOrganization_DoubleClick);
             // 
-            // btnSearch
+            // btnSrcClear
             // 
-            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(993, 42);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(149, 31);
-            this.btnSearch.TabIndex = 127;
-            this.btnSearch.Text = "Search By Code";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSrcClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSrcClear.Location = new System.Drawing.Point(1072, 42);
+            this.btnSrcClear.Name = "btnSrcClear";
+            this.btnSrcClear.Size = new System.Drawing.Size(89, 31);
+            this.btnSrcClear.TabIndex = 127;
+            this.btnSrcClear.Text = "Clear";
+            this.btnSrcClear.UseVisualStyleBackColor = true;
+            this.btnSrcClear.Click += new System.EventHandler(this.btnSrcClear_Click);
+            // 
+            // printPreviewDialog
+            // 
+            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Enabled = true;
+            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
+            this.printPreviewDialog.Name = "printPreviewDialog";
+            this.printPreviewDialog.Visible = false;
+            // 
+            // printDocument
+            // 
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(753, 47);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(122, 20);
+            this.label8.TabIndex = 129;
+            this.label8.Text = "Search by Code";
+            // 
+            // btnHome
+            // 
+            this.btnHome.Location = new System.Drawing.Point(1086, 451);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(75, 23);
+            this.btnHome.TabIndex = 130;
+            this.btnHome.Text = "Home";
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // OrganizationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1198, 498);
-            this.Controls.Add(this.tabControlOrg);
-            this.Controls.Add(this.btnSearch);
+            this.ClientSize = new System.Drawing.Size(1200, 486);
+            this.Controls.Add(this.btnHome);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.TabControlOrgPrint);
+            this.Controls.Add(this.btnSrcClear);
             this.Controls.Add(this.dgvOrganization);
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.txtSearchCode);
-            this.Controls.Add(this.textBoxSrc);
+            this.Controls.Add(this.textSrcQuick);
             this.Controls.Add(this.label6);
             this.Name = "OrganizationForm";
             this.Text = "Organization Form";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOrg)).EndInit();
-            this.tabControlOrg.ResumeLayout(false);
+            this.TabControlOrgPrint.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tpDisplay.ResumeLayout(false);
@@ -462,21 +505,25 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.TabControl tabControlOrg;
+        private System.Windows.Forms.TabControl TabControlOrgPrint;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tpDisplay;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBoxSrc;
+        private System.Windows.Forms.TextBox textSrcQuick;
         private System.Windows.Forms.TextBox txtSearchCode;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.DataGridView dgvOrganization;
-        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnSrcClear;
         private System.Windows.Forms.PictureBox pbOrg;
         private System.Windows.Forms.TextBox txtShowName;
         private System.Windows.Forms.TextBox txtShowCode;
         private System.Windows.Forms.TextBox txtShowContact;
         private System.Windows.Forms.TextBox txtShowAddress;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.TextBox txtCodeManual;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
+        private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnHome;
     }
 }
