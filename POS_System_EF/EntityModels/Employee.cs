@@ -46,12 +46,5 @@ namespace POS_System_EF.EntityModels
         public int OrganizationId { get; set; }
         public Organization Organization { get; set; }
         public bool IsDelete { get; set; }
-        public string GenerateCode(string Name, string ContactNo)
-        {
-            int sl = 0;
-            var firstThreeCharsName = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            var firstThreeCharsContact = ContactNo.Length <= 3 ? ContactNo : ContactNo.Substring(0, 3);
-            return firstThreeCharsName + "-" + firstThreeCharsContact+"-"+sl++;
-        }
     }
 }
