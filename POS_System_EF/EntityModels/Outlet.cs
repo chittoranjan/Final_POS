@@ -26,11 +26,5 @@ namespace POS_System_EF.EntityModels
         public Organization Organization { get; set; }
         public bool IsDelete { get; set; }
 
-
-            public string GenerateCode(string Name, string Address)
-        {
-            var firstThreeChars = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            return firstThreeChars + "-";
-        }
     }
 }
