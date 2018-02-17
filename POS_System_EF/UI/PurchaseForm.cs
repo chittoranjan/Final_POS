@@ -211,10 +211,15 @@ namespace POS_System_EF.UI
             {
                TempPurchase temp=new TempPurchase();
                 temp.Name = txtItemName.Text;
-                var costPrice = db.Items.Where(a => a.Name == temp.Name).Include(a => a.CostPrice) ;
-                if (costPrice != null)
+                var objItem = db.Items.FirstOrDefault(a => a.Name == temp.Name);
+
+                if (objItem != null)
                 {
-                    txtCostPrice.Text = costPrice.ToString();
+                    txtCostPrice.Text = objItem.CostPrice.ToString();
+                }
+                else
+                {
+                    txtCostPrice.Clear();
                 }
             }
             
