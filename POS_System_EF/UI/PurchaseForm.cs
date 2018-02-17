@@ -21,13 +21,15 @@ namespace POS_System_EF.UI
             ComboBoxData();
             ClearTextBox();
         }
-        ManagerContext db = new ManagerContext();
+
         DataTable table = new DataTable();
-        List<TempPurchase> listPurchase=new List<TempPurchase>();
+        List<TempPurchase> listPurchase = new List<TempPurchase>();
+        List<decimal> tamount = new List<decimal>();
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
+                ManagerContext db = new ManagerContext();
                 Purchase purchase = new Purchase();
                 purchase.ListOfPurchase = listPurchase;
                 purchase.OutletId = (int)cmbOutlet.SelectedValue;
@@ -47,78 +49,76 @@ namespace POS_System_EF.UI
                     MessageBox.Show("Try Again !");
                 }
             }
+
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message + "\n" + "Please fill taxt box!");
             }
-            
+
+
+
             ClearTextBox();
         }
-        private int SetInvoiceNo()
-        {
-            int no = db.Purchases.Count();
-            no= 100+ no++;
-            return no;
-        }
-        private void ComboBoxData()
-        {
-            
-            var item = db.Items.ToList();
-            cmbItem.DataSource = item;
-            cmbItem.DisplayMember = "Name";
-            cmbItem.ValueMember = "Id";
 
-
-            cmbOutlet.DataSource = db.Outlets.ToList();
-            cmbOutlet.DisplayMember = "Name";
-            cmbOutlet.ValueMember = "Id";
-
-
-            cmbEmployee.DataSource = db.Employees.ToList();
-            cmbEmployee.DisplayMember = "Name";
-            cmbEmployee.ValueMember = "Id";
-
-
-            cmbSupplier.DataSource = db.Suppliers.ToList();
-            cmbSupplier.DisplayMember = "Name";
-            cmbSupplier.ValueMember = "Id";
-        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            TempPurchase temp = new TempPurchase();
-            temp.Name = cmbItem.Text;
-            temp.Quantity = Convert.ToInt32(txtQty.Text);
-            temp.CostPrice = Convert.ToDecimal(txtCostPrice.Text);
-            temp.TotalPrice = temp.Quantity * temp.CostPrice;
-            table.Rows.Add(temp.Name,temp.Quantity,temp.CostPrice,temp.TotalPrice);
-            //temp.listOfPurchase.Add(temp);
-            listPurchase.Add(temp);
-            dgvPurchaseList.DataSource = table;
-            ClearTextBox();
+            try
+            {
+                TempPurchase temp = new TempPurchase();
+                temp.Name = txtItemName.Text;
+                temp.Quantity = Convert.ToInt32(txtQty.Text);
+                temp.CostPrice = Convert.ToDecimal(txtCostPrice.Text);
+                temp.TotalPrice = temp.Quantity * temp.CostPrice;
+                using (ManagerContext db = new ManagerContext())
+                {
+                    var name = db.Items.Where(a => a.Name==temp.Name).ToList();
+                    if(name.Count==0)
+                    {
+                        MessageBox.Show("Item Does Not Found","Message",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        table.Rows.Add(temp.Name, temp.Quantity, temp.CostPrice, temp.TotalPrice);
+                        listPurchase.Add(temp);
+                        tamount.Add(temp.TotalPrice);
+                        dgvPurchaseList.DataSource = table;
+                        ClearTextBox();
+                        lblTotalAmount.Text = tamount.Sum().ToString();
+                    }
+                }
+                    
+                
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
+       
+        
 
         private void PurchaseForm_Load(object sender, EventArgs e)
         {
-
-            table.Columns.Add("Item Name", typeof(string));
-            table.Columns.Add("Quantiy", typeof(int));
-            table.Columns.Add("Cost Price", typeof(decimal));
-            table.Columns.Add("Total Price", typeof(decimal));
-            dgvPurchaseList.DataSource = table;
+            AutoCompleteData();
+            GridViewColumAdd();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-           
-            if (dgvPurchaseList.SelectedRows.Count> 0)
+
+            if (dgvPurchaseList.SelectedRows.Count > 0)
             {
                 dgvPurchaseList.Rows.RemoveAt(dgvPurchaseList.SelectedRows[0].Index);
             }
+            btnDelete.Visible = false;
         }
 
-      
+
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -134,21 +134,90 @@ namespace POS_System_EF.UI
         {
             btnDelete.Visible = true;
             btnDelete.Enabled = true;
-            cmbItem.Text = dgvPurchaseList.CurrentRow.Cells[0].Value.ToString();
+            txtItemName.Text = dgvPurchaseList.CurrentRow.Cells[0].Value.ToString();
             txtQty.Text = dgvPurchaseList.CurrentRow.Cells[1].Value.ToString();
             txtCostPrice.Text = dgvPurchaseList.CurrentRow.Cells[2].Value.ToString();
+        }
+        
+        private string AutoCompleteData()
+        {
+            using (ManagerContext db = new ManagerContext())
+            {
+                var item = from i in db.Items select i.Name;
+                AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+                collection.AddRange(item.ToArray());
+                txtItemName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                txtItemName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                txtItemName.AutoCompleteCustomSource = collection;
+                return collection.ToString();
+            }
+
+        }
+
+        private void GridViewColumAdd()
+        {
+            table.Columns.Add("Item Name", typeof(string));
+            table.Columns.Add("Quantiy", typeof(int));
+            table.Columns.Add("Cost Price", typeof(decimal));
+            table.Columns.Add("Total Price", typeof(decimal));
+            dgvPurchaseList.DataSource = table;
+        }
+
+        
+        private int SetInvoiceNo()
+        {
+            ManagerContext db = new ManagerContext();
+            int no = db.Purchases.Count();
+            no = 100 + no++;
+            return no;
+        }
+        private void ComboBoxData()
+        {
+
+            ManagerContext db = new ManagerContext();
+
+            cmbOutlet.DataSource = db.Outlets.ToList();
+            cmbOutlet.DisplayMember = "Name";
+            cmbOutlet.ValueMember = "Id";
+
+
+            cmbEmployee.DataSource = db.Employees.ToList();
+            cmbEmployee.DisplayMember = "Name";
+            cmbEmployee.ValueMember = "Id";
+
+
+            cmbSupplier.DataSource = db.Suppliers.ToList();
+            cmbSupplier.DisplayMember = "Name";
+            cmbSupplier.ValueMember = "Id";
         }
         private void ClearTextBox()
         {
             txtQty.Clear();
             txtCostPrice.Clear();
-            cmbItem.Text = null;
+            txtItemName.Text = null;
             txtQty.Clear();
             txtCostPrice.Clear();
             cmbEmployee.Text = null;
             cmbOutlet.Text = null;
             cmbSupplier.Text = null;
             txtRemarks.Clear();
+        }
+
+        
+
+        private void txtItemName_Leave(object sender, EventArgs e)
+        {
+            using (ManagerContext db=new ManagerContext())
+            {
+               TempPurchase temp=new TempPurchase();
+                temp.Name = txtItemName.Text;
+                var costPrice = db.Items.Where(a => a.Name == temp.Name).Include(a => a.CostPrice) ;
+                if (costPrice != null)
+                {
+                    txtCostPrice.Text = costPrice.ToString();
+                }
+            }
+            
         }
     }
 }

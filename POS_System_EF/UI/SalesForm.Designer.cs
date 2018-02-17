@@ -555,6 +555,7 @@
             this.Controls.Add(this.gbSalesRecieving);
             this.Controls.Add(this.label7);
             this.Name = "SalesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SalesForm";
             this.Load += new System.EventHandler(this.SalesForm_Load);
             this.gbSalesSummary.ResumeLayout(false);

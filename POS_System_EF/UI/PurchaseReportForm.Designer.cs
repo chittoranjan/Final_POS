@@ -314,6 +314,7 @@
             this.Controls.Add(this.txtSearchBox);
             this.Controls.Add(this.dgvPurchaseReport);
             this.Name = "PurchaseReportForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PurchaseReportForm";
             this.Load += new System.EventHandler(this.PurchaseReportForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchaseReport)).EndInit();

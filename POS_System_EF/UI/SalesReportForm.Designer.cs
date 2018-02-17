@@ -181,6 +181,7 @@
             this.Controls.Add(this.richTextBoxSalesList);
             this.Controls.Add(this.dgvSalesList);
             this.Name = "SalesReportForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SalesReportForm";
             this.Load += new System.EventHandler(this.SalesReportForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesList)).EndInit();

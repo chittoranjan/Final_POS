@@ -323,6 +323,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxSrc);
             this.Name = "SupplierCustomerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Supplier And Customer Form";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.partyGroupBox.ResumeLayout(false);

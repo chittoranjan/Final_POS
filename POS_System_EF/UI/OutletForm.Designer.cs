@@ -405,6 +405,7 @@
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.buttonPrint);
             this.Name = "OutletForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Outlet Form";
             this.groupBoxShow.ResumeLayout(false);
             this.groupBoxShow.PerformLayout();

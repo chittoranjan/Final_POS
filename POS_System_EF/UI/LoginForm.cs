@@ -51,5 +51,9 @@ namespace POS_System_EF.UI
             txtPassword.Clear();
             this.Close();
         }
+
+        
+
+        
     }
 }

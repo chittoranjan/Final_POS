@@ -245,6 +245,7 @@
             this.Controls.Add(this.dgvCategoryList);
             this.Controls.Add(this.textBoxSrc);
             this.Name = "ItemCategoryForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Item Category Form";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategoryList)).EndInit();
             this.groupBox1.ResumeLayout(false);

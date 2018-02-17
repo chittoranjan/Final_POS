@@ -430,6 +430,7 @@
             this.Controls.Add(this.textBoxSrc);
             this.Controls.Add(this.label6);
             this.Name = "OrganizationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Organization Form";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOrg)).EndInit();
             this.tabControlOrg.ResumeLayout(false);

@@ -229,6 +229,7 @@
             this.Controls.Add(this.labeRootcat);
             this.Controls.Add(this.label1);
             this.Name = "ExpenseCategoryForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Expense Category Form";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategoryList)).EndInit();
             this.ResumeLayout(false);

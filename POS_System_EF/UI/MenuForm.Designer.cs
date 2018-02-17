@@ -246,6 +246,7 @@
             this.ClientSize = new System.Drawing.Size(1084, 461);
             this.Controls.Add(this.menuStrip1);
             this.Name = "OpeningForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Opening Form";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);

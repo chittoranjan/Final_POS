@@ -24,14 +24,21 @@ namespace POS_System_EF.UI
         List<SalesItem> listOfSalesItem=new List<SalesItem>();
         private void btnSalesAdd_Click(object sender, EventArgs e)
         {
-            SalesItem item = new SalesItem();
-            item.SalesItemName = cmbSalesItem.Text;
-            item.Quantity = Convert.ToInt32(txtSalesQty.Text);
-            item.SalePrice = Convert.ToDecimal(txtSaletPrice.Text);
-            item.LineTotal = item.Quantity * item.SalePrice;
-            table.Rows.Add(item.SalesItemName, item.Quantity, item.SalePrice, item.LineTotal);
-            listOfSalesItem.Add(item);
-            dgvSalesList.DataSource = table;
+            try
+            {
+                SalesItem item = new SalesItem();
+                item.SalesItemName = cmbSalesItem.Text;
+                item.Quantity = Convert.ToInt32(txtSalesQty.Text);
+                item.SalePrice = Convert.ToDecimal(txtSaletPrice.Text);
+                item.LineTotal = item.Quantity * item.SalePrice;
+                table.Rows.Add(item.SalesItemName, item.Quantity, item.SalePrice, item.LineTotal);
+                listOfSalesItem.Add(item);
+                dgvSalesList.DataSource = table;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
@@ -114,28 +121,36 @@ namespace POS_System_EF.UI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Sale sales = new Sale();
-            sales.InvoiceNo = "0000";
-            sales.listOfItem = listOfSalesItem;
-            sales.CustomerName = txtCustomerName.Text;
-            sales.CustomerContactNo = txtContactNo.Text;
-            sales.SubTotal = Convert.ToDecimal(txtSubTotal.Text);
-            sales.Vat = Convert.ToDecimal(txtVat.Text);
-            sales.Remarks = txtRemarks.Text;
-            sales.Discount = Convert.ToDecimal(txtDiscount.Text);
-            sales.OutletId = (int)cmbOutlet.SelectedValue;
-            sales.EmployeeId = (int)cmbEmployee.SelectedValue;
-            ManagerContext db = new ManagerContext();
-            db.Sales.Add(sales);
-            int count = db.SaveChanges();
-            if (count > 0)
+            try
             {
-                MessageBox.Show("Sales Saved Success");
+                Sale sales = new Sale();
+                sales.InvoiceNo = "0000";
+                sales.listOfItem = listOfSalesItem;
+                sales.CustomerName = txtCustomerName.Text;
+                sales.CustomerContactNo = txtContactNo.Text;
+                sales.SubTotal = Convert.ToDecimal(txtSubTotal.Text);
+                sales.Vat = Convert.ToDecimal(txtVat.Text);
+                sales.Remarks = txtRemarks.Text;
+                sales.Discount = Convert.ToDecimal(txtDiscount.Text);
+                sales.OutletId = (int)cmbOutlet.SelectedValue;
+                sales.EmployeeId = (int)cmbEmployee.SelectedValue;
+                ManagerContext db = new ManagerContext();
+                db.Sales.Add(sales);
+                int count = db.SaveChanges();
+                if (count > 0)
+                {
+                    MessageBox.Show("Sales Saved Success");
+                }
+                else
+                {
+                    MessageBox.Show("Operation Failed");
+                }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("Operation Failed");
+                MessageBox.Show(ex.Message);
             }
+         
         }
 
         private decimal GetTotalAmount()

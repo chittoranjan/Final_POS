@@ -585,6 +585,7 @@
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.textBoxSrc);
             this.Name = "EmployeeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EmployeeForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployee)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmp)).EndInit();

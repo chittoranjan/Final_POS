@@ -47,6 +47,7 @@
             this.ClientSize = new System.Drawing.Size(834, 363);
             this.Controls.Add(this.barCodePictureBox);
             this.Name = "BarcodeViewForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BarcodeViewForm";
             ((System.ComponentModel.ISupportInitialize)(this.barCodePictureBox)).EndInit();
             this.ResumeLayout(false);

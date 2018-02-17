@@ -405,6 +405,7 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSave);
             this.Name = "ExpenseForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Expense Form";
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

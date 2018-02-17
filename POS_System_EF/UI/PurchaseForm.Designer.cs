@@ -31,8 +31,9 @@
             this.button4 = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.gbSummary = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblTotalAmount = new System.Windows.Forms.Label();
             this.gbDetails = new System.Windows.Forms.GroupBox();
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.dtpPurchase = new System.Windows.Forms.DateTimePicker();
@@ -47,10 +48,10 @@
             this.gbShowPurchaseItem = new System.Windows.Forms.GroupBox();
             this.dgvPurchaseList = new System.Windows.Forms.DataGridView();
             this.gbPurchaseRecieving = new System.Windows.Forms.GroupBox();
+            this.txtItemName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.cmbItem = new System.Windows.Forms.ComboBox();
             this.txtQty = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtCostPrice = new System.Windows.Forms.TextBox();
@@ -66,7 +67,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(911, 432);
+            this.button4.Location = new System.Drawing.Point(911, 444);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(86, 35);
             this.button4.TabIndex = 24;
@@ -77,7 +78,7 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(809, 432);
+            this.btnSave.Location = new System.Drawing.Point(809, 444);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(86, 35);
             this.btnSave.TabIndex = 25;
@@ -87,35 +88,46 @@
             // 
             // gbSummary
             // 
+            this.gbSummary.Controls.Add(this.label7);
             this.gbSummary.Controls.Add(this.label11);
-            this.gbSummary.Controls.Add(this.label10);
+            this.gbSummary.Controls.Add(this.lblTotalAmount);
             this.gbSummary.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbSummary.Location = new System.Drawing.Point(601, 341);
             this.gbSummary.Name = "gbSummary";
-            this.gbSummary.Size = new System.Drawing.Size(397, 76);
+            this.gbSummary.Size = new System.Drawing.Size(397, 95);
             this.gbSummary.TabIndex = 23;
             this.gbSummary.TabStop = false;
             this.gbSummary.Text = "Purchase Summary";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(26, 23);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(104, 20);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Total Amount";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(228, 23);
+            this.label11.Location = new System.Drawing.Point(246, 23);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(99, 20);
             this.label11.TabIndex = 14;
             this.label11.Text = "Amount Due";
             // 
-            // label10
+            // lblTotalAmount
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(28, 23);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(44, 20);
-            this.label10.TabIndex = 13;
-            this.label10.Text = "Total";
+            this.lblTotalAmount.AutoSize = true;
+            this.lblTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalAmount.Location = new System.Drawing.Point(75, 53);
+            this.lblTotalAmount.Name = "lblTotalAmount";
+            this.lblTotalAmount.Size = new System.Drawing.Size(18, 20);
+            this.lblTotalAmount.TabIndex = 13;
+            this.lblTotalAmount.Text = "0";
             // 
             // gbDetails
             // 
@@ -247,20 +259,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPurchaseList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPurchaseList.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvPurchaseList.Location = new System.Drawing.Point(3, 22);
             this.dgvPurchaseList.Name = "dgvPurchaseList";
             this.dgvPurchaseList.RowHeadersVisible = false;
-            this.dgvPurchaseList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPurchaseList.Size = new System.Drawing.Size(543, 336);
             this.dgvPurchaseList.TabIndex = 0;
             this.dgvPurchaseList.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPurchaseList_CellMouseClick);
             // 
             // gbPurchaseRecieving
             // 
+            this.gbPurchaseRecieving.Controls.Add(this.txtItemName);
             this.gbPurchaseRecieving.Controls.Add(this.label1);
             this.gbPurchaseRecieving.Controls.Add(this.btnDelete);
             this.gbPurchaseRecieving.Controls.Add(this.btnClear);
-            this.gbPurchaseRecieving.Controls.Add(this.cmbItem);
             this.gbPurchaseRecieving.Controls.Add(this.txtQty);
             this.gbPurchaseRecieving.Controls.Add(this.btnAdd);
             this.gbPurchaseRecieving.Controls.Add(this.txtCostPrice);
@@ -273,6 +285,15 @@
             this.gbPurchaseRecieving.TabIndex = 20;
             this.gbPurchaseRecieving.TabStop = false;
             this.gbPurchaseRecieving.Text = "Purchase Receiving";
+            // 
+            // txtItemName
+            // 
+            this.txtItemName.AcceptsTab = true;
+            this.txtItemName.Location = new System.Drawing.Point(103, 30);
+            this.txtItemName.Name = "txtItemName";
+            this.txtItemName.Size = new System.Drawing.Size(176, 26);
+            this.txtItemName.TabIndex = 0;
+            this.txtItemName.Leave += new System.EventHandler(this.txtItemName_Leave);
             // 
             // label1
             // 
@@ -307,23 +328,13 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // cmbItem
-            // 
-            this.cmbItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbItem.FormattingEnabled = true;
-            this.cmbItem.Location = new System.Drawing.Point(103, 26);
-            this.cmbItem.Name = "cmbItem";
-            this.cmbItem.Size = new System.Drawing.Size(178, 28);
-            this.cmbItem.TabIndex = 1;
-            // 
             // txtQty
             // 
             this.txtQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtQty.Location = new System.Drawing.Point(376, 29);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(100, 26);
-            this.txtQty.TabIndex = 2;
+            this.txtQty.TabIndex = 1;
             // 
             // btnAdd
             // 
@@ -372,7 +383,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1031, 479);
+            this.ClientSize = new System.Drawing.Size(1061, 503);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.gbSummary);
@@ -380,6 +391,7 @@
             this.Controls.Add(this.gbShowPurchaseItem);
             this.Controls.Add(this.gbPurchaseRecieving);
             this.Name = "PurchaseForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PurchaseForm";
             this.Load += new System.EventHandler(this.PurchaseForm_Load);
             this.gbSummary.ResumeLayout(false);
@@ -400,7 +412,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.GroupBox gbSummary;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblTotalAmount;
         private System.Windows.Forms.GroupBox gbDetails;
         private System.Windows.Forms.TextBox txtRemarks;
         private System.Windows.Forms.DateTimePicker dtpPurchase;
@@ -417,12 +429,13 @@
         private System.Windows.Forms.GroupBox gbPurchaseRecieving;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.ComboBox cmbItem;
         private System.Windows.Forms.TextBox txtQty;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtCostPrice;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.TextBox txtItemName;
+        private System.Windows.Forms.Label label7;
     }
 }
