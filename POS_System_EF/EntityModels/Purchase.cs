@@ -30,5 +30,7 @@ namespace POS_System_EF.EntityModels
         public int? SupplierId { get; set; }
         public Supplier Supplier { get; set; }
         public bool IsDelete { get; set; }
+        [Required]
+        public decimal TotalAmount { get; set; }
     }
 }

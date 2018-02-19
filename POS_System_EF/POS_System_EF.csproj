@@ -106,6 +106,10 @@
     <Compile Include="Migrations\201802140937163_SalesClassChanged.Designer.cs">
       <DependentUpon>201802140937163_SalesClassChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802171935376_PurchaseClassAddedTotalAmountField.cs" />
+    <Compile Include="Migrations\201802171935376_PurchaseClassAddedTotalAmountField.Designer.cs">
+      <DependentUpon>201802171935376_PurchaseClassAddedTotalAmountField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UI\ExpenseCategoryForm.cs">
       <SubType>Form</SubType>
@@ -211,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802140937163_SalesClassChanged.resx">
       <DependentUpon>201802140937163_SalesClassChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802171935376_PurchaseClassAddedTotalAmountField.resx">
+      <DependentUpon>201802171935376_PurchaseClassAddedTotalAmountField.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ExpenseCategoryForm.resx">
       <DependentUpon>ExpenseCategoryForm.cs</DependentUpon>

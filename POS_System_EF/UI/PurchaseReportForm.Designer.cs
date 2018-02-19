@@ -72,6 +72,7 @@
             this.dgvPurchaseReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPurchaseReport.Size = new System.Drawing.Size(618, 431);
             this.dgvPurchaseReport.TabIndex = 0;
+            this.dgvPurchaseReport.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPurchaseReport_CellClick);
             this.dgvPurchaseReport.DoubleClick += new System.EventHandler(this.dgvPurchaseReport_DoubleClick);
             // 
             // txtSearchBox
@@ -204,6 +205,7 @@
             // 
             // itemListView
             // 
+            this.itemListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.itemListView.Location = new System.Drawing.Point(15, 189);
             this.itemListView.Name = "itemListView";
             this.itemListView.Size = new System.Drawing.Size(501, 316);

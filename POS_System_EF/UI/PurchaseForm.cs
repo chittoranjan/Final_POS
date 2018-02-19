@@ -38,6 +38,7 @@ namespace POS_System_EF.UI
                 purchase.EmployeeId = (int)cmbEmployee.SelectedValue;
                 purchase.SupplierId = (int)cmbSupplier.SelectedValue;
                 purchase.InvoiceNo = SetInvoiceNo();
+                purchase.TotalAmount = Convert.ToDecimal(lblTotalAmount.Text);
                 db.Purchases.Add(purchase);
                 int count = db.SaveChanges();
                 if (count > 0)
@@ -67,7 +68,7 @@ namespace POS_System_EF.UI
             try
             {
                 TempPurchase temp = new TempPurchase();
-                temp.Name = txtItemName.Text;
+                temp.Name = cmbItem.Text;
                 temp.Quantity = Convert.ToInt32(txtQty.Text);
                 temp.CostPrice = Convert.ToDecimal(txtCostPrice.Text);
                 temp.TotalPrice = temp.Quantity * temp.CostPrice;
@@ -81,12 +82,14 @@ namespace POS_System_EF.UI
                     else
                     {
                         table.Rows.Add(temp.Name, temp.Quantity, temp.CostPrice, temp.TotalPrice);
+
                         listPurchase.Add(temp);
                         tamount.Add(temp.TotalPrice);
                         dgvPurchaseList.DataSource = table;
                         ClearTextBox();
                         lblTotalAmount.Text = tamount.Sum().ToString();
                     }
+                    
                 }
                     
                 
@@ -104,21 +107,8 @@ namespace POS_System_EF.UI
 
         private void PurchaseForm_Load(object sender, EventArgs e)
         {
-            AutoCompleteData();
             GridViewColumAdd();
         }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-
-            if (dgvPurchaseList.SelectedRows.Count > 0)
-            {
-                dgvPurchaseList.Rows.RemoveAt(dgvPurchaseList.SelectedRows[0].Index);
-            }
-            btnDelete.Visible = false;
-        }
-
-
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -130,29 +120,20 @@ namespace POS_System_EF.UI
             ClearTextBox();
         }
 
-        private void dgvPurchaseList_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            btnDelete.Visible = true;
-            btnDelete.Enabled = true;
-            txtItemName.Text = dgvPurchaseList.CurrentRow.Cells[0].Value.ToString();
-            txtQty.Text = dgvPurchaseList.CurrentRow.Cells[1].Value.ToString();
-            txtCostPrice.Text = dgvPurchaseList.CurrentRow.Cells[2].Value.ToString();
-        }
-        
-        private string AutoCompleteData()
-        {
-            using (ManagerContext db = new ManagerContext())
-            {
-                var item = from i in db.Items select i.Name;
-                AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
-                collection.AddRange(item.ToArray());
-                txtItemName.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                txtItemName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                txtItemName.AutoCompleteCustomSource = collection;
-                return collection.ToString();
-            }
+        //private string AutoCompleteData()
+        //{
+        //    using (ManagerContext db = new ManagerContext())
+        //    {
+        //        var item = from i in db.Items select i.Name;
+        //        AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+        //        collection.AddRange(item.ToArray());
+        //        cmbItem.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        //        cmbItem.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+        //        cmbItem.AutoCompleteCustomSource = collection;
+        //        return collection.ToString();
+        //    }
 
-        }
+        //}
 
         private void GridViewColumAdd()
         {
@@ -161,6 +142,12 @@ namespace POS_System_EF.UI
             table.Columns.Add("Cost Price", typeof(decimal));
             table.Columns.Add("Total Price", typeof(decimal));
             dgvPurchaseList.DataSource = table;
+            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+            btn.HeaderText = "Action";
+            btn.Name = "btnDelete";
+            btn.Text = "Delete";
+            btn.UseColumnTextForButtonValue = true;
+            dgvPurchaseList.Columns.Add(btn);
         }
 
         
@@ -175,6 +162,10 @@ namespace POS_System_EF.UI
         {
 
             ManagerContext db = new ManagerContext();
+            cmbItem.DataSource = db.Items.ToList();
+            cmbItem.DisplayMember = "Name";
+            cmbItem.ValueMember = "Id";
+
 
             cmbOutlet.DataSource = db.Outlets.ToList();
             cmbOutlet.DisplayMember = "Name";
@@ -194,7 +185,7 @@ namespace POS_System_EF.UI
         {
             txtQty.Clear();
             txtCostPrice.Clear();
-            txtItemName.Text = null;
+            cmbItem.Text = null;
             txtQty.Clear();
             txtCostPrice.Clear();
             cmbEmployee.Text = null;
@@ -202,15 +193,12 @@ namespace POS_System_EF.UI
             cmbSupplier.Text = null;
             txtRemarks.Clear();
         }
-
-        
-
-        private void txtItemName_Leave(object sender, EventArgs e)
+        private void cmbItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (ManagerContext db=new ManagerContext())
+            using (ManagerContext db = new ManagerContext())
             {
-               TempPurchase temp=new TempPurchase();
-                temp.Name = txtItemName.Text;
+                TempPurchase temp = new TempPurchase();
+                temp.Name = cmbItem.Text;
                 var objItem = db.Items.FirstOrDefault(a => a.Name == temp.Name);
 
                 if (objItem != null)
@@ -222,7 +210,18 @@ namespace POS_System_EF.UI
                     txtCostPrice.Clear();
                 }
             }
-            
+        }
+
+        private void dgvPurchaseList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvPurchaseList.CurrentCell.ColumnIndex.Equals(4))
+                if (dgvPurchaseList.CurrentCell != null && dgvPurchaseList.CurrentCell.Value != null)
+                {
+                    dgvPurchaseList.Rows.RemoveAt(e.RowIndex);
+                    tamount.RemoveAt(e.RowIndex);
+                }
+
+            lblTotalAmount.Text = tamount.Sum().ToString();
         }
     }
 }

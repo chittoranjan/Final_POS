@@ -48,9 +48,8 @@
             this.gbShowPurchaseItem = new System.Windows.Forms.GroupBox();
             this.dgvPurchaseList = new System.Windows.Forms.DataGridView();
             this.gbPurchaseRecieving = new System.Windows.Forms.GroupBox();
-            this.txtItemName = new System.Windows.Forms.TextBox();
+            this.cmbItem = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.txtQty = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -265,13 +264,12 @@
             this.dgvPurchaseList.RowHeadersVisible = false;
             this.dgvPurchaseList.Size = new System.Drawing.Size(543, 336);
             this.dgvPurchaseList.TabIndex = 0;
-            this.dgvPurchaseList.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPurchaseList_CellMouseClick);
+            this.dgvPurchaseList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPurchaseList_CellClick);
             // 
             // gbPurchaseRecieving
             // 
-            this.gbPurchaseRecieving.Controls.Add(this.txtItemName);
+            this.gbPurchaseRecieving.Controls.Add(this.cmbItem);
             this.gbPurchaseRecieving.Controls.Add(this.label1);
-            this.gbPurchaseRecieving.Controls.Add(this.btnDelete);
             this.gbPurchaseRecieving.Controls.Add(this.btnClear);
             this.gbPurchaseRecieving.Controls.Add(this.txtQty);
             this.gbPurchaseRecieving.Controls.Add(this.btnAdd);
@@ -286,14 +284,16 @@
             this.gbPurchaseRecieving.TabStop = false;
             this.gbPurchaseRecieving.Text = "Purchase Receiving";
             // 
-            // txtItemName
+            // cmbItem
             // 
-            this.txtItemName.AcceptsTab = true;
-            this.txtItemName.Location = new System.Drawing.Point(103, 30);
-            this.txtItemName.Name = "txtItemName";
-            this.txtItemName.Size = new System.Drawing.Size(176, 26);
-            this.txtItemName.TabIndex = 0;
-            this.txtItemName.Leave += new System.EventHandler(this.txtItemName_Leave);
+            this.cmbItem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbItem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbItem.FormattingEnabled = true;
+            this.cmbItem.Location = new System.Drawing.Point(103, 24);
+            this.cmbItem.Name = "cmbItem";
+            this.cmbItem.Size = new System.Drawing.Size(156, 28);
+            this.cmbItem.TabIndex = 9;
+            this.cmbItem.SelectedIndexChanged += new System.EventHandler(this.cmbItem_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -304,18 +304,6 @@
             this.label1.Size = new System.Drawing.Size(87, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Item Name";
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(881, 30);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 29);
-            this.btnDelete.TabIndex = 8;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Visible = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnClear
             // 
@@ -434,8 +422,7 @@
         private System.Windows.Forms.TextBox txtCostPrice;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.TextBox txtItemName;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbItem;
     }
 }
