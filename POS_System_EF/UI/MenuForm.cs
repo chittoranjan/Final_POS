@@ -83,11 +83,6 @@ namespace POS_System_EF
             this.Close();
         }
 
-        private void organizationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void expenseCategorySetUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ExpenseCategoryForm expenseCategoryForm=new ExpenseCategoryForm();
@@ -100,16 +95,22 @@ namespace POS_System_EF
             expenseItemForm.Show();
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            ExpenseForm expense=new ExpenseForm();
-            expense.Show();
-        }
-
         private void salesRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SalesReportForm srForm = new SalesReportForm();
             srForm.Show();
+        }
+
+        private void addExpenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExpenseForm expense = new ExpenseForm();
+            expense.Show();
+        }
+
+        private void expReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExpenseReportForm exReport=new ExpenseReportForm();
+            exReport.Show();
         }
     }
 }

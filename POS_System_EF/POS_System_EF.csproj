@@ -89,6 +89,7 @@
     <Compile Include="EntityModels\Expense.cs" />
     <Compile Include="EntityModels\ExpenseCategory.cs" />
     <Compile Include="EntityModels\ExpenseItem.cs" />
+    <Compile Include="EntityModels\ExpenseList.cs" />
     <Compile Include="EntityModels\Item.cs" />
     <Compile Include="EntityModels\ItemCategory.cs" />
     <Compile Include="EntityModels\Organization.cs" />
@@ -141,6 +142,12 @@
     </Compile>
     <Compile Include="UI\ExpenseItemForm.Designer.cs">
       <DependentUpon>ExpenseItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ExpenseReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ExpenseReportForm.Designer.cs">
+      <DependentUpon>ExpenseReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\LoginForm.cs">
       <SubType>Form</SubType>
@@ -233,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ExpenseItemForm.resx">
       <DependentUpon>ExpenseItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ExpenseReportForm.resx">
+      <DependentUpon>ExpenseReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

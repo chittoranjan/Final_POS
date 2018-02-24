@@ -20,10 +20,9 @@ namespace POS_System_EF.Managers
         public DbSet<ExpenseCategory> ExpenseCategories { get; set; }
         public DbSet<ExpenseItem> ExpenseItems { get; set; }
         public DbSet<Expense> Expenses { get; set; }
+        public DbSet<ExpenseList> ExpenseLists { get; set; } 
         public DbSet<Purchase> Purchases { get; set; }
-
         public DbSet<TempPurchase> TempPurchases { get; set; }
-
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SalesItem> SalesItem { get; set; }
     }

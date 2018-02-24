@@ -51,6 +51,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addExpenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +93,6 @@
             this.organizationToolStripMenuItem.Name = "organizationToolStripMenuItem";
             this.organizationToolStripMenuItem.Size = new System.Drawing.Size(100, 23);
             this.organizationToolStripMenuItem.Text = "Organization";
-            this.organizationToolStripMenuItem.Click += new System.EventHandler(this.organizationToolStripMenuItem_Click);
             // 
             // addorganizationToolStripMenuItem
             // 
@@ -222,10 +223,12 @@
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addExpenseToolStripMenuItem,
+            this.expReportToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(74, 23);
             this.toolStripMenuItem1.Text = "Expense ";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // reportToolStripMenuItem
             // 
@@ -238,6 +241,20 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
             this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // addExpenseToolStripMenuItem
+            // 
+            this.addExpenseToolStripMenuItem.Name = "addExpenseToolStripMenuItem";
+            this.addExpenseToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+            this.addExpenseToolStripMenuItem.Text = "Add Expense";
+            this.addExpenseToolStripMenuItem.Click += new System.EventHandler(this.addExpenseToolStripMenuItem_Click);
+            // 
+            // expReportToolStripMenuItem
+            // 
+            this.expReportToolStripMenuItem.Name = "expReportToolStripMenuItem";
+            this.expReportToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+            this.expReportToolStripMenuItem.Text = "Exp Report";
+            this.expReportToolStripMenuItem.Click += new System.EventHandler(this.expReportToolStripMenuItem_Click);
             // 
             // OpeningForm
             // 
@@ -281,6 +298,8 @@
         private System.Windows.Forms.ToolStripMenuItem addSalesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salesRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem addExpenseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem expReportToolStripMenuItem;
     }
 }
 

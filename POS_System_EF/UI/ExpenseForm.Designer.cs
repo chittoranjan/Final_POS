@@ -40,27 +40,27 @@
             this.cmbEmployee = new System.Windows.Forms.ComboBox();
             this.cmbOrganization = new System.Windows.Forms.ComboBox();
             this.cmbOutlet = new System.Windows.Forms.ComboBox();
+            this.txtRemark = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnClearAddItem = new System.Windows.Forms.Button();
             this.txtpaid = new System.Windows.Forms.TextBox();
             this.txtAmount = new System.Windows.Forms.TextBox();
             this.txtQty = new System.Windows.Forms.TextBox();
             this.cmbExpenseItem = new System.Windows.Forms.ComboBox();
-            this.txtRemark = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvExpense = new System.Windows.Forms.DataGridView();
-            this.btnPrint = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
+            this.btnClearAll = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -75,10 +75,10 @@
             this.groupBox3.Controls.Add(this.txtTotalShow);
             this.groupBox3.Controls.Add(this.txtPaidSho);
             this.groupBox3.Controls.Add(this.txtDueShow);
-            this.groupBox3.Location = new System.Drawing.Point(790, 12);
+            this.groupBox3.Location = new System.Drawing.Point(763, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(242, 160);
-            this.groupBox3.TabIndex = 16;
+            this.groupBox3.Size = new System.Drawing.Size(269, 160);
+            this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Expense Summary";
             // 
@@ -142,25 +142,27 @@
             this.groupBox2.Controls.Add(this.cmbEmployee);
             this.groupBox2.Controls.Add(this.cmbOrganization);
             this.groupBox2.Controls.Add(this.cmbOutlet);
+            this.groupBox2.Controls.Add(this.txtRemark);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Location = new System.Drawing.Point(451, 12);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Location = new System.Drawing.Point(404, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(287, 225);
-            this.groupBox2.TabIndex = 15;
+            this.groupBox2.Size = new System.Drawing.Size(334, 225);
+            this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Employee Info";
             // 
             // dateTimePicker
             // 
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker.Location = new System.Drawing.Point(91, 150);
+            this.dateTimePicker.Location = new System.Drawing.Point(91, 137);
             this.dateTimePicker.MaxDate = new System.DateTime(2018, 2, 10, 0, 0, 0, 0);
             this.dateTimePicker.MinDate = new System.DateTime(2018, 2, 10, 0, 0, 0, 0);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(171, 20);
+            this.dateTimePicker.Size = new System.Drawing.Size(208, 20);
             this.dateTimePicker.TabIndex = 11;
             this.dateTimePicker.Value = new System.DateTime(2018, 2, 10, 0, 0, 0, 0);
             // 
@@ -168,9 +170,9 @@
             // 
             this.cmbEmployee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEmployee.FormattingEnabled = true;
-            this.cmbEmployee.Location = new System.Drawing.Point(91, 112);
+            this.cmbEmployee.Location = new System.Drawing.Point(91, 100);
             this.cmbEmployee.Name = "cmbEmployee";
-            this.cmbEmployee.Size = new System.Drawing.Size(171, 21);
+            this.cmbEmployee.Size = new System.Drawing.Size(208, 21);
             this.cmbEmployee.TabIndex = 9;
             // 
             // cmbOrganization
@@ -179,7 +181,7 @@
             this.cmbOrganization.FormattingEnabled = true;
             this.cmbOrganization.Location = new System.Drawing.Point(91, 27);
             this.cmbOrganization.Name = "cmbOrganization";
-            this.cmbOrganization.Size = new System.Drawing.Size(171, 21);
+            this.cmbOrganization.Size = new System.Drawing.Size(208, 21);
             this.cmbOrganization.TabIndex = 10;
             this.cmbOrganization.SelectionChangeCommitted += new System.EventHandler(this.cmbOrganization_SelectionChangeCommitted);
             // 
@@ -187,16 +189,24 @@
             // 
             this.cmbOutlet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOutlet.FormattingEnabled = true;
-            this.cmbOutlet.Location = new System.Drawing.Point(91, 68);
+            this.cmbOutlet.Location = new System.Drawing.Point(91, 62);
             this.cmbOutlet.Name = "cmbOutlet";
-            this.cmbOutlet.Size = new System.Drawing.Size(171, 21);
+            this.cmbOutlet.Size = new System.Drawing.Size(208, 21);
             this.cmbOutlet.TabIndex = 10;
             this.cmbOutlet.SelectionChangeCommitted += new System.EventHandler(this.cmbOutlet_SelectionChangeCommitted);
+            // 
+            // txtRemark
+            // 
+            this.txtRemark.Location = new System.Drawing.Point(91, 171);
+            this.txtRemark.Multiline = true;
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(208, 46);
+            this.txtRemark.TabIndex = 8;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 153);
+            this.label7.Location = new System.Drawing.Point(18, 140);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(30, 13);
             this.label7.TabIndex = 6;
@@ -205,7 +215,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 115);
+            this.label6.Location = new System.Drawing.Point(18, 103);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 13);
             this.label6.TabIndex = 7;
@@ -223,50 +233,69 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 71);
+            this.label5.Location = new System.Drawing.Point(18, 65);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "OutLet";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 171);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Remark";
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnClearAddItem);
             this.groupBox1.Controls.Add(this.txtpaid);
             this.groupBox1.Controls.Add(this.txtAmount);
             this.groupBox1.Controls.Add(this.txtQty);
             this.groupBox1.Controls.Add(this.cmbExpenseItem);
-            this.groupBox1.Controls.Add(this.txtRemark);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(53, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(353, 225);
-            this.groupBox1.TabIndex = 14;
+            this.groupBox1.Size = new System.Drawing.Size(325, 217);
+            this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Expense Info";
             // 
+            // btnClearAddItem
+            // 
+            this.btnClearAddItem.Location = new System.Drawing.Point(149, 161);
+            this.btnClearAddItem.Name = "btnClearAddItem";
+            this.btnClearAddItem.Size = new System.Drawing.Size(75, 33);
+            this.btnClearAddItem.TabIndex = 12;
+            this.btnClearAddItem.Text = "Clear";
+            this.btnClearAddItem.UseVisualStyleBackColor = true;
+            this.btnClearAddItem.Click += new System.EventHandler(this.btnClearAddItem_Click);
+            // 
             // txtpaid
             // 
-            this.txtpaid.Location = new System.Drawing.Point(113, 185);
+            this.txtpaid.Location = new System.Drawing.Point(113, 122);
             this.txtpaid.Name = "txtpaid";
-            this.txtpaid.Size = new System.Drawing.Size(100, 20);
+            this.txtpaid.Size = new System.Drawing.Size(196, 20);
             this.txtpaid.TabIndex = 6;
             // 
             // txtAmount
             // 
-            this.txtAmount.Location = new System.Drawing.Point(113, 153);
+            this.txtAmount.Location = new System.Drawing.Point(113, 90);
             this.txtAmount.Name = "txtAmount";
-            this.txtAmount.Size = new System.Drawing.Size(100, 20);
+            this.txtAmount.Size = new System.Drawing.Size(196, 20);
             this.txtAmount.TabIndex = 6;
             // 
             // txtQty
             // 
-            this.txtQty.Location = new System.Drawing.Point(113, 121);
+            this.txtQty.Location = new System.Drawing.Point(113, 58);
             this.txtQty.Name = "txtQty";
-            this.txtQty.Size = new System.Drawing.Size(100, 20);
+            this.txtQty.Size = new System.Drawing.Size(196, 20);
             this.txtQty.TabIndex = 7;
             // 
             // cmbExpenseItem
@@ -278,18 +307,10 @@
             this.cmbExpenseItem.Size = new System.Drawing.Size(196, 21);
             this.cmbExpenseItem.TabIndex = 10;
             // 
-            // txtRemark
-            // 
-            this.txtRemark.Location = new System.Drawing.Point(113, 53);
-            this.txtRemark.Multiline = true;
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(196, 53);
-            this.txtRemark.TabIndex = 8;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(31, 192);
+            this.label12.Location = new System.Drawing.Point(31, 122);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(28, 13);
             this.label12.TabIndex = 2;
@@ -298,29 +319,30 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 160);
+            this.label4.Location = new System.Drawing.Point(31, 97);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 2;
             this.label4.Text = "Amount";
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(230, 160);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(79, 34);
+            this.btnAdd.TabIndex = 11;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click_1);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(31, 124);
+            this.label3.Location = new System.Drawing.Point(31, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(23, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "Qty";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Remark";
             // 
             // label1
             // 
@@ -338,57 +360,40 @@
             this.dgvExpense.Location = new System.Drawing.Point(53, 243);
             this.dgvExpense.Name = "dgvExpense";
             this.dgvExpense.RowHeadersVisible = false;
+            this.dgvExpense.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvExpense.Size = new System.Drawing.Size(979, 163);
-            this.dgvExpense.TabIndex = 13;
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Location = new System.Drawing.Point(858, 415);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(84, 34);
-            this.btnPrint.TabIndex = 9;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.UseVisualStyleBackColor = true;
+            this.dgvExpense.TabIndex = 20;
+            this.dgvExpense.DoubleClick += new System.EventHandler(this.dgvExpense_DoubleClick);
             // 
             // btnHome
             // 
             this.btnHome.Location = new System.Drawing.Point(948, 415);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(84, 34);
-            this.btnHome.TabIndex = 10;
+            this.btnHome.TabIndex = 17;
             this.btnHome.Text = "Home";
             this.btnHome.UseVisualStyleBackColor = true;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
-            // btnClear
+            // btnClearAll
             // 
-            this.btnClear.Location = new System.Drawing.Point(858, 183);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(84, 34);
-            this.btnClear.TabIndex = 11;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.btnClearAll.Location = new System.Drawing.Point(858, 183);
+            this.btnClearAll.Name = "btnClearAll";
+            this.btnClearAll.Size = new System.Drawing.Size(84, 34);
+            this.btnClearAll.TabIndex = 18;
+            this.btnClearAll.Text = "Clear";
+            this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
             // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(948, 183);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(84, 34);
-            this.btnSave.TabIndex = 12;
+            this.btnSave.TabIndex = 19;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(765, 183);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(84, 34);
-            this.btnAdd.TabIndex = 11;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // ExpenseForm
             // 
@@ -399,10 +404,8 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvExpense);
-            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnHome);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnClearAll);
             this.Controls.Add(this.btnSave);
             this.Name = "ExpenseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -432,26 +435,27 @@
         private System.Windows.Forms.ComboBox cmbEmployee;
         private System.Windows.Forms.ComboBox cmbOrganization;
         private System.Windows.Forms.ComboBox cmbOutlet;
+        private System.Windows.Forms.TextBox txtRemark;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnClearAddItem;
         private System.Windows.Forms.TextBox txtpaid;
         private System.Windows.Forms.TextBox txtAmount;
         private System.Windows.Forms.TextBox txtQty;
         private System.Windows.Forms.ComboBox cmbExpenseItem;
-        private System.Windows.Forms.TextBox txtRemark;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvExpense;
-        private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnHome;
-        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnClearAll;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnAdd;
+
     }
 }
