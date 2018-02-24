@@ -270,19 +270,34 @@ namespace POS_System_EF.UI
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Are you sure want to delete ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if(DialogResult==DialogResult.Yes)
+            int id = (int)dgvOutlet.SelectedRows[0].Cells["Id"].Value;
+            var updateOutlet = db.Outlets.FirstOrDefault(c => c.Id == id);
+            if (updateOutlet != null)
             {
-                int selectedId = (int)dgvOutlet.CurrentRow.Cells["Id"].Value;
-                _outlet = db.Outlets.FirstOrDefault(c => c.Id == selectedId);
-                if (_outlet!=null)
+                _outlet = updateOutlet;
+                updateOutlet.IsDelete = true;
+
+
+                DialogResult result = MessageBox.Show("Do you want to Delete?", "Confirmation", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                switch (result)
                 {
-                    _outlet.IsDelete = true;
-                    db.Outlets.Add(_outlet);
+                    case DialogResult.Yes:
+                        db.SaveChanges();
+                        MessageBox.Show("Successfully deleted");
+                        break;
+                    case DialogResult.No:
+                        MessageBox.Show("You have clicked Cancel Button");
+                        break;
                 }
             }
-            ClearTextBoxAll();
+            else
+            {
+                MessageBox.Show("Delete failed");
+            }
+           
             LoadDataGridView();
+            ClearTextBoxAll();
         }
 
         private void buttonClear_Click_1(object sender, EventArgs e)

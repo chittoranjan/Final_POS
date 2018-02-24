@@ -47,6 +47,7 @@
             this.textBoxSrc = new System.Windows.Forms.TextBox();
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonPrint = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -177,8 +178,10 @@
             this.dgvItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItem.Location = new System.Drawing.Point(378, 81);
             this.dgvItem.Name = "dgvItem";
+            this.dgvItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvItem.Size = new System.Drawing.Size(664, 295);
             this.dgvItem.TabIndex = 5;
+            this.dgvItem.DoubleClick += new System.EventHandler(this.dgvItem_DoubleClick);
             // 
             // buttonSrcClear
             // 
@@ -216,11 +219,22 @@
             this.buttonPrint.Text = "Print";
             this.buttonPrint.UseVisualStyleBackColor = true;
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(52, 353);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 42;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
             // ItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 461);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.buttonSrcClear);
@@ -270,5 +284,6 @@
         private System.Windows.Forms.TextBox textBoxSrc;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button buttonPrint;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }

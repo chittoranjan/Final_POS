@@ -392,5 +392,22 @@ namespace POS_System_EF.UI
             txtCode.Text = firstThreeChars + "-" + "00" + count.ToString();
 
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure want to delete ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                int id = (int)dataGridViewEmployee.CurrentRow.Cells["Id"].Value;
+                aEmployee = db.Employees.FirstOrDefault(c => c.Id == id);
+                if (aEmployee != null)
+                {
+                    aEmployee.IsDelete = true;
+                    db.SaveChanges();
+                }
+            }
+            ClearTextBoxAll();
+            LoadDataGridView();
+        }
     }
 }

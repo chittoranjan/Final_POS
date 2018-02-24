@@ -46,6 +46,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.labeRootCat = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategoryList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -86,8 +87,10 @@
             this.dgvCategoryList.Location = new System.Drawing.Point(399, 73);
             this.dgvCategoryList.Name = "dgvCategoryList";
             this.dgvCategoryList.RowHeadersVisible = false;
+            this.dgvCategoryList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCategoryList.Size = new System.Drawing.Size(623, 292);
             this.dgvCategoryList.TabIndex = 37;
+            this.dgvCategoryList.DoubleClick += new System.EventHandler(this.dgvCategoryList_DoubleClick);
             // 
             // textBoxSrc
             // 
@@ -99,6 +102,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonDelete);
             this.groupBox1.Controls.Add(this.btnSaveCategory);
             this.groupBox1.Controls.Add(this.btnClear);
             this.groupBox1.Controls.Add(this.cmbRootCategory);
@@ -233,6 +237,16 @@
             this.label1.TabIndex = 41;
             this.label1.Text = "Name";
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(43, 300);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 52;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
             // ItemCategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,5 +289,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labeRootCat;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }

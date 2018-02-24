@@ -45,6 +45,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.labeRootcat = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategoryList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,8 +95,10 @@
             this.dgvCategoryList.Location = new System.Drawing.Point(402, 75);
             this.dgvCategoryList.Name = "dgvCategoryList";
             this.dgvCategoryList.RowHeadersVisible = false;
+            this.dgvCategoryList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCategoryList.Size = new System.Drawing.Size(623, 292);
             this.dgvCategoryList.TabIndex = 88;
+            this.dgvCategoryList.DoubleClick += new System.EventHandler(this.dgvCategoryList_DoubleClick);
             // 
             // btnClear
             // 
@@ -206,11 +209,22 @@
             this.label1.TabIndex = 76;
             this.label1.Text = "Name";
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(73, 281);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 92;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
             // ExpenseCategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 461);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.btnSaveCategory);
             this.Controls.Add(this.buttonSrcClear);
@@ -256,5 +270,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labeRootcat;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }
