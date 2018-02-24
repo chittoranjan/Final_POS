@@ -16,6 +16,7 @@ namespace POS_System_EF.UI
     {
         ManagerContext db = new ManagerContext();
         ItemCategory itemCategory = new ItemCategory();
+        private bool _isUpdateMode = false;
         public ItemCategoryForm()
         {
             InitializeComponent();
@@ -34,54 +35,100 @@ namespace POS_System_EF.UI
 
         private void btnSaveCategory_Click(object sender, EventArgs e)
         {
+            if (txtName.Text.Trim() == string.Empty && txtDescription.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Please fill text box !");
+                return;
+            }
             try
             {
-                if (rbRootCategory.Checked)
+                if (!_isUpdateMode)
                 {
-                    
-                    itemCategory.Name = txtName.Text;
-                    itemCategory.Code = itemCategory.GenearateCodeRoot(itemCategory.Name);
-                    itemCategory.Description = txtDescription.Text;
-                    db.ItemCategories.Add(itemCategory);
-                    int count = db.SaveChanges();
-                    if (count > 0)
+                    try
                     {
-                        MessageBox.Show("Root Category saved!");
+                        if (rbRootCategory.Checked)
+                        {
+                            itemCategory.Name = txtName.Text;
+                            itemCategory.Code = itemCategory.GenearateCodeRoot(itemCategory.Name);
+                            itemCategory.Description = txtDescription.Text;
+                            db.ItemCategories.Add(itemCategory);
+                            int count = db.SaveChanges();
+                            if (count > 0)
+                            {
+                                MessageBox.Show("Root Category saved!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Save failed!");
+                            }
+
+                        }
+                        else if (rbSubCategory.Checked)
+                        {
+                            VisibleRootCategory();
+                            itemCategory.CategoryId = (int)cmbRootCategory.SelectedValue;
+                            itemCategory.Name = txtName.Text;
+                            itemCategory.Code = itemCategory.GenearateCodeSub(itemCategory.Name);
+                            itemCategory.Description = txtDescription.Text;
+                            //itemCategory.listOfSubCategory.Add(itemCategory);
+
+                            DialogResult dialogResult = MessageBox.Show("Are you sure want to save ?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                            if (dialogResult == DialogResult.Yes)
+                            {
+                                db.ItemCategories.Add(itemCategory);
+                                int count = db.SaveChanges();
+                                if (count > 0)
+                                {
+                                    MessageBox.Show("Sub Category saved!");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Save failed!");
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please Select Category!");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Save failed!");
+
+                        MessageBox.Show(ex.Message + " \n" + "[NB] Operating system found error!");
                     }
-                    
+                    TextBoxValue();
+
+
                 }
-                else if (rbSubCategory.Checked)
+
+                if (_isUpdateMode)
                 {
-                    VisibleRootCategory();
-                    itemCategory.CategoryId = (int)cmbRootCategory.SelectedValue;
-                    itemCategory.Name = txtName.Text;
-                    itemCategory.Code = itemCategory.GenearateCodeSub(itemCategory.Name);
-                    itemCategory.Description = txtDescription.Text;
-                    //itemCategory.listOfSubCategory.Add(itemCategory);
-                    db.ItemCategories.Add(itemCategory);
-                    int count = db.SaveChanges();
-                    if (count > 0)
+                    TextBoxValue();
+
+                    DialogResult dialogResult = MessageBox.Show("Are you sure want to update ?", "Information", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Information);
+                    if (dialogResult == DialogResult.Yes)
                     {
-                        MessageBox.Show("Sub Category saved!");
+                        db.ItemCategories.Attach(itemCategory);
+                        db.Entry(itemCategory).State = System.Data.Entity.EntityState.Modified;
+                        int count = db.SaveChanges();
+                        if (count > 0)
+                        {
+                            MessageBox.Show(" updated");
+                        }
+                        else
+                        {
+                            MessageBox.Show(" failed");
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Save failed!");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please Select Category!");
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + " \n" + "[NB] Operating system found error!");
+                MessageBox.Show(ex.Message + " \n" + " Find system error! ", MessageBoxIcon.Warning.ToString());
             }
             LoadDataGridView();
             ClearAllTextBox();
@@ -102,16 +149,25 @@ namespace POS_System_EF.UI
             txtCode.Clear();
             txtDescription.Clear();
         }
+        private void TextBoxValue()
+        {
+
+            itemCategory.Name = txtName.Text;
+            itemCategory.Code = txtCode.Text;
+            itemCategory.Description = txtDescription.Text;
+
+        }
         private void LoadDataGridView()
         {
             var dgvLoad = (from itemCategory in db.ItemCategories
+                           where (itemCategory.IsDelete == false)
                            select new
                            {
                                itemCategory.Id,
                                itemCategory.Name,
                                itemCategory.Code,
                                itemCategory.Description,
-                               SubCategory= itemCategory.Category.Name
+                               SubCategory = itemCategory.Category.Name
                            }).ToList();
 
             dgvCategoryList.DataSource = dgvLoad;
@@ -185,6 +241,51 @@ namespace POS_System_EF.UI
         {
             textBoxSrc.Clear();
             LoadDataGridView();
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure want to delete ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                int id = (int)dgvCategoryList.CurrentRow.Cells["Id"].Value;
+                itemCategory = db.ItemCategories.FirstOrDefault(c => c.Id == id);
+                if (itemCategory != null)
+                {
+                    itemCategory.IsDelete = true;
+                    db.SaveChanges();
+                }
+            }
+            ClearAllTextBox();
+            LoadDataGridView();
+
+        }
+
+        private void dgvCategoryList_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgvCategoryList.CurrentRow != null)
+            {
+                int itemCategoryId = Convert.ToInt32(dgvCategoryList.CurrentRow.Cells["Id"].Value);
+                var itemCategoryRetrive = db.ItemCategories.FirstOrDefault(c => c.Id == itemCategoryId);
+                itemCategory = itemCategoryRetrive;
+
+                if (itemCategory != null)
+                {
+                    txtName.Text = itemCategory.Name;
+
+                    txtCode.Text = itemCategory.Code;
+                    txtDescription.Text = itemCategory.Description;
+                }
+
+                SetFormUpdateMode();
+            }
+        }
+        private void SetFormUpdateMode()
+        {
+            btnSaveCategory.Text = "Update";
+            buttonDelete.Visible = true;
+            buttonDelete.Enabled = true;
+            _isUpdateMode = true;
         }
     }
 }

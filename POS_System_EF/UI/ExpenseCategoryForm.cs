@@ -16,6 +16,7 @@ namespace POS_System_EF
     {
         ManagerContext db = new ManagerContext();
         ExpenseCategory expenseCategory = new ExpenseCategory();
+        private bool _isUpdateMode = false;
         public ExpenseCategoryForm()
         {
             InitializeComponent();
@@ -37,58 +38,108 @@ namespace POS_System_EF
         }
         private void btnSaveCategory_Click(object sender, EventArgs e)
         {
+            if (txtName.Text.Trim() == string.Empty && txtDescription.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Please fill text box !");
+                return;
+            }
+
             try
             {
-                if (rbRootCategory.Checked)
+                if (!_isUpdateMode)
                 {
+                    try
+                    {
+                        if (rbRootCategory.Checked)
+                        {
 
-                    expenseCategory.Name = txtName.Text;
-                    expenseCategory.Code = expenseCategory.GenearateCodeExpRoot(expenseCategory.Name);
-                    expenseCategory.Description = txtDescription.Text;
-                    db.ExpenseCategories.Add(expenseCategory);
-                    int count = db.SaveChanges();
-                    if (count > 0)
-                    {
-                        MessageBox.Show("Root Category saved!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Save failed!");
-                    }
-                    LoadCombobox();
-                }
-                else if (rbSubCategory.Checked)
-                {
+                            expenseCategory.Name = txtName.Text;
+                            expenseCategory.Code = expenseCategory.GenearateCodeExpRoot(expenseCategory.Name);
+                            expenseCategory.Description = txtDescription.Text;
+                            db.ExpenseCategories.Add(expenseCategory);
+                            int count = db.SaveChanges();
+                            if (count > 0)
+                            {
+                                MessageBox.Show("Root Category saved!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Save failed!");
+                            }
+                            LoadCombobox();
+                        }
+                        else if (rbSubCategory.Checked)
+                        {
 
-                    expenseCategory.RootCategoryId = (int)cmbRootCategory.SelectedValue;
-                    expenseCategory.RootCategoryName = cmbRootCategory.Text;
-                    expenseCategory.Name = txtName.Text;
-                    expenseCategory.Code = expenseCategory.GenearateCodeExpSub(expenseCategory.Name);
-                    expenseCategory.Description = txtDescription.Text;
-                    db.ExpenseCategories.Add(expenseCategory);
-                    int count = db.SaveChanges();
-                    if (count > 0)
-                    {
-                        MessageBox.Show("Sub Category saved!");
+                            expenseCategory.RootCategoryId = (int)cmbRootCategory.SelectedValue;
+                            expenseCategory.RootCategoryName = cmbRootCategory.Text;
+                            expenseCategory.Name = txtName.Text;
+                            expenseCategory.Code = expenseCategory.GenearateCodeExpSub(expenseCategory.Name);
+                            expenseCategory.Description = txtDescription.Text;
+                            db.ExpenseCategories.Add(expenseCategory);
+                            int count = db.SaveChanges();
+                            if (count > 0)
+                            {
+                                MessageBox.Show("Sub Category saved!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Save failed!");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please Select Category!");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Save failed!");
+
+                        MessageBox.Show(ex.Message + " \n" + "[NB] Operating system found error!");
                     }
+                    LoadDataGridView();
+                    ClearAllTextBox();
+                    RootCategoryVisibleFalse();
                 }
-                else
+
+                if (_isUpdateMode)
                 {
-                    MessageBox.Show("Please Select Category!");
+                    TextBoxValue();
+
+                    DialogResult dialogResult = MessageBox.Show("Are you sure want to update ?", "Information", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Information);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.ExpenseCategories.Attach(expenseCategory);
+                        db.Entry(expenseCategory).State = System.Data.Entity.EntityState.Modified;
+                        int count = db.SaveChanges();
+                        if (count > 0)
+                        {
+                            MessageBox.Show(" updated");
+                        }
+                        else
+                        {
+                            MessageBox.Show(" failed");
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + " \n" + "[NB] Operating system found error!");
+                MessageBox.Show(ex.Message + " \n" + " Find system error! ", MessageBoxIcon.Warning.ToString());
             }
             LoadDataGridView();
             ClearAllTextBox();
             RootCategoryVisibleFalse();
+        }
+        private void TextBoxValue()
+        {
+
+            expenseCategory.Name = txtName.Text;
+            expenseCategory.Code = txtCode.Text;
+            expenseCategory.Description = txtDescription.Text;
+
         }
         private void ClearAllTextBox()
         {
@@ -102,14 +153,18 @@ namespace POS_System_EF
         private void LoadDataGridView()
         {
             var item = (from expenseCategory in db.ExpenseCategories
+                        where (expenseCategory.IsDelete == false)
                         select new
                         {
+                            expenseCategory.Id,
                             expenseCategory.Name,
                             expenseCategory.Code,
                             expenseCategory.Description,
                             expenseCategory.RootCategoryName
                         }).ToList();
             dgvCategoryList.DataSource = item;
+
+            dgvCategoryList.Columns["Id"].Visible = false;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -163,6 +218,49 @@ namespace POS_System_EF
             {
                 RootCategoryVisibleTrue();
             }
+        }
+
+        private void dgvCategoryList_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgvCategoryList.CurrentRow != null)
+            {
+                int expenseCategoryId = Convert.ToInt32(dgvCategoryList.CurrentRow.Cells["Id"].Value);
+                var expenseCategoryRetrive = db.ExpenseCategories.FirstOrDefault(c => c.Id == expenseCategoryId);
+                expenseCategory = expenseCategoryRetrive;
+
+                if (expenseCategory != null)
+                {
+                    txtName.Text = expenseCategory.Name;
+                    txtCode.Text = expenseCategory.Code;
+                    txtDescription.Text = expenseCategory.Description;
+
+                }
+
+                SetFormUpdateMode();
+            }
+        }
+        private void SetFormUpdateMode()
+        {
+            btnSaveCategory.Text = "Update";
+            buttonDelete.Visible = true;
+            _isUpdateMode = true;
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure want to delete ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                int id = (int)dgvCategoryList.CurrentRow.Cells["Id"].Value;
+                expenseCategory = db.ExpenseCategories.FirstOrDefault(c => c.Id == id);
+                if (expenseCategory != null)
+                {
+                    expenseCategory.IsDelete = true;
+                    db.SaveChanges();
+                }
+            }
+            ClearAllTextBox();
+            LoadDataGridView();
         }
     }
 }

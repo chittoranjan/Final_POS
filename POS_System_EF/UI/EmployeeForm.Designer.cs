@@ -58,7 +58,10 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabControlEmployee = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtCodeManual = new System.Windows.Forms.TextBox();
+            this.btnNext = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnPrevious = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -78,9 +81,6 @@
             this.txtEmergencyContact = new System.Windows.Forms.TextBox();
             this.textBoxQuickSrc = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.txtCodeManual = new System.Windows.Forms.TextBox();
-            this.btnPrevious = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployee)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmp)).BeginInit();
             this.tabControlEmployee.SuspendLayout();
@@ -414,6 +414,25 @@
             this.tabPage1.Text = "Official Information";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // txtCodeManual
+            // 
+            this.txtCodeManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCodeManual.Location = new System.Drawing.Point(92, 86);
+            this.txtCodeManual.Name = "txtCodeManual";
+            this.txtCodeManual.Size = new System.Drawing.Size(103, 23);
+            this.txtCodeManual.TabIndex = 125;
+            // 
+            // btnNext
+            // 
+            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNext.Location = new System.Drawing.Point(917, 211);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(75, 32);
+            this.btnNext.TabIndex = 124;
+            this.btnNext.Text = "Next";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.btnPrevious);
@@ -442,6 +461,16 @@
             this.tabPage2.Text = "Personal Information";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Location = new System.Drawing.Point(886, 213);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(86, 34);
+            this.btnPrevious.TabIndex = 127;
+            this.btnPrevious.Text = "Previous";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(617, 213);
@@ -451,6 +480,7 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Visible = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // label15
             // 
@@ -620,35 +650,6 @@
             this.label21.Size = new System.Drawing.Size(104, 20);
             this.label21.TabIndex = 127;
             this.label21.Text = "Quick Search";
-            // 
-            // btnNext
-            // 
-            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNext.Location = new System.Drawing.Point(917, 211);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 32);
-            this.btnNext.TabIndex = 124;
-            this.btnNext.Text = "Next";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // txtCodeManual
-            // 
-            this.txtCodeManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCodeManual.Location = new System.Drawing.Point(92, 86);
-            this.txtCodeManual.Name = "txtCodeManual";
-            this.txtCodeManual.Size = new System.Drawing.Size(103, 23);
-            this.txtCodeManual.TabIndex = 125;
-            // 
-            // btnPrevious
-            // 
-            this.btnPrevious.Location = new System.Drawing.Point(886, 213);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(86, 34);
-            this.btnPrevious.TabIndex = 127;
-            this.btnPrevious.Text = "Previous";
-            this.btnPrevious.UseVisualStyleBackColor = true;
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // EmployeeForm
             // 
