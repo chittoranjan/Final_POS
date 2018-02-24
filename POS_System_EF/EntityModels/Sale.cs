@@ -12,8 +12,9 @@ namespace POS_System_EF.EntityModels
         public List<SalesItem> listOfItem { get; set; }
         public string InvoiceNo { get; set; }
         public string Remarks { get; set; }
-        public string CustomerName { get; set; }
-        public string CustomerContactNo { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
+        public DateTime SalesDate { get; set; }
         public decimal SubTotal { get; set; }
         public decimal TotalAmount { get; set; }
         public decimal Vat { get; set; }
@@ -22,6 +23,7 @@ namespace POS_System_EF.EntityModels
         public Outlet Outlet { get; set; }
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
+        public bool IsDelete { get; set; }
 
     }
 }

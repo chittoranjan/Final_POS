@@ -22,14 +22,14 @@ namespace POS_System_EF.EntityModels
         public string Email { get; set; }
         public string Address { get; set; }
         public bool IsDelete { get; set; }
-        public string GenerateCode(string name, string address, string contactno)
+        public string GenerateCode(string name, string contactno)
         {
             int sl = 0;
 
             var firstThreeChars = name.Length <= 3 ? name : name.Substring(0, 3);
             //var firstThreeCharsAddress = address.Length <= 3 ? address : address.Substring(0, 3);
             var firstThreeCharsContactNo = contactno.Length <= 3 ? contactno : contactno.Substring(0, 3);
-            return firstThreeChars + "-"+ firstThreeCharsContactNo+"-"+sl++;
+            return firstThreeChars + "-" + firstThreeCharsContactNo + "-" + sl++;
         }
     }
 }

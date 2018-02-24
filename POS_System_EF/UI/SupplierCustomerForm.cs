@@ -73,7 +73,7 @@ namespace POS_System_EF.UI
                     aCustomer.Email = txtEmail.Text;
                     aCustomer.ContactNo = txtContactNo.Text;
                     aCustomer.Address = txtAddress.Text;
-                    aCustomer.Code = aCustomer.GenerateCode(aCustomer.Name, aCustomer.Address, aCustomer.ContactNo);
+                    aCustomer.Code = aCustomer.GenerateCode(aCustomer.Name, aCustomer.ContactNo);
                     aCustomer.IsDelete = false;
                     if (aCustomer.Id == 0)
                     {

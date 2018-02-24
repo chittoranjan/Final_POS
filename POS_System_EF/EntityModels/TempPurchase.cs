@@ -15,5 +15,6 @@ namespace POS_System_EF.EntityModels
         public decimal TotalPrice { get; set; }
         public int PurchaseId { get; set; }
         public Purchase Purchase { get; set; }
+        public bool IsDelete { get; set; }
     }
 }
