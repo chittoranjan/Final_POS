@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonPrint = new System.Windows.Forms.Button();
             this.buttonSrcClear = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
             this.dgvCategoryList = new System.Windows.Forms.DataGridView();
             this.textBoxSrc = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.btnSaveCategory = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.cmbRootCategory = new System.Windows.Forms.ComboBox();
@@ -46,19 +46,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.labeRootCat = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonDelete = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategoryList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // buttonPrint
-            // 
-            this.buttonPrint.Location = new System.Drawing.Point(847, 402);
-            this.buttonPrint.Name = "buttonPrint";
-            this.buttonPrint.Size = new System.Drawing.Size(75, 23);
-            this.buttonPrint.TabIndex = 40;
-            this.buttonPrint.Text = "Print";
-            this.buttonPrint.UseVisualStyleBackColor = true;
             // 
             // buttonSrcClear
             // 
@@ -94,7 +85,7 @@
             // 
             // textBoxSrc
             // 
-            this.textBoxSrc.Location = new System.Drawing.Point(729, 34);
+            this.textBoxSrc.Location = new System.Drawing.Point(709, 34);
             this.textBoxSrc.Name = "textBoxSrc";
             this.textBoxSrc.Size = new System.Drawing.Size(193, 20);
             this.textBoxSrc.TabIndex = 31;
@@ -121,6 +112,17 @@
             this.groupBox1.TabIndex = 41;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item Category Setup";
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(43, 300);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 52;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Visible = false;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // btnSaveCategory
             // 
@@ -151,7 +153,6 @@
             this.cmbRootCategory.Size = new System.Drawing.Size(193, 21);
             this.cmbRootCategory.TabIndex = 49;
             this.cmbRootCategory.Visible = false;
-            this.cmbRootCategory.SelectedIndexChanged += new System.EventHandler(this.cmbRootCategory_SelectedIndexChanged);
             // 
             // rbSubCategory
             // 
@@ -237,23 +238,23 @@
             this.label1.TabIndex = 41;
             this.label1.Text = "Name";
             // 
-            // buttonDelete
+            // label4
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(43, 300);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
-            this.buttonDelete.TabIndex = 52;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(571, 37);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 17);
+            this.label4.TabIndex = 42;
+            this.label4.Text = "Quick Search";
             // 
             // ItemCategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 461);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.buttonSrcClear);
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.dgvCategoryList);
@@ -271,7 +272,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonPrint;
         private System.Windows.Forms.Button buttonSrcClear;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.DataGridView dgvCategoryList;
@@ -290,5 +290,6 @@
         private System.Windows.Forms.Label labeRootCat;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Label label4;
     }
 }

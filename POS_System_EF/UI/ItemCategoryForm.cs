@@ -26,7 +26,7 @@ namespace POS_System_EF.UI
 
         private void LoadCombobox()
         {
-            var loadCategory = db.ItemCategories.ToList();
+            var loadCategory = db.ItemCategories.Where(c => c.CategoryId == null && c.IsDelete==false).ToList();
             cmbRootCategory.DataSource = loadCategory;
             cmbRootCategory.DisplayMember = "Name";
             cmbRootCategory.ValueMember = "Id";
@@ -66,13 +66,14 @@ namespace POS_System_EF.UI
                         else if (rbSubCategory.Checked)
                         {
                             VisibleRootCategory();
-                            itemCategory.CategoryId = (int)cmbRootCategory.SelectedValue;
+                            itemCategory.CategoryId = (int) cmbRootCategory.SelectedValue;
                             itemCategory.Name = txtName.Text;
                             itemCategory.Code = itemCategory.GenearateCodeSub(itemCategory.Name);
                             itemCategory.Description = txtDescription.Text;
                             //itemCategory.listOfSubCategory.Add(itemCategory);
 
-                            DialogResult dialogResult = MessageBox.Show("Are you sure want to save ?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                            DialogResult dialogResult = MessageBox.Show("Are you sure want to save ?", "Information",
+                                MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                             if (dialogResult == DialogResult.Yes)
                             {
                                 db.ItemCategories.Add(itemCategory);
@@ -98,9 +99,6 @@ namespace POS_System_EF.UI
 
                         MessageBox.Show(ex.Message + " \n" + "[NB] Operating system found error!");
                     }
-                    TextBoxValue();
-
-
                 }
 
                 if (_isUpdateMode)
@@ -132,6 +130,15 @@ namespace POS_System_EF.UI
             }
             LoadDataGridView();
             ClearAllTextBox();
+            SetFormNewMode();
+            HideRootCategory();
+        }
+
+        private void SetFormNewMode()
+        {
+            btnSaveCategory.Text = "Save";
+            buttonDelete.Visible = false;
+            _isUpdateMode = false;
         }
 
         private void VisibleRootCategory()
@@ -191,24 +198,21 @@ namespace POS_System_EF.UI
             string textSearch = textBoxSrc.Text;
             ManagerContext db = new ManagerContext();
             var category = (from cat in db.ItemCategories
-                                where cat.Name.StartsWith(textSearch)
+                            where cat.Name.StartsWith(textSearch) && cat.IsDelete == false || cat.Code.StartsWith(textSearch) && cat.IsDelete == false
                                 select new
                                 {
                                     cat.Name,
                                     cat.Code,
-                                    cat.Description
+                                    cat.Description,
                                 }).ToList();
             dgvCategoryList.DataSource = category;
         }
-
-        
 
         private void rbRootCategory_CheckedChanged(object sender, EventArgs e)
         {
             if(rbRootCategory.Checked)
             {
-                rbSubCategory.Checked = false;
-                cmbRootCategory.Visible = false;
+                HideRootCategory();
             }
         }
 
@@ -216,18 +220,8 @@ namespace POS_System_EF.UI
         {
             if(rbSubCategory.Checked)
             {
-                cmbRootCategory.Visible = true;
-                rbRootCategory.Checked = false;
+                VisibleRootCategory();
                 LoadCombobox();
-            }
-        }
-
-        private void cmbRootCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(rbSubCategory.Checked)
-            { 
-            cmbRootCategory.DataSource = db.ItemCategories.Where(c => c.CategoryId == null).ToList();
-
             }
         }
 
@@ -235,6 +229,7 @@ namespace POS_System_EF.UI
         {
             ClearAllTextBox();
             LoadDataGridView();
+            HideRootCategory();
         }
 
         private void buttonSrcClear_Click(object sender, EventArgs e)
@@ -254,10 +249,13 @@ namespace POS_System_EF.UI
                 {
                     itemCategory.IsDelete = true;
                     db.SaveChanges();
+                    MessageBox.Show("Successfully deleted");
                 }
             }
             ClearAllTextBox();
             LoadDataGridView();
+            SetFormNewMode();
+            HideRootCategory();
 
         }
 
@@ -284,7 +282,6 @@ namespace POS_System_EF.UI
         {
             btnSaveCategory.Text = "Update";
             buttonDelete.Visible = true;
-            buttonDelete.Enabled = true;
             _isUpdateMode = true;
         }
     }

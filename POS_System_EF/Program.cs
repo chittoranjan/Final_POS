@@ -17,11 +17,8 @@ namespace POS_System_EF
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //desktop-feb24-18
             Application.Run(new LoginForm());
-            // Application.Run(new OutletForm());
             //Application.Run(new ItemCategoryForm());
-           // Application.Run(new EmployeeForm());
            // Application.Run(new ItemForm());
             //Application.Run(new ExpenseCategoryForm());
            // Application.Run(new ExpenseItemForm());

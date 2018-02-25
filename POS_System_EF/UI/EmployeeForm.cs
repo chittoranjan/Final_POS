@@ -359,11 +359,30 @@ namespace POS_System_EF.UI
                     byte[] data = (byte[])aEmployee.Image;
                     MemoryStream ms = new MemoryStream(data);
                     pictureBoxEmp.Image = Image.FromStream(ms);
+                    pictureBox.Image=Image.FromStream(ms);
                 }
                 else
                 {
                     pictureBoxEmp.Image = null;
+                    pictureBox.Image = null;
                 }
+
+                //print form load........
+
+                txtShowEmpName.Text = aEmployee.Name;
+                txtShowOrg.Text = dataGridViewEmployee.CurrentRow.Cells["Organization"].Value.ToString();
+                txtShowOutlet.Text = dataGridViewEmployee.CurrentRow.Cells["OutletName"].Value.ToString();
+                txtShowDate.Text = aEmployee.JoiningDate.ToShortDateString();
+                txtShowContactNo.Text = aEmployee.ContactNo;
+                txtShowEmail.Text = aEmployee.Email;
+                txtShowRef.Text = aEmployee.Reference;
+                txtShowFatherName.Text = aEmployee.FathersName;
+                txtShowMotherName.Text = aEmployee.MothersName;
+                txtShowEmgContNo.Text = aEmployee.EmergencyContactNo;
+                txtShowNID.Text = aEmployee.NID;
+                txtShowPresentAddress.Text = aEmployee.PresentAddress;
+                txtShowPermanentAddress.Text = aEmployee.PermanentAddress;
+                txtShowCode.Text = aEmployee.Code;
             }
             SetFormUpdateMode();
         }
@@ -409,5 +428,54 @@ namespace POS_System_EF.UI
             ClearTextBoxAll();
             LoadDataGridView();
         }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog.Document = printDocument;
+            printPreviewDialog.ShowDialog();
+        }
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Image i = pictureBox.Image;
+            if (i != null)
+            {
+                float newWidth = i.Width * 30 / i.HorizontalResolution;
+                float newHeight = i.Height * 30 / i.VerticalResolution;
+                float widthFactor = newWidth / e.MarginBounds.Width;
+                float heightFactor = newHeight / e.MarginBounds.Height;
+                if (widthFactor > 1 | heightFactor > 1)
+                {
+                    if (widthFactor > heightFactor)
+                    {
+                        newWidth = newWidth / widthFactor;
+
+                        newHeight = newHeight / widthFactor;
+                    }
+                    else
+                    {
+                        newWidth = newWidth / heightFactor;
+                        newHeight = newHeight / heightFactor;
+                    }
+                }
+                e.Graphics.DrawImage(i, 600, 80, (int)newWidth, (int)newHeight);
+            }
+            e.Graphics.DrawString("Organization Name       :  " + txtShowOrg.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 150));
+            e.Graphics.DrawString("Outlet Name                   :  " + txtShowOutlet.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 200));
+            e.Graphics.DrawString("Employee Name            :  " + txtShowEmpName.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 250));
+            e.Graphics.DrawString("Code                                :  " + txtShowCode.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 300));
+            e.Graphics.DrawString("Contact No                     :  " + txtShowContactNo.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 350));
+            e.Graphics.DrawString("Email                               :  " + txtShowEmail.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 400));
+            e.Graphics.DrawString("Reference                       :  " + txtShowRef.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 450));
+            e.Graphics.DrawString("Joining Date                   :  " + txtShowDate.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 500));
+            e.Graphics.DrawString("Father Name                   :  " + txtShowFatherName.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 550));
+            e.Graphics.DrawString("Mother Name                  :  " + txtShowMotherName.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 600));
+            e.Graphics.DrawString("Emergency Contact No :  " + txtShowEmgContNo.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 650));
+            e.Graphics.DrawString("NID                                  :  " + txtShowNID.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 700));
+            e.Graphics.DrawString("Present Address            :  " + txtShowPresentAddress.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 750));
+            e.Graphics.DrawString("Permanent Address       :  " + txtShowPermanentAddress.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 800));
+
+        }
+
     }
 }

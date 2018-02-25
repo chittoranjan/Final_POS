@@ -172,7 +172,7 @@ namespace POS_System_EF.UI
                     Customer cus = new Customer();
                     cus.ContactNo = txtContactNo.Text;
                     cus.Name = txtCustomerName.Text;
-                    cus.Code = cus.GenerateCode(cus.Name, cus.ContactNo);
+                    cus.Code = cus.GenerateCode(cus.Name);
                     using (ManagerContext db = new ManagerContext())
                     {
                         bool customerIdExist = db.Customers.Count(a => a.ContactNo == cus.ContactNo) > 0;
