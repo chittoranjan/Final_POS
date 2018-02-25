@@ -246,7 +246,7 @@ namespace POS_System_EF.UI
                 }
                 using (ManagerContext db = new ManagerContext())
                 {
-                    var purchaseObj = db.TempPurchases.FirstOrDefault(a => a.Name == item.SalesItemName);
+                    var purchaseObj = db.TempPurchases.FirstOrDefault(a => a.Item.Name == item.SalesItemName);
                     if (purchaseObj != null)
                     {
                         txtStock.Text = purchaseObj.Quantity.ToString();

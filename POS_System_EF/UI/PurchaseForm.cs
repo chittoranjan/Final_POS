@@ -18,8 +18,8 @@ namespace POS_System_EF.UI
         public PurchaseForm()
         {
             InitializeComponent();
+            //ClearTextBox();
             ComboBoxData();
-            ClearTextBox();
         }
 
         DataTable table = new DataTable();
@@ -68,20 +68,20 @@ namespace POS_System_EF.UI
             try
             {
                 TempPurchase temp = new TempPurchase();
-                temp.Name = cmbItem.Text;
+                temp.ItemId = (int)cmbItem.SelectedValue;
                 temp.Quantity = Convert.ToInt32(txtQty.Text);
                 temp.CostPrice = Convert.ToDecimal(txtCostPrice.Text);
                 temp.TotalPrice = temp.Quantity * temp.CostPrice;
                 using (ManagerContext db = new ManagerContext())
                 {
-                    var name = db.Items.Where(a => a.Name==temp.Name).ToList();
-                    if(name.Count==0)
+                    var itemid = db.Items.Where(a => a.Id==temp.ItemId).ToList();
+                    if(itemid.Count == 0)
                     {
                         MessageBox.Show("Item Does Not Found","Message",MessageBoxButtons.OK,MessageBoxIcon.Error);
                     }
                     else
                     {
-                        table.Rows.Add(temp.Name, temp.Quantity, temp.CostPrice, temp.TotalPrice);
+                        table.Rows.Add(cmbItem.Text, temp.Quantity, temp.CostPrice, temp.TotalPrice);
 
                         listPurchase.Add(temp);
                         tamount.Add(temp.TotalPrice);
@@ -160,26 +160,27 @@ namespace POS_System_EF.UI
         }
         private void ComboBoxData()
         {
-
             ManagerContext db = new ManagerContext();
-            cmbItem.DataSource = db.Items.ToList();
             cmbItem.DisplayMember = "Name";
             cmbItem.ValueMember = "Id";
+            cmbItem.DataSource = db.Items.ToList();
 
 
-            cmbOutlet.DataSource = db.Outlets.ToList();
+            
             cmbOutlet.DisplayMember = "Name";
             cmbOutlet.ValueMember = "Id";
+            cmbOutlet.DataSource = db.Outlets.ToList();
 
-
-            cmbEmployee.DataSource = db.Employees.ToList();
+            
             cmbEmployee.DisplayMember = "Name";
             cmbEmployee.ValueMember = "Id";
+            cmbEmployee.DataSource = db.Employees.ToList();
 
 
-            cmbSupplier.DataSource = db.Suppliers.ToList();
+            
             cmbSupplier.DisplayMember = "Name";
             cmbSupplier.ValueMember = "Id";
+            cmbSupplier.DataSource = db.Suppliers.ToList();
         }
         private void ClearTextBox()
         {
@@ -192,25 +193,9 @@ namespace POS_System_EF.UI
             cmbOutlet.Text = null;
             cmbSupplier.Text = null;
             txtRemarks.Clear();
+            cmbItem.SelectedIndex = -1;
         }
-        private void cmbItem_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            using (ManagerContext db = new ManagerContext())
-            {
-                TempPurchase temp = new TempPurchase();
-                temp.Name = cmbItem.Text;
-                var objItem = db.Items.FirstOrDefault(a => a.Name == temp.Name);
-
-                if (objItem != null)
-                {
-                    txtCostPrice.Text = objItem.CostPrice.ToString();
-                }
-                else
-                {
-                    txtCostPrice.Clear();
-                }
-            }
-        }
+      
 
         private void dgvPurchaseList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -222,6 +207,36 @@ namespace POS_System_EF.UI
                 }
 
             lblTotalAmount.Text = tamount.Sum().ToString();
+        }
+
+        private void cmbItem_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                    TempPurchase t = new TempPurchase();
+                    t.ItemId = (int)cmbItem.SelectedValue;
+                    using (ManagerContext db = new ManagerContext())
+                    {
+
+                        var objItem = db.Items.FirstOrDefault(a => a.Id == t.ItemId);
+                        t.ItemId = objItem.Id;
+
+                        if (objItem.Id > 0)
+                        {
+                            txtCostPrice.Text = objItem.CostPrice.ToString();
+                        }
+                        else
+                        {
+                            txtCostPrice.Clear();
+                        }
+                    }
+                
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
