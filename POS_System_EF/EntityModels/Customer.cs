@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using POS_System_EF.Managers;
 
 namespace POS_System_EF.EntityModels
 {
@@ -22,14 +23,31 @@ namespace POS_System_EF.EntityModels
         public string Email { get; set; }
         public string Address { get; set; }
         public bool IsDelete { get; set; }
-        public string GenerateCode(string name, string contactno)
-        {
-            int sl = 0;
 
-            var firstThreeChars = name.Length <= 3 ? name : name.Substring(0, 3);
-            //var firstThreeCharsAddress = address.Length <= 3 ? address : address.Substring(0, 3);
-            var firstThreeCharsContactNo = contactno.Length <= 3 ? contactno : contactno.Substring(0, 3);
-            return firstThreeChars + "-" + firstThreeCharsContactNo + "-" + sl++;
+        ManagerContext db =new ManagerContext();
+        private string SetInvioceNo()
+        {
+            var countId = db.Customers.Count();
+            if (countId <= 9)
+            {
+                string invNO = Convert.ToString("00" + countId++);
+                return invNO;
+            }
+            if (countId <= 99)
+            {
+                string invNO = Convert.ToString("0" + countId++);
+                return invNO;
+            }
+            else
+            {
+                string invNO = Convert.ToString(countId++);
+                return invNO;
+            }
+        }
+        public string GenerateCode(string Name)
+        {
+            var firstThreeChars = Name.Length <= 3 ? Name : Name.Substring(0, 3);
+            return firstThreeChars + "-" + SetInvioceNo();
         }
     }
 }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonPrint = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonSrcClear = new System.Windows.Forms.Button();
             this.textBoxSrc = new System.Windows.Forms.TextBox();
@@ -46,15 +45,6 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItem)).BeginInit();
             this.SuspendLayout();
-            // 
-            // buttonPrint
-            // 
-            this.buttonPrint.Location = new System.Drawing.Point(886, 399);
-            this.buttonPrint.Name = "buttonPrint";
-            this.buttonPrint.Size = new System.Drawing.Size(75, 23);
-            this.buttonPrint.TabIndex = 90;
-            this.buttonPrint.Text = "Print";
-            this.buttonPrint.UseVisualStyleBackColor = true;
             // 
             // buttonHome
             // 
@@ -190,6 +180,7 @@
             this.buttonDelete.TabIndex = 91;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Visible = false;
             // 
             // ExpenseItemForm
             // 
@@ -197,7 +188,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 461);
             this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.buttonSrcClear);
             this.Controls.Add(this.textBoxSrc);
@@ -223,7 +213,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonPrint;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button buttonSrcClear;
         private System.Windows.Forms.TextBox textBoxSrc;

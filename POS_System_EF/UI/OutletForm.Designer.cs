@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OutletForm));
             this.groupBoxShow = new System.Windows.Forms.GroupBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.txtSearchCode = new System.Windows.Forms.TextBox();
@@ -56,11 +57,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtShowOrgName = new System.Windows.Forms.TextBox();
+            this.txtShowOutletName = new System.Windows.Forms.TextBox();
+            this.txtShowAddress = new System.Windows.Forms.TextBox();
+            this.txtShowContactNo = new System.Windows.Forms.TextBox();
+            this.txtShowOutletCode = new System.Windows.Forms.TextBox();
+            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBoxShow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOutlet)).BeginInit();
             this.tabControlOutlet.SuspendLayout();
@@ -346,12 +354,17 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label13);
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.btnPrint);
-            this.tabPage2.Controls.Add(this.textBox6);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.textBox4);
+            this.tabPage2.Controls.Add(this.txtShowOrgName);
+            this.tabPage2.Controls.Add(this.txtShowOutletName);
+            this.tabPage2.Controls.Add(this.txtShowAddress);
+            this.tabPage2.Controls.Add(this.txtShowContactNo);
+            this.tabPage2.Controls.Add(this.txtShowOutletCode);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -368,49 +381,117 @@
             this.btnPrint.TabIndex = 27;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // textBox6
+            // txtShowOrgName
             // 
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(35, 26);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(238, 26);
-            this.textBox6.TabIndex = 26;
+            this.txtShowOrgName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtShowOrgName.Location = new System.Drawing.Point(129, 26);
+            this.txtShowOrgName.Name = "txtShowOrgName";
+            this.txtShowOrgName.ReadOnly = true;
+            this.txtShowOrgName.Size = new System.Drawing.Size(238, 26);
+            this.txtShowOrgName.TabIndex = 26;
             // 
-            // textBox1
+            // txtShowOutletName
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(35, 71);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(238, 26);
-            this.textBox1.TabIndex = 25;
+            this.txtShowOutletName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtShowOutletName.Location = new System.Drawing.Point(129, 71);
+            this.txtShowOutletName.Name = "txtShowOutletName";
+            this.txtShowOutletName.ReadOnly = true;
+            this.txtShowOutletName.Size = new System.Drawing.Size(238, 26);
+            this.txtShowOutletName.TabIndex = 25;
             // 
-            // textBox2
+            // txtShowAddress
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(35, 207);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(238, 83);
-            this.textBox2.TabIndex = 21;
+            this.txtShowAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtShowAddress.Location = new System.Drawing.Point(129, 207);
+            this.txtShowAddress.Multiline = true;
+            this.txtShowAddress.Name = "txtShowAddress";
+            this.txtShowAddress.ReadOnly = true;
+            this.txtShowAddress.Size = new System.Drawing.Size(238, 83);
+            this.txtShowAddress.TabIndex = 21;
             // 
-            // textBox3
+            // txtShowContactNo
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(35, 160);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(204, 26);
-            this.textBox3.TabIndex = 22;
+            this.txtShowContactNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtShowContactNo.Location = new System.Drawing.Point(129, 160);
+            this.txtShowContactNo.Name = "txtShowContactNo";
+            this.txtShowContactNo.ReadOnly = true;
+            this.txtShowContactNo.Size = new System.Drawing.Size(204, 26);
+            this.txtShowContactNo.TabIndex = 22;
             // 
-            // textBox4
+            // txtShowOutletCode
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(35, 116);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(238, 26);
-            this.textBox4.TabIndex = 23;
+            this.txtShowOutletCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtShowOutletCode.Location = new System.Drawing.Point(129, 116);
+            this.txtShowOutletCode.Name = "txtShowOutletCode";
+            this.txtShowOutletCode.ReadOnly = true;
+            this.txtShowOutletCode.Size = new System.Drawing.Size(238, 26);
+            this.txtShowOutletCode.TabIndex = 23;
+            // 
+            // printPreviewDialog
+            // 
+            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Enabled = true;
+            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
+            this.printPreviewDialog.Name = "printPreviewDialog";
+            this.printPreviewDialog.Visible = false;
+            // 
+            // printDocument
+            // 
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(9, 26);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(73, 17);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "Org Name";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(9, 71);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 17);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "Outlet Name";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(8, 116);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(41, 17);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "Code";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(9, 160);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(78, 17);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "Contact No";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(9, 207);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(60, 17);
+            this.label13.TabIndex = 28;
+            this.label13.Text = "Address";
             // 
             // OutletForm
             // 
@@ -446,11 +527,11 @@
         private System.Windows.Forms.TabControl tabControlOutlet;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtShowOrgName;
+        private System.Windows.Forms.TextBox txtShowOutletName;
+        private System.Windows.Forms.TextBox txtShowAddress;
+        private System.Windows.Forms.TextBox txtShowContactNo;
+        private System.Windows.Forms.TextBox txtShowOutletCode;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.TextBox txtSearchCode;
         private System.Windows.Forms.GroupBox groupBoxAddOraganization;
@@ -471,5 +552,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
+        private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
     }
 }

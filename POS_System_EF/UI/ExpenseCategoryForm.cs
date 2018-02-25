@@ -27,7 +27,7 @@ namespace POS_System_EF
         private void LoadCombobox()
         {
             var loadCategory = (from expenseCategory in db.ExpenseCategories
-                                where expenseCategory.RootCategoryId == 0
+                                where expenseCategory.RootCategoryId == 0 && expenseCategory.IsDelete==false
                                 select expenseCategory
                 ).ToList();
 
@@ -149,7 +149,16 @@ namespace POS_System_EF
             txtName.Clear();
             txtCode.Clear();
             txtDescription.Clear();
+            SetFormNewMode();
         }
+
+        private void SetFormNewMode()
+        {
+            btnSaveCategory.Text = "Save";
+            buttonDelete.Visible = false;
+            _isUpdateMode = false;
+        }
+
         private void LoadDataGridView()
         {
             var item = (from expenseCategory in db.ExpenseCategories
@@ -185,7 +194,7 @@ namespace POS_System_EF
             string textSearch = textBoxSrc.Text;
             ManagerContext db = new ManagerContext();
             var item = (from exp in db.ExpenseCategories
-                        where exp.Name.StartsWith(textSearch)
+                        where exp.Name.StartsWith(textSearch) && exp.IsDelete==false||exp.Code.StartsWith(textSearch) && exp.IsDelete==false
                         select new
                         {
                             exp.Name,
@@ -257,6 +266,7 @@ namespace POS_System_EF
                 {
                     expenseCategory.IsDelete = true;
                     db.SaveChanges();
+                    MessageBox.Show("Successfully deleted");
                 }
             }
             ClearAllTextBox();

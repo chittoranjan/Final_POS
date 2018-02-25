@@ -46,7 +46,6 @@
             this.buttonSrcClear = new System.Windows.Forms.Button();
             this.textBoxSrc = new System.Windows.Forms.TextBox();
             this.buttonHome = new System.Windows.Forms.Button();
-            this.buttonPrint = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItem)).BeginInit();
             this.SuspendLayout();
@@ -210,15 +209,6 @@
             this.buttonHome.UseVisualStyleBackColor = true;
             this.buttonHome.Click += new System.EventHandler(this.buttonHome_Click);
             // 
-            // buttonPrint
-            // 
-            this.buttonPrint.Location = new System.Drawing.Point(876, 400);
-            this.buttonPrint.Name = "buttonPrint";
-            this.buttonPrint.Size = new System.Drawing.Size(75, 23);
-            this.buttonPrint.TabIndex = 41;
-            this.buttonPrint.Text = "Print";
-            this.buttonPrint.UseVisualStyleBackColor = true;
-            // 
             // buttonDelete
             // 
             this.buttonDelete.Location = new System.Drawing.Point(52, 353);
@@ -227,6 +217,7 @@
             this.buttonDelete.TabIndex = 42;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Visible = false;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // ItemForm
@@ -235,7 +226,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 461);
             this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.buttonSrcClear);
             this.Controls.Add(this.textBoxSrc);
@@ -283,7 +273,6 @@
         private System.Windows.Forms.Button buttonSrcClear;
         private System.Windows.Forms.TextBox textBoxSrc;
         private System.Windows.Forms.Button buttonHome;
-        private System.Windows.Forms.Button buttonPrint;
         private System.Windows.Forms.Button buttonDelete;
     }
 }

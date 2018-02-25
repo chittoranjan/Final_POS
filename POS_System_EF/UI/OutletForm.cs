@@ -255,6 +255,14 @@ namespace POS_System_EF.UI
                     txtAddress.Text = _outlet.Address;
                     txtContactNo.Text = _outlet.ContactNo;
                     txtOutletCode.Text = _outlet.Code;
+
+                    //prin preview text box fill...
+
+                    txtShowOrgName.Text = dgvOutlet.CurrentRow.Cells["Organization"].Value.ToString();
+                    txtShowOutletName.Text = _outlet.Name;
+                    txtShowOutletCode.Text = _outlet.Code;
+                    txtShowContactNo.Text = _outlet.ContactNo;
+                    txtShowAddress.Text = _outlet.Address;
                 }
 
                 SetFormUpdateMode();
@@ -303,6 +311,33 @@ namespace POS_System_EF.UI
         private void buttonClear_Click_1(object sender, EventArgs e)
         {
             ClearTextBoxAll();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog.Document = printDocument;
+            //CaptureScreen();
+            printPreviewDialog.ShowDialog();
+        }
+        private Bitmap bmp;
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawString("Organization Name :  " + txtShowOrgName.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 150));
+            e.Graphics.DrawString("Outlet Name             :  " + txtShowOutletName.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 200));
+            e.Graphics.DrawString("Code                         :  " + txtShowOutletCode.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 250));
+            e.Graphics.DrawString("Contact No               :  " + txtShowContactNo.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 300));
+            e.Graphics.DrawString("Address                   :  " + txtShowAddress.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 350));
+
+
+            //e.Graphics.DrawImage(bmp, 0, 0);
+        }
+        private void CaptureScreen()
+        {
+            //Graphics myGraphics = this.CreateGraphics();
+            //bmp=new Bitmap(this.Size.Width, this.Size.Height,myGraphics);
+            //Graphics memoryGraphics = Graphics.FromImage(bmp);
+            //memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 10, 10, this.TabControlOrgPrint.Size);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace POS_System_EF.UI
                         item.Name = txtName.Text;
                         item.CostPrice = Convert.ToDecimal(txtCostPrice.Text);
                         item.SalePrice = Convert.ToDecimal(txtSalePrice.Text);
-                        item.Code = item.GenearateCode(item.Name, cmbCategory.Text);
+                        item.Code = item.GenearateCode(item.Name);
                         item.Description = txtDescription.Text;
 
                         db.Items.Add(item);
@@ -103,7 +103,7 @@ namespace POS_System_EF.UI
             item.Name = txtName.Text;
             item.CostPrice = Convert.ToDecimal(txtCostPrice.Text);
             item.SalePrice = Convert.ToDecimal(txtSalePrice.Text);
-            item.Code = item.GenearateCode(item.Name, cmbCategory.Text);
+            item.Code = item.GenearateCode(item.Name);
             item.Description = txtDescription.Text;
 
         }
@@ -115,12 +115,19 @@ namespace POS_System_EF.UI
             txtCode.Clear();
             txtDescription.Clear();
             cmbCategory.SelectedIndex = -1;
+            SetFormNewMode();
+        }
+
+        private void SetFormNewMode()
+        {
+            btnSave.Text = "Save";
+            buttonDelete.Visible = false;
+            _isUpdateMode = false;
         }
 
         private void ComboxData()
         {
-             var cat= db.ItemCategories.Where(c => c.CategoryId >0).ToList();
-            //var subcat = db.ItemCategories.Where(c => c.CategoryId == c.Id).ToList();
+            var cat= db.ItemCategories.Where(c => c.CategoryId >0 &&c.IsDelete==false).ToList();
             cmbCategory.DataSource = cat;
             cmbCategory.DisplayMember = "Name";
             cmbCategory.ValueMember = "Id";
@@ -160,7 +167,7 @@ namespace POS_System_EF.UI
             string textSearch = textBoxSrc.Text;
             ManagerContext db = new ManagerContext();
             var item = (from i in db.Items
-                                where i.Name.StartsWith(textSearch)
+                                where i.Name.StartsWith(textSearch)&&i.IsDelete==false||i.Code.StartsWith(textSearch)&&i.IsDelete==false
                                 select new
                                 {
                                     i.Name,
@@ -216,6 +223,7 @@ namespace POS_System_EF.UI
                 {
                     item.IsDelete = true;
                     db.SaveChanges();
+                    MessageBox.Show("Successfully deleted");
                 }
             }
             ClearAllTextBox();

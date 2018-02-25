@@ -99,7 +99,7 @@ namespace POS_System_EF.UI
                     {
                         TextBoxValue();
                         bool isContactNoExist = db.Organizations.Count(c => c.ContactNo == org.ContactNo) > 1;
-                        if (isContactNoExist)
+                        if (isContactNoExist )
                         {
                             MessageBox.Show("Contact No Allready Exist");
                             return;
@@ -366,7 +366,7 @@ namespace POS_System_EF.UI
                 e.Graphics.DrawImage(i, 600, 100, (int)newWidth, (int)newHeight);
             }
             e.Graphics.DrawString("Organization Name :  "+txtShowName.Text , new Font("Arial", 18, FontStyle.Bold) ,Brushes.Black, new Point(30, 150));
-            e.Graphics.DrawString("Code                       :  "+ txtShowCode.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 200));
+            e.Graphics.DrawString("Code                        :  "+ txtShowCode.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 200));
             e.Graphics.DrawString("Contact No              :  "+ txtShowContact.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 250));
             e.Graphics.DrawString("Address                   :  "+ txtShowAddress.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 300));
 
