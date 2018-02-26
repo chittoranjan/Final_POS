@@ -35,7 +35,14 @@ namespace POS_System_EF.UI
                     supplier.ContactNo = txtContactNo.Text;
                     supplier.Email = txtEmail.Text;
                     supplier.Address = txtAddress.Text;
-                    supplier.Code = supplier.GenerateCode(supplier.Name);
+                    if (txtCodeManual.Text.Trim() != string.Empty)
+                    {
+                        supplier.Code = txtCodeManual.Text;
+                    }
+                    else
+                    {
+                        supplier.Code = txtPartyCode.Text;
+                    }
                     supplier.IsDelete = false;
                     if (supplier.Id == 0)
                     {
@@ -133,7 +140,58 @@ namespace POS_System_EF.UI
             SetFormNewMode();
 
         }
+        private string SetInvioceNo()
+        {
+            var countId = db.Suppliers.Count();
+            countId++;
+            if (countId <= 9)
+            {
+                string invNo = Convert.ToString("00" + countId);
+                return invNo;
+            }
+            if (countId <= 99)
+            {
+                string invNo = Convert.ToString("0" + countId);
+                return invNo;
+            }
+            else
+            {
+                string invNo = Convert.ToString(countId);
+                return invNo;
+            }
+        }
 
+        private string GenerateCodeCustomer()
+        {
+            var firstThreeChars = Name.Length <= 3 ? Name : Name.Substring(0, 3);
+            return firstThreeChars + "-" + SetInvioceNo();
+        }
+        private string SetInvioceNo1()
+        {
+            var countId = db.Customers.Count();
+            countId++;
+            if (countId <= 9)
+            {
+                string invNo = Convert.ToString("00" + countId);
+                return invNo;
+            }
+            if (countId <= 99)
+            {
+                string invNo = Convert.ToString("0" + countId);
+                return invNo;
+            }
+            else
+            {
+                string invNo = Convert.ToString(countId);
+                return invNo;
+            }
+        }
+
+        private string GenerateCodeSuppliers()
+        {
+            var firstThreeChars = Name.Length <= 3 ? Name : Name.Substring(0, 3);
+            return firstThreeChars + "-" + SetInvioceNo();
+        }
         private void SetFormNewMode()
         {
             btnSave.Text = "Save";
@@ -212,7 +270,7 @@ namespace POS_System_EF.UI
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int selectedId = (int)dataGridView.CurrentRow.Cells["Id"].Value;
-            var updateOutlet = db.Suppliers.Where(c => c.Id == selectedId).FirstOrDefault();
+            var updateOutlet = db.Suppliers.FirstOrDefault(c => c.Id == selectedId);
             if (selectedId != 0)
             {
                 updateOutlet.IsDelete = true;
@@ -261,6 +319,7 @@ namespace POS_System_EF.UI
             {
                 chkCustomer.Checked = false;
             }
+            txtPartyCode.Text = GenerateCodeSuppliers();
         }
 
         private void chkCustomer_CheckedChanged(object sender, EventArgs e)
@@ -269,6 +328,9 @@ namespace POS_System_EF.UI
             {
                 chkSupplier.Checked = false;
             }
+            txtPartyCode.Text = GenerateCodeCustomer();
         }
+
+        
     }
 }

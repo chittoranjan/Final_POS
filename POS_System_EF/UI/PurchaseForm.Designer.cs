@@ -257,6 +257,7 @@
             this.dgvPurchaseList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPurchaseList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPurchaseList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPurchaseList.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvPurchaseList.Location = new System.Drawing.Point(3, 22);
@@ -293,7 +294,7 @@
             this.cmbItem.Name = "cmbItem";
             this.cmbItem.Size = new System.Drawing.Size(156, 28);
             this.cmbItem.TabIndex = 9;
-            this.cmbItem.SelectedIndexChanged += new System.EventHandler(this.cmbItem_SelectedIndexChanged);
+            this.cmbItem.SelectionChangeCommitted += new System.EventHandler(this.cmbItem_SelectionChangeCommitted);
             // 
             // label1
             // 

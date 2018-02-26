@@ -216,6 +216,44 @@ namespace POS_System_EF.UI
         private void cmbItem_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            //try
+            //{
+            //    var cmbId = (int)cmbItem.SelectedValue;
+            //    using (ManagerContext db = new ManagerContext())
+            //    {
+            //        var objItem = db.Items.FirstOrDefault(a => a.Id == cmbId);
+
+            //        if (objItem.Id > 0)
+            //        {
+            //            txtCostPrice.Text = objItem.CostPrice.ToString();
+            //        }
+            //        else
+            //        {
+            //            txtCostPrice.Clear();
+            //        }
+            //    }
+
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+        }
+
+        private void InStock()
+        {
+            Stock stock = new Stock();
+            stock.ItemId = (int)listPurchase[0].ItemId;
+            stock.AvailableQuantity = listPurchase[0].Quantity;
+            using (ManagerContext db = new ManagerContext())
+            {
+                db.Stocks.Add(stock);
+                db.SaveChanges();
+            }
+        }
+        private void cmbItem_SelectionChangeCommitted(object sender, EventArgs e)
+        {
             try
             {
                 var cmbId = (int)cmbItem.SelectedValue;
@@ -232,24 +270,10 @@ namespace POS_System_EF.UI
                         txtCostPrice.Clear();
                     }
                 }
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void InStock()
-        {
-            Stock stock = new Stock();
-            stock.ItemId = (int)listPurchase[0].ItemId;
-            stock.AvailableQuantity = listPurchase[0].Quantity;
-            using (ManagerContext db = new ManagerContext())
-            {
-                db.Stocks.Add(stock);
-                db.SaveChanges();
             }
         }
     }

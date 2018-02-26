@@ -52,6 +52,7 @@
             this.buttonSupplier = new System.Windows.Forms.Button();
             this.buttonCustomer = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
+            this.txtCodeManual = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.partyGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +81,7 @@
             this.partyGroupBox.Controls.Add(this.txtEmail);
             this.partyGroupBox.Controls.Add(this.txtContactNo);
             this.partyGroupBox.Controls.Add(this.txtPartyCode);
+            this.partyGroupBox.Controls.Add(this.txtCodeManual);
             this.partyGroupBox.Controls.Add(this.txtPartyName);
             this.partyGroupBox.Controls.Add(this.label5);
             this.partyGroupBox.Controls.Add(this.label4);
@@ -199,10 +201,10 @@
             // txtPartyCode
             // 
             this.txtPartyCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPartyCode.Location = new System.Drawing.Point(108, 88);
+            this.txtPartyCode.Location = new System.Drawing.Point(251, 88);
             this.txtPartyCode.Name = "txtPartyCode";
             this.txtPartyCode.ReadOnly = true;
-            this.txtPartyCode.Size = new System.Drawing.Size(270, 26);
+            this.txtPartyCode.Size = new System.Drawing.Size(127, 26);
             this.txtPartyCode.TabIndex = 48;
             // 
             // txtPartyName
@@ -310,6 +312,14 @@
             this.buttonHome.UseVisualStyleBackColor = true;
             this.buttonHome.Click += new System.EventHandler(this.buttonHome_Click);
             // 
+            // txtCodeManual
+            // 
+            this.txtCodeManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCodeManual.Location = new System.Drawing.Point(108, 88);
+            this.txtCodeManual.Name = "txtCodeManual";
+            this.txtCodeManual.Size = new System.Drawing.Size(138, 26);
+            this.txtCodeManual.TabIndex = 49;
+            // 
             // SupplierCustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,5 +369,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.TextBox txtCodeManual;
     }
 }

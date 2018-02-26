@@ -27,20 +27,21 @@ namespace POS_System_EF.EntityModels
         private string SetInvioceNo()
         {
             var countId = db.ItemCategories.Count();
+            countId++;
             if (countId <= 9)
             {
-                string invNO = Convert.ToString("00" + countId++);
-                return invNO;
+                string invNo = Convert.ToString("00" + countId);
+                return invNo;
             }
             if (countId <= 99)
             {
-                string invNO = Convert.ToString("0" + countId++);
-                return invNO;
+                string invNo = Convert.ToString("0" + countId);
+                return invNo;
             }
             else
             {
-                string invNO = Convert.ToString(countId++);
-                return invNO;
+                string invNo = Convert.ToString(countId);
+                return invNo;
             }
         }
         internal string GenearateCodeRoot(string Name)
