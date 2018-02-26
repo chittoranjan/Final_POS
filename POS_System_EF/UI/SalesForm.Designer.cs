@@ -477,7 +477,7 @@
             this.cmbSalesItem.Name = "cmbSalesItem";
             this.cmbSalesItem.Size = new System.Drawing.Size(204, 28);
             this.cmbSalesItem.TabIndex = 1;
-            this.cmbSalesItem.SelectedIndexChanged += new System.EventHandler(this.cmbSalesItem_SelectedIndexChanged);
+            this.cmbSalesItem.SelectedValueChanged += new System.EventHandler(this.cmbSalesItem_SelectedValueChanged);
             // 
             // txtSalesQty
             // 

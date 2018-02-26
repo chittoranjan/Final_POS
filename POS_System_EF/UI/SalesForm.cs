@@ -83,9 +83,9 @@ namespace POS_System_EF.UI
             //                }).ToList();
             //cmbSalesItem.DataSource = itemName;
             var itemName = db.Items.ToList();
-            cmbSalesItem.DataSource = itemName;
-            cmbSalesItem.DisplayMember = "Name";
+            cmbSalesItem.DisplayMember = "CodeName";
             cmbSalesItem.ValueMember = "Id";
+            cmbSalesItem.DataSource = itemName;
 
             cmbOutlet.DataSource = db.Outlets.ToList();
             cmbOutlet.DisplayMember = "Name";
@@ -230,37 +230,7 @@ namespace POS_System_EF.UI
             return no;
         }
 
-        private void cmbSalesItem_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                txtSalesQty.Text = 1.ToString();
-                SalesItem item = new SalesItem();
-                item.ItemId = (int)cmbSalesItem.SelectedValue;
-                using (ManagerContext db = new ManagerContext())
-                {
-                    var ObjItem = db.Items.FirstOrDefault(a => a.Id == item.ItemId);
-                    if (ObjItem != null)
-                    {
-                        txtSalePriceRO.Text = ObjItem.SalePrice.ToString();
-
-                    }
-
-                }
-                using (ManagerContext db = new ManagerContext())
-                {
-                    var purchaseObj = db.Stocks.FirstOrDefault(a => a.ItemId == item.ItemId);
-                    if (purchaseObj != null)
-                    {
-                        txtStock.Text = purchaseObj.AvailableQuantity.ToString();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        
 
         private void dgvSalesList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -341,5 +311,51 @@ namespace POS_System_EF.UI
                 db.SaveChanges();
             }
         }
+
+        private void cmbSalesItem_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int cmbId;
+                if (cmbSalesItem.SelectedValue != null && cmbSalesItem.Text != "")
+                {
+                    bool isValidItemId = int.TryParse(cmbSalesItem.SelectedValue.ToString(), out cmbId);
+                    if (isValidItemId)
+                    {
+                        using (ManagerContext db = new ManagerContext())
+                        {
+                            var objItem = db.Items.FirstOrDefault(a => a.Id == cmbId);
+
+                            if (objItem.Id > 0)
+                            {
+                                txtSalePriceRO.Text = objItem.SalePrice.ToString();
+                                txtSalesQty.Text = 1.ToString();
+
+                            }
+                            else
+                            {
+                                txtSalePriceRO.Clear();
+
+                            }
+                        }
+                    }
+                }
+
+                if (string.IsNullOrEmpty(cmbSalesItem.Text))
+                {
+                    txtSalePriceRO.Clear();
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+       
     }
 }
