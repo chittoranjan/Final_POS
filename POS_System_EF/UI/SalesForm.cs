@@ -19,39 +19,70 @@ namespace POS_System_EF.UI
         {
             InitializeComponent();
             ComboBoxData();
+            ClearAllBox();
         }
         DataTable table = new DataTable();
-        List<SalesItem> listOfSalesItem=new List<SalesItem>();
-        private void btnSalesAdd_Click(object sender, EventArgs e)
+        List<SalesItem> listOfSalesItem = new List<SalesItem>();
+        List<decimal> totalAmount = new List<decimal>();
+
+        private void btnSalesAdd_Click_1(object sender, EventArgs e)
         {
             try
             {
                 SalesItem item = new SalesItem();
-                item.SalesItemName = cmbSalesItem.Text;
+                item.ItemId = (int)cmbSalesItem.SelectedValue;
                 item.Quantity = Convert.ToInt32(txtSalesQty.Text);
-                item.SalePrice = Convert.ToDecimal(txtSaletPrice.Text);
-                item.LineTotal = item.Quantity * item.SalePrice;
-                table.Rows.Add(item.SalesItemName, item.Quantity, item.SalePrice, item.LineTotal);
-                listOfSalesItem.Add(item);
-                dgvSalesList.DataSource = table;
+                if (txtSalePrice.Text == "")
+                {
+                    item.SalePrice = Convert.ToDecimal(txtSalePriceRO.Text);
+                }
+                else
+                {
+                    item.SalePrice = Convert.ToDecimal(txtSalePrice.Text);
+                }
+
+
+                using (ManagerContext db = new ManagerContext())
+                {
+
+                    var name = db.Items.Where(a => a.Id == item.ItemId).ToList();
+                    if (name.Count == 0)
+                    {
+                        MessageBox.Show("Item Does Not Found", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    else
+                    {
+                        item.LineTotal = item.Quantity * item.SalePrice;
+                        table.Rows.Add(cmbSalesItem.Text, item.Quantity, item.SalePrice, item.LineTotal);
+                        listOfSalesItem.Add(item);
+                        totalAmount.Add(item.LineTotal);
+                        dgvSalesList.DataSource = table;
+                        ClearTextBox();
+                        txtTotalAmount.Text = totalAmount.Sum().ToString();
+                        txtSubTotal.Text = txtTotalAmount.Text;
+                    }
+                }
+                txtDiscount.Text = 0.ToString();
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
-
-        private void GetTotal(decimal lineTotalPrice)
-        {
-            
-            txtTotalAmount.Text= lineTotalPrice.ToString();
-        }
-
         private void ComboBoxData()
         {
             ManagerContext db = new ManagerContext();
-            var itemName = db.TempPurchases.ToList();
+            //var itemName = (from i in db.Items
+            //                select new
+            //                {
+            //                    name=i.Name,
+            //                    code=i.Code
+            //                }).ToList();
+            //cmbSalesItem.DataSource = itemName;
+            var itemName = db.Items.ToList();
             cmbSalesItem.DataSource = itemName;
             cmbSalesItem.DisplayMember = "Name";
             cmbSalesItem.ValueMember = "Id";
@@ -73,27 +104,24 @@ namespace POS_System_EF.UI
             table.Columns.Add("Cost Price", typeof(decimal));
             table.Columns.Add("Total Price", typeof(decimal));
             dgvSalesList.DataSource = table;
-        }
 
+            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+            btn.HeaderText = "Action";
+            btn.Name = "btnDelete";
+            btn.Text = "Delete";
+            btn.UseColumnTextForButtonValue = true;
+            dgvSalesList.Columns.Add(btn);
+        }
         private void dgvSalesList_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            btnDelete.Visible = true;
-            btnDelete.Enabled = true;
-            cmbSalesItem.Text = dgvSalesList.CurrentRow.Cells[0].Value.ToString();
-            txtSalesQty.Text = dgvSalesList.CurrentRow.Cells[1].Value.ToString();
-            txtSaletPrice.Text = dgvSalesList.CurrentRow.Cells[2].Value.ToString();
+            //btnDelete.Visible = true;
+            //btnDelete.Enabled = true;
+            //cmbSalesItem.Text = dgvSalesList.CurrentRow.Cells[0].Value.ToString();
+            //txtSalesQty.Text = dgvSalesList.CurrentRow.Cells[1].Value.ToString();
+            //txtSaletPrice.Text = dgvSalesList.CurrentRow.Cells[2].Value.ToString();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-
-            if (dgvSalesList.SelectedRows.Count > 0)
-            {
-                dgvSalesList.Rows.RemoveAt(dgvSalesList.SelectedRows[0].Index);
-            }
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
+        private void btnClear_Click_1(object sender, EventArgs e)
         {
             ClearTextBox();
         }
@@ -102,10 +130,12 @@ namespace POS_System_EF.UI
 
             cmbSalesItem.SelectedIndex = -1;
             txtSalesQty.Clear();
-            txtSaletPrice.Clear();
+            txtSalePrice.Clear();
+            txtSalesQty.Clear();
+            txtSalePriceRO.Clear();
+            txtStock.Clear();
         }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click_1(object sender, EventArgs e)
         {
             cmbOutlet.Text = null;
             cmbEmployee.Text = null;
@@ -119,51 +149,197 @@ namespace POS_System_EF.UI
             ClearTextBox();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnSave_Click_1(object sender, EventArgs e)
         {
             try
             {
                 Sale sales = new Sale();
-                sales.InvoiceNo = "0000";
+                sales.InvoiceNo = GetInvoiceNo().ToString();
                 sales.listOfItem = listOfSalesItem;
-                sales.CustomerName = txtCustomerName.Text;
-                sales.CustomerContactNo = txtContactNo.Text;
+
                 sales.SubTotal = Convert.ToDecimal(txtSubTotal.Text);
-                sales.Vat = Convert.ToDecimal(txtVat.Text);
+                sales.Vat = Convert.ToDecimal(lblVat.Text);
+                sales.SalesDate = dtpSales.Value;
                 sales.Remarks = txtRemarks.Text;
                 sales.Discount = Convert.ToDecimal(txtDiscount.Text);
+
+                sales.TotalAmount = sales.SubTotal + sales.Vat;
                 sales.OutletId = (int)cmbOutlet.SelectedValue;
                 sales.EmployeeId = (int)cmbEmployee.SelectedValue;
-                ManagerContext db = new ManagerContext();
-                db.Sales.Add(sales);
-                int count = db.SaveChanges();
-                if (count > 0)
+
+                if (lblCustomerId.Text == "")
                 {
-                    MessageBox.Show("Sales Saved Success");
+                    Customer cus = new Customer();
+                    cus.ContactNo = txtContactNo.Text;
+                    cus.Name = txtCustomerName.Text;
+                    cus.Code = cus.GenerateCode(cus.Name);
+                    using (ManagerContext db = new ManagerContext())
+                    {
+                        bool customerIdExist = db.Customers.Count(a => a.ContactNo == cus.ContactNo) > 0;
+                        if (customerIdExist)
+                        {
+                            MessageBox.Show("This number is Exist");
+
+                        }
+                        else
+                        {
+
+                            db.Customers.Add(cus);
+                            db.SaveChanges();
+                            sales.CustomerId = db.Customers.Count();
+                        }
+
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Operation Failed");
+
+                    sales.CustomerId = Convert.ToInt32(lblCustomerId.Text);
                 }
+
+
+                using (ManagerContext db = new ManagerContext())
+                {
+                    db.Sales.Add(sales);
+                    int count = db.SaveChanges();
+                    if (count > 0)
+                    {
+                        //UpdateStock();
+                        MessageBox.Show("Sales Saved Success");
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Operation Failed");
+                    }
+
+
+                }
+                ClearAllBox();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-         
+        }
+        private int GetInvoiceNo()
+        {
+            ManagerContext db = new ManagerContext();
+            int no = db.Sales.Count();
+            no = 100 + no++;
+            return no;
         }
 
-        private decimal GetTotalAmount()
+        private void cmbSalesItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            decimal total;
-            total = 1000;
-            return total;
+            try
+            {
+                txtSalesQty.Text = 1.ToString();
+                SalesItem item = new SalesItem();
+                item.ItemId = (int)cmbSalesItem.SelectedValue;
+                using (ManagerContext db = new ManagerContext())
+                {
+                    var ObjItem = db.Items.FirstOrDefault(a => a.Id == item.ItemId);
+                    if (ObjItem != null)
+                    {
+                        txtSalePriceRO.Text = ObjItem.SalePrice.ToString();
+
+                    }
+
+                }
+                using (ManagerContext db = new ManagerContext())
+                {
+                    var purchaseObj = db.Stocks.FirstOrDefault(a => a.ItemId == item.ItemId);
+                    if (purchaseObj != null)
+                    {
+                        txtStock.Text = purchaseObj.AvailableQuantity.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private string GetInvoiceNo()
+        private void dgvSalesList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string InvoiceNo = "001";
-            return InvoiceNo;
+            if (dgvSalesList.CurrentCell.ColumnIndex.Equals(4))
+                if (dgvSalesList.CurrentCell != null && dgvSalesList.CurrentCell.Value != null)
+                {
+                    dgvSalesList.Rows.RemoveAt(e.RowIndex);
+                    totalAmount.RemoveAt(e.RowIndex);
+                    listOfSalesItem.RemoveAt(e.RowIndex);
+                }
+
+            txtTotalAmount.Text = totalAmount.Sum().ToString();
+            txtSubTotal.Text = txtTotalAmount.Text;
+        }
+
+        private void ClearAllBox()
+        {
+            cmbOutlet.Text = null;
+            cmbEmployee.Text = null;
+            txtCustomerName.Clear();
+            txtContactNo.Clear();
+            txtVat.Clear();
+            txtDiscount.Clear();
+            txtRemarks.Clear();
+            txtSubTotal.Clear();
+            txtTotalAmount.Clear();
+            ClearTextBox();
+            cmbSalesItem.SelectedIndex = -1;
+            txtSalesQty.Clear();
+            txtSalePrice.Clear();
+            txtSalesQty.Clear();
+            txtSalePriceRO.Clear();
+            txtStock.Clear();
+        }
+
+        private void txtContactNo_Leave(object sender, EventArgs e)
+        {
+            using (ManagerContext db = new ManagerContext())
+            {
+                var customer = db.Customers.FirstOrDefault(a => a.ContactNo == txtContactNo.Text);
+                if (customer != null)
+                {
+                    txtCustomerName.Text = customer.Name;
+                    lblCustomerId.Text = customer.Id.ToString();
+                    lblCustomerId.Hide();
+                }
+            }
+        }
+
+        private void txtVat_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+
+                decimal TotalWithDiscount = Convert.ToDecimal(txtSubTotal.Text) - Convert.ToDecimal(txtDiscount.Text);
+                double vat = Convert.ToDouble(txtSubTotal.Text) / Convert.ToDouble(txtVat.Text);
+                lblVat.Text = vat.ToString();
+                txtVat.Clear();
+                decimal totalAmount = TotalWithDiscount + Convert.ToDecimal(vat);
+                lblTotal.Text = totalAmount.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void UpdateStock()
+        {
+            Stock stock = new Stock();
+            stock.ItemId = (int)listOfSalesItem[0].ItemId;
+            stock.AvailableQuantity = listOfSalesItem[0].Quantity;
+            using (ManagerContext db = new ManagerContext())
+            {
+                db.Stocks.Attach(stock);
+                db.Entry(stock).Property(X => X.AvailableQuantity).IsModified = true;
+                db.SaveChanges();
+            }
         }
     }
 }

@@ -99,7 +99,7 @@ namespace POS_System_EF.UI
                     {
                         TextBoxValue();
                         bool isContactNoExist = db.Organizations.Count(c => c.ContactNo == org.ContactNo) > 1;
-                        if (isContactNoExist)
+                        if (isContactNoExist )
                         {
                             MessageBox.Show("Contact No Allready Exist");
                             return;
@@ -213,6 +213,7 @@ namespace POS_System_EF.UI
         }
         private void textSrcQuick_TextChanged(object sender, EventArgs e)
         {
+
             string textSearch = textSrcQuick.Text;
             if(textSearch.Length>2)
             { 
@@ -318,12 +319,31 @@ namespace POS_System_EF.UI
             LoadDataGridView();
         }
 
+        private string SetInvioceNo()
+        {
+            var countId = db.Organizations.Count();
+            countId++;
+            if (countId <= 9)
+            {
+                
+                string invNo = Convert.ToString("00" + countId);
+                return invNo;
+            }
+            if (countId <= 99)
+            {
+                string invNo = Convert.ToString("0" + countId);
+                return invNo;
+            }
+            else
+            {
+                string invNo = Convert.ToString(countId);
+                return invNo;
+            }
+        }
         private void AutoCodeShow()
         {
-            int count = 1;
-            count = db.Organizations.Include(c => c.Id).Count()+count;
             var firstThreeChars = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            txtOrgnizationCode.Text=firstThreeChars+"-"+ "00"+count.ToString();
+            txtOrgnizationCode.Text=firstThreeChars+"-"+ SetInvioceNo();
 
         }
 
@@ -366,7 +386,7 @@ namespace POS_System_EF.UI
                 e.Graphics.DrawImage(i, 600, 100, (int)newWidth, (int)newHeight);
             }
             e.Graphics.DrawString("Organization Name :  "+txtShowName.Text , new Font("Arial", 18, FontStyle.Bold) ,Brushes.Black, new Point(30, 150));
-            e.Graphics.DrawString("Code                       :  "+ txtShowCode.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 200));
+            e.Graphics.DrawString("Code                        :  "+ txtShowCode.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 200));
             e.Graphics.DrawString("Contact No              :  "+ txtShowContact.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 250));
             e.Graphics.DrawString("Address                   :  "+ txtShowAddress.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 300));
 
@@ -386,6 +406,11 @@ namespace POS_System_EF.UI
         private void btnHome_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }  
     }
 }

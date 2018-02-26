@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using POS_System_EF.Managers;
 
 namespace POS_System_EF.EntityModels
 {
@@ -22,20 +23,36 @@ namespace POS_System_EF.EntityModels
         public List<ItemCategory> ListOfSubCategory { get; set; }
         public bool IsDelete { get; set; }
 
+        ManagerContext db=new ManagerContext();
+        private string SetInvioceNo()
+        {
+            var countId = db.ItemCategories.Count();
+            if (countId <= 9)
+            {
+                string invNO = Convert.ToString("00" + countId++);
+                return invNO;
+            }
+            if (countId <= 99)
+            {
+                string invNO = Convert.ToString("0" + countId++);
+                return invNO;
+            }
+            else
+            {
+                string invNO = Convert.ToString(countId++);
+                return invNO;
+            }
+        }
         internal string GenearateCodeRoot(string Name)
         {
-            int sl = 0;
             var firstThreeCategoryName = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            //var firstThreeCharsCategoryName = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            return firstThreeCategoryName + "-" +sl++;
+            return firstThreeCategoryName + "-" +SetInvioceNo();
         }
 
         internal string GenearateCodeSub(string Name)
         {
-            int sl = 0;
             var firstThreeCategoryName = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            //var firstThreeCharsCategoryName = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            return firstThreeCategoryName + "-" + sl++;
+            return firstThreeCategoryName + "-" + SetInvioceNo();
         }
     }
 }

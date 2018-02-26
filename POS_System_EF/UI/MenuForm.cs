@@ -83,11 +83,6 @@ namespace POS_System_EF
             this.Close();
         }
 
-        private void organizationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void expenseCategorySetUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ExpenseCategoryForm expenseCategoryForm=new ExpenseCategoryForm();
@@ -100,16 +95,46 @@ namespace POS_System_EF
             expenseItemForm.Show();
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            ExpenseForm expense=new ExpenseForm();
-            expense.Show();
-        }
-
         private void salesRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SalesReportForm srForm = new SalesReportForm();
             srForm.Show();
+        }
+
+        private void addExpenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExpenseForm expense = new ExpenseForm();
+            expense.Show();
+        }
+
+        private void expReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExpenseReportForm exReport=new ExpenseReportForm();
+            exReport.Show();
+        }
+
+        private void salesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SalesCrystalReportForm sForm = new SalesCrystalReportForm();
+            sForm.Show();
+        }
+
+        private void purchaseReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PurchaseReportForm pForm = new PurchaseReportForm();
+            pForm.Show();
+        }
+
+        private void expenseReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExpenseReportForm eForm = new ExpenseReportForm();
+            eForm.Show();
+        }
+
+        private void stockReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StockForm sForm = new StockForm();
+            sForm.Show();
         }
     }
 }

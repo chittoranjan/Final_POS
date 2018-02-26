@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using POS_System_EF.Managers;
 
 namespace POS_System_EF.EntityModels
 {
@@ -16,11 +17,30 @@ namespace POS_System_EF.EntityModels
         public ExpenseCategory ExpenseCategory { get; set; }
         public bool  IsDelete { get; set; }
 
-        internal string GenearateExpItemCode(string name, string Name)
+        ManagerContext db = new ManagerContext();
+        private string SetInvioceNo()
         {
-            var firstThreeCharsItemName = name.Length <= 3 ? name : name.Substring(0, 3);
+            var countId = db.ExpenseItems.Count();
+            if (countId <= 9)
+            {
+                string invNO = Convert.ToString("00" + countId++);
+                return invNO;
+            }
+            if (countId <= 99)
+            {
+                string invNO = Convert.ToString("0" + countId++);
+                return invNO;
+            }
+            else
+            {
+                string invNO = Convert.ToString(countId++);
+                return invNO;
+            }
+        }
+        internal string GenearateExpItemCode( string Name)
+        {
             var firstThreeCategoryName = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            return firstThreeCharsItemName + "-" + firstThreeCategoryName;
+            return firstThreeCategoryName + "-" +SetInvioceNo() ;
         }
     }
 }

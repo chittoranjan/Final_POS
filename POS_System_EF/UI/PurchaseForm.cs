@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS_System_EF.EntityModels;
 using System.Data.Entity;
+using System.Globalization;
 
 namespace POS_System_EF.UI
 {
@@ -18,8 +19,8 @@ namespace POS_System_EF.UI
         public PurchaseForm()
         {
             InitializeComponent();
+            //ClearTextBox();
             ComboBoxData();
-            ClearTextBox();
         }
 
         DataTable table = new DataTable();
@@ -44,11 +45,15 @@ namespace POS_System_EF.UI
                 if (count > 0)
                 {
                     MessageBox.Show("Saved Successfully");
+                    InStock();
+                    
                 }
                 else
                 {
                     MessageBox.Show("Try Again !");
                 }
+
+
             }
 
             catch (Exception ex)
@@ -68,20 +73,20 @@ namespace POS_System_EF.UI
             try
             {
                 TempPurchase temp = new TempPurchase();
-                temp.Name = cmbItem.Text;
+                temp.ItemId = (int)cmbItem.SelectedValue;
                 temp.Quantity = Convert.ToInt32(txtQty.Text);
                 temp.CostPrice = Convert.ToDecimal(txtCostPrice.Text);
                 temp.TotalPrice = temp.Quantity * temp.CostPrice;
                 using (ManagerContext db = new ManagerContext())
                 {
-                    var name = db.Items.Where(a => a.Name==temp.Name).ToList();
-                    if(name.Count==0)
+                    var itemid = db.Items.Where(a => a.Id==temp.ItemId).ToList();
+                    if(itemid.Count == 0)
                     {
                         MessageBox.Show("Item Does Not Found","Message",MessageBoxButtons.OK,MessageBoxIcon.Error);
                     }
                     else
                     {
-                        table.Rows.Add(temp.Name, temp.Quantity, temp.CostPrice, temp.TotalPrice);
+                        table.Rows.Add(cmbItem.Text, temp.Quantity, temp.CostPrice, temp.TotalPrice);
 
                         listPurchase.Add(temp);
                         tamount.Add(temp.TotalPrice);
@@ -91,10 +96,6 @@ namespace POS_System_EF.UI
                     }
                     
                 }
-                    
-                
-                
-
             }
             catch (Exception ex)
             {
@@ -160,26 +161,30 @@ namespace POS_System_EF.UI
         }
         private void ComboBoxData()
         {
-
             ManagerContext db = new ManagerContext();
-            cmbItem.DataSource = db.Items.ToList();
+            var loadItem = db.Items.Where(i => i.IsDelete == false);
+            cmbItem.DataSource = loadItem.ToList();
             cmbItem.DisplayMember = "Name";
             cmbItem.ValueMember = "Id";
+            cmbItem.SelectedIndex = -1;
+            
 
 
-            cmbOutlet.DataSource = db.Outlets.ToList();
+            
             cmbOutlet.DisplayMember = "Name";
             cmbOutlet.ValueMember = "Id";
+            cmbOutlet.DataSource = db.Outlets.ToList();
 
-
-            cmbEmployee.DataSource = db.Employees.ToList();
+            
             cmbEmployee.DisplayMember = "Name";
             cmbEmployee.ValueMember = "Id";
+            cmbEmployee.DataSource = db.Employees.ToList();
 
 
-            cmbSupplier.DataSource = db.Suppliers.ToList();
+            
             cmbSupplier.DisplayMember = "Name";
             cmbSupplier.ValueMember = "Id";
+            cmbSupplier.DataSource = db.Suppliers.ToList();
         }
         private void ClearTextBox()
         {
@@ -192,25 +197,9 @@ namespace POS_System_EF.UI
             cmbOutlet.Text = null;
             cmbSupplier.Text = null;
             txtRemarks.Clear();
+            cmbItem.SelectedIndex = -1;
         }
-        private void cmbItem_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            using (ManagerContext db = new ManagerContext())
-            {
-                TempPurchase temp = new TempPurchase();
-                temp.Name = cmbItem.Text;
-                var objItem = db.Items.FirstOrDefault(a => a.Name == temp.Name);
-
-                if (objItem != null)
-                {
-                    txtCostPrice.Text = objItem.CostPrice.ToString();
-                }
-                else
-                {
-                    txtCostPrice.Clear();
-                }
-            }
-        }
+      
 
         private void dgvPurchaseList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -222,6 +211,46 @@ namespace POS_System_EF.UI
                 }
 
             lblTotalAmount.Text = tamount.Sum().ToString();
+        }
+
+        private void cmbItem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            try
+            {
+                var cmbId = (int)cmbItem.SelectedValue;
+                using (ManagerContext db = new ManagerContext())
+                {
+                    var objItem = db.Items.FirstOrDefault(a => a.Id == cmbId);
+
+                    if (objItem.Id > 0)
+                    {
+                        txtCostPrice.Text = objItem.CostPrice.ToString();
+                    }
+                    else
+                    {
+                        txtCostPrice.Clear();
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void InStock()
+        {
+            Stock stock = new Stock();
+            stock.ItemId = (int)listPurchase[0].ItemId;
+            stock.AvailableQuantity = listPurchase[0].Quantity;
+            using (ManagerContext db = new ManagerContext())
+            {
+                db.Stocks.Add(stock);
+                db.SaveChanges();
+            }
         }
     }
 }

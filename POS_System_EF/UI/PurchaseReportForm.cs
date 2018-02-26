@@ -55,8 +55,8 @@ namespace POS_System_EF.UI
                 itemListView.Items.Clear();
                 foreach (var o in purchases)
                 {
-                   
-                    itms[0] = o.Name;
+
+                    itms[0] = o.ItemId.ToString();
                     itms[1] = o.Quantity.ToString();
                     itms[2] = o.CostPrice.ToString();
                     itms[3] = o.TotalPrice.ToString();

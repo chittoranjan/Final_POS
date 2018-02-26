@@ -25,7 +25,7 @@ namespace POS_System_EF.UI
         private void ComboxData()
         {
             var loadRootCat = (from exCat in db.ExpenseCategories
-                               where exCat.RootCategoryId > 0
+                               where exCat.RootCategoryId > 0 && exCat.IsDelete==false 
                                select exCat).ToList();
 
             cmbCategory.DataSource = loadRootCat.ToList();
@@ -39,7 +39,7 @@ namespace POS_System_EF.UI
             {
                 expenseItem.ExpenseCategoryId = (int)cmbCategory.SelectedValue;
                 expenseItem.Name = txtName.Text;
-                expenseItem.Code = expenseItem.GenearateExpItemCode(expenseItem.Name, cmbCategory.Text);
+                expenseItem.Code = expenseItem.GenearateExpItemCode(expenseItem.Name);
                 expenseItem.Description = txtDescription.Text;
 
                 db.ExpenseItems.Add(expenseItem);
@@ -99,7 +99,7 @@ namespace POS_System_EF.UI
         {
             string textSearch = textBoxSrc.Text;
             var item = (from ei in db.ExpenseItems
-                        where ei.Name.StartsWith(textSearch)
+                        where ei.Name.StartsWith(textSearch)&& ei.IsDelete==false||ei.Code.StartsWith(textSearch)&&ei.IsDelete==false
                         select new
                         {
                             ei.Name,

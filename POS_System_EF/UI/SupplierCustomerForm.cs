@@ -15,6 +15,7 @@ namespace POS_System_EF.UI
     public partial class SupplierCustomerForm : Form
     {
         ManagerContext db = new ManagerContext();
+        private bool isDelete = false;
 
         public SupplierCustomerForm()
         {
@@ -34,7 +35,7 @@ namespace POS_System_EF.UI
                     supplier.ContactNo = txtContactNo.Text;
                     supplier.Email = txtEmail.Text;
                     supplier.Address = txtAddress.Text;
-                    supplier.Code = supplier.GenerateCode(supplier.Name, supplier.Address, supplier.ContactNo);
+                    supplier.Code = supplier.GenerateCode(supplier.Name);
                     supplier.IsDelete = false;
                     if (supplier.Id == 0)
                     {
@@ -73,7 +74,7 @@ namespace POS_System_EF.UI
                     aCustomer.Email = txtEmail.Text;
                     aCustomer.ContactNo = txtContactNo.Text;
                     aCustomer.Address = txtAddress.Text;
-                    aCustomer.Code = aCustomer.GenerateCode(aCustomer.Name, aCustomer.Address, aCustomer.ContactNo);
+                    aCustomer.Code = aCustomer.GenerateCode(aCustomer.Name);
                     aCustomer.IsDelete = false;
                     if (aCustomer.Id == 0)
                     {
@@ -129,6 +130,15 @@ namespace POS_System_EF.UI
             chkCustomer.Checked = false;
             chkSupplier.Checked = false;
 
+            SetFormNewMode();
+
+        }
+
+        private void SetFormNewMode()
+        {
+            btnSave.Text = "Save";
+            btnDelete.Visible = false;
+            isDelete = false;
         }
 
         private void buttonSupplier_Click(object sender, EventArgs e)
@@ -188,7 +198,8 @@ namespace POS_System_EF.UI
         {
             string textSearch = textBoxSrc.Text;
             var customer = (from c in db.Customers
-                            where c.Name.StartsWith(textSearch)
+                            where c.Name.StartsWith(textSearch)&&c.IsDelete==false||c.Code.StartsWith(textSearch)&&c.IsDelete==false
+                            ||c.ContactNo.StartsWith(textSearch)&&c.IsDelete==false||c.Email.StartsWith(textSearch)&&c.IsDelete==false
                             select new
                             {
                                 c.Name,
@@ -220,18 +231,22 @@ namespace POS_System_EF.UI
                 Supplier s = new Supplier();
 
                 s.Id = Convert.ToInt32(dataGridView.CurrentRow.Cells["Id"].Value);
-                var supplierObj = db.Suppliers.Where(c => c.Id == s.Id).FirstOrDefault();
+                var supplierObj = db.Suppliers.FirstOrDefault(c => c.Id == s.Id);
 
                 txtPartyName.Text = supplierObj.Name;
                 txtAddress.Text = supplierObj.Address;
                 txtContactNo.Text = supplierObj.ContactNo;
                 txtPartyCode.Text = supplierObj.Code;
 
-                btnSave.Text = "Update";
-                btnDelete.Visible = true;
-                btnDelete.Enabled = true;
-
+                SetFormUpdateMode();
             }
+        }
+
+        private void SetFormUpdateMode()
+        {
+            btnSave.Text = "Update";
+            btnDelete.Visible = true;
+            isDelete = true;
         }
 
         private void btnClear_Click(object sender, EventArgs e)

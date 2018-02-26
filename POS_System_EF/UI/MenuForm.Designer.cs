@@ -49,8 +49,15 @@
             this.addSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addExpenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.incomeReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expenseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +98,6 @@
             this.organizationToolStripMenuItem.Name = "organizationToolStripMenuItem";
             this.organizationToolStripMenuItem.Size = new System.Drawing.Size(100, 23);
             this.organizationToolStripMenuItem.Text = "Organization";
-            this.organizationToolStripMenuItem.Click += new System.EventHandler(this.organizationToolStripMenuItem_Click);
             // 
             // addorganizationToolStripMenuItem
             // 
@@ -222,22 +228,78 @@
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addExpenseToolStripMenuItem,
+            this.expReportToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(74, 23);
             this.toolStripMenuItem1.Text = "Expense ";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // addExpenseToolStripMenuItem
+            // 
+            this.addExpenseToolStripMenuItem.Name = "addExpenseToolStripMenuItem";
+            this.addExpenseToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+            this.addExpenseToolStripMenuItem.Text = "Add Expense";
+            this.addExpenseToolStripMenuItem.Click += new System.EventHandler(this.addExpenseToolStripMenuItem_Click);
+            // 
+            // expReportToolStripMenuItem
+            // 
+            this.expReportToolStripMenuItem.Name = "expReportToolStripMenuItem";
+            this.expReportToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+            this.expReportToolStripMenuItem.Text = "Exp Report";
+            this.expReportToolStripMenuItem.Click += new System.EventHandler(this.expReportToolStripMenuItem_Click);
             // 
             // reportToolStripMenuItem
             // 
+            this.reportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.salesReportToolStripMenuItem,
+            this.purchaseReportToolStripMenuItem,
+            this.incomeReportToolStripMenuItem,
+            this.expenseReportToolStripMenuItem,
+            this.stockReportToolStripMenuItem});
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
             this.reportToolStripMenuItem.Size = new System.Drawing.Size(62, 23);
             this.reportToolStripMenuItem.Text = "Report";
+            // 
+            // salesReportToolStripMenuItem
+            // 
+            this.salesReportToolStripMenuItem.Name = "salesReportToolStripMenuItem";
+            this.salesReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.salesReportToolStripMenuItem.Text = "Sales Report";
+            this.salesReportToolStripMenuItem.Click += new System.EventHandler(this.salesReportToolStripMenuItem_Click);
+            // 
+            // purchaseReportToolStripMenuItem
+            // 
+            this.purchaseReportToolStripMenuItem.Name = "purchaseReportToolStripMenuItem";
+            this.purchaseReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.purchaseReportToolStripMenuItem.Text = "Purchase Report";
+            this.purchaseReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseReportToolStripMenuItem_Click);
+            // 
+            // incomeReportToolStripMenuItem
+            // 
+            this.incomeReportToolStripMenuItem.Name = "incomeReportToolStripMenuItem";
+            this.incomeReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.incomeReportToolStripMenuItem.Text = "Income Report";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
             this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // expenseReportToolStripMenuItem
+            // 
+            this.expenseReportToolStripMenuItem.Name = "expenseReportToolStripMenuItem";
+            this.expenseReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.expenseReportToolStripMenuItem.Text = "Expense Report";
+            this.expenseReportToolStripMenuItem.Click += new System.EventHandler(this.expenseReportToolStripMenuItem_Click);
+            // 
+            // stockReportToolStripMenuItem
+            // 
+            this.stockReportToolStripMenuItem.Name = "stockReportToolStripMenuItem";
+            this.stockReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.stockReportToolStripMenuItem.Text = "Stock Report";
+            this.stockReportToolStripMenuItem.Click += new System.EventHandler(this.stockReportToolStripMenuItem_Click);
             // 
             // OpeningForm
             // 
@@ -281,6 +343,13 @@
         private System.Windows.Forms.ToolStripMenuItem addSalesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salesRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem addExpenseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem expReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salesReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem purchaseReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem incomeReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem expenseReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stockReportToolStripMenuItem;
     }
 }
 

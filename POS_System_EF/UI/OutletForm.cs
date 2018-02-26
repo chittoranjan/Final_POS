@@ -171,12 +171,32 @@ namespace POS_System_EF.UI
             btnSave.Text = "Save";
             _isUpdateMode = false;
         }
+
+        private string SetInvioceNo()
+        {
+            var countId = db.Outlets.Count();
+            countId++;
+            if (countId <= 9)
+            {
+
+                string invNo = Convert.ToString("00" + countId);
+                return invNo;
+            }
+            if (countId <= 99)
+            {
+                string invNo = Convert.ToString("0" + countId);
+                return invNo;
+            }
+            else
+            {
+                string invNo = Convert.ToString(countId);
+                return invNo;
+            }
+        }
         private void AutoCodeShow()
         {
-            int count = 1;
-            count = db.Outlets.Include(c => c.Id).Count()+count;
             var firstThreeChars = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            txtOutletCode.Text = firstThreeChars + "-" + "00" + count.ToString();
+            txtOutletCode.Text = firstThreeChars + "-" + SetInvioceNo();
 
         }
         private void textBoxOutletName_TextChanged(object sender, EventArgs e)
@@ -255,6 +275,14 @@ namespace POS_System_EF.UI
                     txtAddress.Text = _outlet.Address;
                     txtContactNo.Text = _outlet.ContactNo;
                     txtOutletCode.Text = _outlet.Code;
+
+                    //prin preview text box fill...
+
+                    txtShowOrgName.Text = dgvOutlet.CurrentRow.Cells["Organization"].Value.ToString();
+                    txtShowOutletName.Text = _outlet.Name;
+                    txtShowOutletCode.Text = _outlet.Code;
+                    txtShowContactNo.Text = _outlet.ContactNo;
+                    txtShowAddress.Text = _outlet.Address;
                 }
 
                 SetFormUpdateMode();
@@ -270,24 +298,66 @@ namespace POS_System_EF.UI
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Are you sure want to delete ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if(DialogResult==DialogResult.Yes)
+            int id = (int)dgvOutlet.SelectedRows[0].Cells["Id"].Value;
+            var updateOutlet = db.Outlets.FirstOrDefault(c => c.Id == id);
+            if (updateOutlet != null)
             {
-                int selectedId = (int)dgvOutlet.CurrentRow.Cells["Id"].Value;
-                _outlet = db.Outlets.FirstOrDefault(c => c.Id == selectedId);
-                if (_outlet!=null)
+                _outlet = updateOutlet;
+                updateOutlet.IsDelete = true;
+
+
+                DialogResult result = MessageBox.Show("Do you want to Delete?", "Confirmation", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                switch (result)
                 {
-                    _outlet.IsDelete = true;
-                    db.Outlets.Add(_outlet);
+                    case DialogResult.Yes:
+                        db.SaveChanges();
+                        MessageBox.Show("Successfully deleted");
+                        break;
+                    case DialogResult.No:
+                        MessageBox.Show("You have clicked Cancel Button");
+                        break;
                 }
             }
-            ClearTextBoxAll();
+            else
+            {
+                MessageBox.Show("Delete failed");
+            }
+           
             LoadDataGridView();
+            ClearTextBoxAll();
         }
 
         private void buttonClear_Click_1(object sender, EventArgs e)
         {
             ClearTextBoxAll();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog.Document = printDocument;
+            //CaptureScreen();
+            printPreviewDialog.ShowDialog();
+        }
+        private Bitmap bmp;
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawString("Organization Name :  " + txtShowOrgName.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 150));
+            e.Graphics.DrawString("Outlet Name             :  " + txtShowOutletName.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 200));
+            e.Graphics.DrawString("Code                         :  " + txtShowOutletCode.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 250));
+            e.Graphics.DrawString("Contact No               :  " + txtShowContactNo.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 300));
+            e.Graphics.DrawString("Address                   :  " + txtShowAddress.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 350));
+
+
+            //e.Graphics.DrawImage(bmp, 0, 0);
+        }
+        private void CaptureScreen()
+        {
+            //Graphics myGraphics = this.CreateGraphics();
+            //bmp=new Bitmap(this.Size.Width, this.Size.Height,myGraphics);
+            //Graphics memoryGraphics = Graphics.FromImage(bmp);
+            //memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 10, 10, this.TabControlOrgPrint.Size);
         }
     }
 }

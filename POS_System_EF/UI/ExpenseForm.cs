@@ -15,14 +15,14 @@ namespace POS_System_EF.UI
     public partial class ExpenseForm : Form
     {
         ManagerContext db = new ManagerContext();
-        private Expense expense;
+        private Expense expense = new Expense();
         bool isUpdateMode = false;
         public ExpenseForm()
         {
             InitializeComponent();
-            LoadDataGridView();
             LoadExpenseItem();
             LoadOrganization();
+          
         }
         private void LoadExpenseItem()
         {
@@ -74,6 +74,7 @@ namespace POS_System_EF.UI
         {
             LoadEmployee();
         }
+        
         private void LoadEmployee()
         {
             var cmbEmp = (from empName in db.Employees
@@ -88,65 +89,43 @@ namespace POS_System_EF.UI
             cmbEmployee.ValueMember = "Id";
             cmbEmployee.SelectedIndex = -1;
         }
-        private void LoadDataGridView()
-        {
-            var loadData = (from ex in db.Expenses
-                            join emp in db.Employees on ex.EmployeeId equals emp.Id
-                            join outlet1 in db.Outlets on ex.OutletId equals outlet1.Id
-                            join org in db.Organizations on ex.OrganizationId equals org.Id
-
-                            select new
-                            {
-                                ex.Id,
-                                ex.ExpenseName,
-                                ex.Qty,
-                                ex.Amount,
-                                ex.Paid,
-                                ex.Due,
-                                ex.Date,
-                                ex.Remarks,
-                                EmployeeName = ex.Employee.Name,
-                                OutletName = ex.Outlet.Name,
-                                OrganizationName = ex.Organization.Name
-                            }).ToList();
-            dgvExpense.DataSource = loadData;
-            var dgvColumn = dgvExpense.Columns["Id"];
-            if (dgvColumn != null)
-            {
-                dgvColumn.Visible = false;
-            }
-        }
-        
-
         private void btnHome_Click(object sender, EventArgs e)
         {
             //OpeningForm openingForm = new OpeningForm();
             //openingForm.Show();
             this.Close();
         }
-        private List<Expense> _expnseItems = new List<Expense>();
-        Expense anExpense = new Expense();
-        private void btnAdd_Click(object sender, EventArgs e)
+        List<ExpenseList>expenseLists=new List<ExpenseList>(); 
+        private void btnAdd_Click_1(object sender, EventArgs e)
         {
-            expense=new Expense();
-            expense.ExpenseName = cmbExpenseItem.Text;
-            expense.ExpenseItemId = (int)cmbExpenseItem.SelectedValue;
-                expense.Remarks = txtRemark.Text;
-                expense.Qty = Convert.ToInt32(txtQty.Text);
-                expense.Amount = Convert.ToDecimal(txtAmount.Text);
-                expense.Paid = Convert.ToDecimal(txtpaid.Text);
-                expense.Due = (Convert.ToDecimal(txtAmount.Text)-Convert.ToDecimal(txtpaid.Text));
-                expense.OrganizationId = (int)cmbOrganization.SelectedValue;
-                expense.OutletId = (int)cmbOutlet.SelectedValue;
-                expense.EmployeeId = (int)cmbEmployee.SelectedValue;
-                expense.Date = dateTimePicker.Value;
-
-                DialogResult result = MessageBox.Show("Do you want to Save?", "Confirmation",
+            ExpenseList expenseAdd=new ExpenseList();
+            try
+            {
+                DialogResult result = MessageBox.Show("Do you want to Add?", "Confirmation",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (result == DialogResult.Yes)
                 {
+                    expenseAdd.ExpenseName = cmbExpenseItem.Text;
+                    expenseAdd.Qty = Convert.ToInt32(txtQty.Text);
+                    expenseAdd.Amount = Convert.ToDecimal(txtAmount.Text);
+                    expenseAdd.Paid = Convert.ToDecimal(txtpaid.Text);
+                    expenseAdd.Due = Convert.ToDecimal(txtAmount.Text) - Convert.ToDecimal(txtpaid.Text);
 
-                    _expnseItems.Add(expense);
+                    var name = db.ExpenseItems.Where(a => a.Name == expenseAdd.ExpenseName).ToList();
+                    if (name.Count == 0)
+                    {
+                        MessageBox.Show("Item Does Not Found", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+
+                    }
+                    else if (name.Count>0)
+                    {
+                        expenseLists.Add(expenseAdd);
+                        ShowDgvAddItems();
+
+                        ShowExpenseSummary();
+                        ClearAddItemTextBox();
+                    }
 
                     MessageBox.Show("Expense added successfully!");
                 }
@@ -154,30 +133,39 @@ namespace POS_System_EF.UI
                 {
                     MessageBox.Show("You have clicked Cancel Button");
                 }
-                dgvExpense.DataSource = null;
-            var addExpItem = (from ex in _expnseItems
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ShowDgvAddItems()
+        {
+            var showAddItems = (from exList in expenseLists
                 select new
                 {
-                    ex.ExpenseName,
-                    ex.Qty,
-                    ex.Amount,
-                    ex.Paid,
-                    ex.Date
+                    expense.Id,
+                    exList.ExpenseName,
+                    exList.Qty,
+                    exList.Amount,
+                    exList.Paid,
+                    exList.Due
                 }).ToList();
-            
-                dgvExpense.DataSource = addExpItem;
-            ShowExpenseSummary();
-                ClearAddItemTextBox();
+
+            dgvExpense.DataSource = null;
+            dgvExpense.DataSource = showAddItems;
+            var dataGridViewColumn = dgvExpense.Columns["Id"];
+            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
         }
 
         private void ShowExpenseSummary()
         {
-            decimal total = 0; 
-            decimal paid = 0;
-            decimal due = 0;
-            total+=Convert.ToDecimal(txtAmount.Text);
-            paid += Convert.ToDecimal(txtpaid.Text);
-            due += total - paid;
+
+            decimal total = expenseLists.Sum(s => s.Amount);
+            decimal paid = expenseLists.Sum(s => s.Paid);
+            decimal due = total - paid;
 
             txtTotalShow.Text = total.ToString();
             txtPaidSho.Text = paid.ToString();
@@ -195,36 +183,109 @@ namespace POS_System_EF.UI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Do you want to Save", "Confirmation",
+            try
+            {
+                DialogResult result = MessageBox.Show("Do you want to Save", "Confirmation",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (result == DialogResult.Yes)
-            {
-                db.Expenses.AddRange(_expnseItems);
-                int count = db.SaveChanges();
-                MessageBox.Show(count > 0 ? "Expense save successfully!" : "Save failed");
+                if (result == DialogResult.Yes)
+                {
+                    expense.ExpenseList = expenseLists;
+                    expense.InvoiceNo = SetInvioceNo();
+                    expense.Remarks = txtRemark.Text;
+                    expense.TotalAmount = Convert.ToDecimal(txtTotalShow.Text);
+                    expense.OrganizationId = (int)cmbOrganization.SelectedValue;
+                    expense.OutletId = (int)cmbOutlet.SelectedValue;
+                    expense.EmployeeId = (int)cmbEmployee.SelectedValue;
+                    expense.Date = dateTimePicker.Value;
+
+                    db.Expenses.Add(expense);
+                    int count = db.SaveChanges();
+                    MessageBox.Show(count > 0 ? "Expense save successfully!" : "Save failed");
+                }
+                else if (result == DialogResult.No)
+                {
+                    MessageBox.Show("You have clicked Cancel Button");
+                }
             }
-            else if (result == DialogResult.No)
+            catch (Exception ex)
             {
-                MessageBox.Show("You have clicked Cancel Button");
+
+                MessageBox.Show(ex.Message);
             }
-            
-            LoadDataGridView();
             ClearTextBoxAll();
         }
+        private string SetInvioceNo()
+        {
+            var countId = db.Organizations.Count();
+            countId++;
+            if (countId <= 9)
+            {
+
+                string invNo = Convert.ToString("00" + countId);
+                return invNo;
+            }
+            if (countId <= 99)
+            {
+                string invNo = Convert.ToString("0" + countId);
+                return invNo;
+            }
+            else
+            {
+                string invNo = Convert.ToString(countId);
+                return invNo;
+            }
+        }
+
         private void ClearTextBoxAll()
         {
             txtDueShow.Clear();
             txtTotalShow.Clear();
             txtPaidSho.Clear();
+            dateTimePicker.ResetText();
             cmbOrganization.SelectedIndex = -1;
             cmbOutlet.SelectedIndex = -1;
             cmbEmployee.SelectedIndex = -1;
-            _expnseItems.Clear();
+            expenseLists.Clear();
+
+            ClearAddItemTextBox();
         }
-        private void btnClear_Click(object sender, EventArgs e)
+
+        private void dgvExpense_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult result = MessageBox.Show("Do you want to remove ?", "Confirmation",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (result == DialogResult.Yes)
+                {
+                    int index = dgvExpense.CurrentCell.RowIndex;
+                    expenseLists.RemoveAt(index);
+
+                    ShowDgvAddItems();
+
+                    ShowExpenseSummary();
+
+                    MessageBox.Show("Item has removed");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
+        private void btnClearAddItem_Click(object sender, EventArgs e)
+        {
+            ClearAddItemTextBox();
+            ShowDgvAddItems();
+        }
+
+        private void btnClearAll_Click(object sender, EventArgs e)
         {
             ClearTextBoxAll();
-            LoadDataGridView();
         }
+
     }
 }

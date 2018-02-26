@@ -89,6 +89,7 @@
     <Compile Include="EntityModels\Expense.cs" />
     <Compile Include="EntityModels\ExpenseCategory.cs" />
     <Compile Include="EntityModels\ExpenseItem.cs" />
+    <Compile Include="EntityModels\ExpenseList.cs" />
     <Compile Include="EntityModels\Item.cs" />
     <Compile Include="EntityModels\ItemCategory.cs" />
     <Compile Include="EntityModels\Organization.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="EntityModels\Purchase.cs" />
     <Compile Include="EntityModels\Sale.cs" />
     <Compile Include="EntityModels\SalesItem.cs" />
+    <Compile Include="EntityModels\Stock.cs" />
     <Compile Include="EntityModels\Supplier.cs" />
     <Compile Include="EntityModels\TempPurchase.cs" />
     <Compile Include="Migrations\201802140451580_initial_migration1.cs" />
@@ -109,6 +111,26 @@
     <Compile Include="Migrations\201802171935376_PurchaseClassAddedTotalAmountField.cs" />
     <Compile Include="Migrations\201802171935376_PurchaseClassAddedTotalAmountField.Designer.cs">
       <DependentUpon>201802171935376_PurchaseClassAddedTotalAmountField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802241939489_AddExpense_and_ExpenseList_Class.cs" />
+    <Compile Include="Migrations\201802241939489_AddExpense_and_ExpenseList_Class.Designer.cs">
+      <DependentUpon>201802241939489_AddExpense_and_ExpenseList_Class.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802242109574_Add_Delete_and_Remove_CustomerName_from_SalesClass.cs" />
+    <Compile Include="Migrations\201802242109574_Add_Delete_and_Remove_CustomerName_from_SalesClass.Designer.cs">
+      <DependentUpon>201802242109574_Add_Delete_and_Remove_CustomerName_from_SalesClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802251903360_tempPurchaseClassChanged.cs" />
+    <Compile Include="Migrations\201802251903360_tempPurchaseClassChanged.Designer.cs">
+      <DependentUpon>201802251903360_tempPurchaseClassChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802252037592_AddStockClass.cs" />
+    <Compile Include="Migrations\201802252037592_AddStockClass.Designer.cs">
+      <DependentUpon>201802252037592_AddStockClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802252101225_SaleClassChangeAddItemIdFromItemTable.cs" />
+    <Compile Include="Migrations\201802252101225_SaleClassChangeAddItemIdFromItemTable.Designer.cs">
+      <DependentUpon>201802252101225_SaleClassChangeAddItemIdFromItemTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UI\ExpenseCategoryForm.cs">
@@ -141,6 +163,12 @@
     </Compile>
     <Compile Include="UI\ExpenseItemForm.Designer.cs">
       <DependentUpon>ExpenseItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ExpenseReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ExpenseReportForm.Designer.cs">
+      <DependentUpon>ExpenseReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\LoginForm.cs">
       <SubType>Form</SubType>
@@ -192,6 +220,12 @@
     <Compile Include="UI\PurchaseReportForm.Designer.cs">
       <DependentUpon>PurchaseReportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\SalesCrystalReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SalesCrystalReportForm.Designer.cs">
+      <DependentUpon>SalesCrystalReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\SalesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +237,12 @@
     </Compile>
     <Compile Include="UI\SalesReportForm.Designer.cs">
       <DependentUpon>SalesReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\StockForm.Designer.cs">
+      <DependentUpon>StockForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\SupplierCustomerForm.cs">
       <SubType>Form</SubType>
@@ -219,6 +259,21 @@
     <EmbeddedResource Include="Migrations\201802171935376_PurchaseClassAddedTotalAmountField.resx">
       <DependentUpon>201802171935376_PurchaseClassAddedTotalAmountField.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802241939489_AddExpense_and_ExpenseList_Class.resx">
+      <DependentUpon>201802241939489_AddExpense_and_ExpenseList_Class.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802242109574_Add_Delete_and_Remove_CustomerName_from_SalesClass.resx">
+      <DependentUpon>201802242109574_Add_Delete_and_Remove_CustomerName_from_SalesClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802251903360_tempPurchaseClassChanged.resx">
+      <DependentUpon>201802251903360_tempPurchaseClassChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802252037592_AddStockClass.resx">
+      <DependentUpon>201802252037592_AddStockClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802252101225_SaleClassChangeAddItemIdFromItemTable.resx">
+      <DependentUpon>201802252101225_SaleClassChangeAddItemIdFromItemTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ExpenseCategoryForm.resx">
       <DependentUpon>ExpenseCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -233,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ExpenseItemForm.resx">
       <DependentUpon>ExpenseItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ExpenseReportForm.resx">
+      <DependentUpon>ExpenseReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -268,11 +326,17 @@
     <EmbeddedResource Include="UI\PurchaseReportForm.resx">
       <DependentUpon>PurchaseReportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\SalesCrystalReportForm.resx">
+      <DependentUpon>SalesCrystalReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\SalesForm.resx">
       <DependentUpon>SalesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SalesReportForm.resx">
       <DependentUpon>SalesReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\StockForm.resx">
+      <DependentUpon>StockForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SupplierCustomerForm.resx">
       <DependentUpon>SupplierCustomerForm.cs</DependentUpon>
