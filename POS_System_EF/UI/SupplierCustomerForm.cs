@@ -237,6 +237,7 @@ namespace POS_System_EF.UI
                 txtAddress.Text = supplierObj.Address;
                 txtContactNo.Text = supplierObj.ContactNo;
                 txtPartyCode.Text = supplierObj.Code;
+                txtEmail.Text = supplierObj.Email;
 
                 SetFormUpdateMode();
             }

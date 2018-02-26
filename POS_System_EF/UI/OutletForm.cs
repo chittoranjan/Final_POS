@@ -72,6 +72,7 @@ namespace POS_System_EF.UI
                 txtContactNo.Clear();
                 return;
             }
+           
             try
             {
                 if (!_isUpdateMode)
@@ -79,6 +80,12 @@ namespace POS_System_EF.UI
                     TextBoxValue();
                     bool isExistContactNo = db.Outlets.Count(c => c.ContactNo == _outlet.ContactNo) > 0;
                     if (isExistContactNo)
+                    {
+                        MessageBox.Show("Contact no already exist");
+                        return;
+                    }
+                    bool isExistCode = db.Outlets.Count(c => c.Code == _outlet.Code) > 0;
+                    if (isExistCode)
                     {
                         MessageBox.Show("Contact no already exist");
                         return;
@@ -107,6 +114,12 @@ namespace POS_System_EF.UI
                     if (isExistContactNo)
                     {
                         MessageBox.Show("Contact no already exist");
+                        return;
+                    }
+                    bool isExistCode = db.Outlets.Count(c => c.Code == _outlet.Code) > 0;
+                    if (isExistCode)
+                    {
+                        MessageBox.Show("Code already exist");
                         return;
                     }
                     DialogResult dialogResult = MessageBox.Show("Are you sure want to update ?", "Information", MessageBoxButtons.YesNo,
@@ -163,6 +176,7 @@ namespace POS_System_EF.UI
             txtOutletCode.Clear();
             cmbOrganizationName.SelectedIndex = -1;
             SetFormNewMode();
+            textCodeManual.Clear();
         }
 
         private void SetFormNewMode()
