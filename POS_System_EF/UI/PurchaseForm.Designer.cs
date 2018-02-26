@@ -180,7 +180,7 @@
             this.cmbEmployee.Location = new System.Drawing.Point(145, 65);
             this.cmbEmployee.Name = "cmbEmployee";
             this.cmbEmployee.Size = new System.Drawing.Size(202, 28);
-            this.cmbEmployee.TabIndex = 11;
+            this.cmbEmployee.TabIndex = 7;
             // 
             // label9
             // 
@@ -229,7 +229,7 @@
             this.cmbOutlet.Location = new System.Drawing.Point(145, 19);
             this.cmbOutlet.Name = "cmbOutlet";
             this.cmbOutlet.Size = new System.Drawing.Size(202, 28);
-            this.cmbOutlet.TabIndex = 9;
+            this.cmbOutlet.TabIndex = 6;
             // 
             // label4
             // 
@@ -290,11 +290,11 @@
             this.cmbItem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbItem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbItem.FormattingEnabled = true;
-            this.cmbItem.Location = new System.Drawing.Point(103, 24);
+            this.cmbItem.Location = new System.Drawing.Point(103, 26);
             this.cmbItem.Name = "cmbItem";
             this.cmbItem.Size = new System.Drawing.Size(156, 28);
-            this.cmbItem.TabIndex = 9;
-            this.cmbItem.SelectionChangeCommitted += new System.EventHandler(this.cmbItem_SelectionChangeCommitted);
+            this.cmbItem.TabIndex = 1;
+            this.cmbItem.LocationChanged += new System.EventHandler(this.cmbItem_LocationChanged);
             // 
             // label1
             // 
@@ -312,7 +312,7 @@
             this.btnClear.Location = new System.Drawing.Point(786, 29);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 28);
-            this.btnClear.TabIndex = 8;
+            this.btnClear.TabIndex = 5;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -323,7 +323,7 @@
             this.txtQty.Location = new System.Drawing.Point(376, 29);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(100, 26);
-            this.txtQty.TabIndex = 1;
+            this.txtQty.TabIndex = 2;
             // 
             // btnAdd
             // 
@@ -335,7 +335,7 @@
             this.btnAdd.Location = new System.Drawing.Point(691, 31);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(78, 26);
-            this.btnAdd.TabIndex = 6;
+            this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
