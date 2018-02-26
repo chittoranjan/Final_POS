@@ -21,6 +21,7 @@ namespace POS_System_EF.UI
             InitializeComponent();
             //ClearTextBox();
             ComboBoxData();
+            txtQty.Text = 1.ToString();
         }
 
         DataTable table = new DataTable();
@@ -163,9 +164,10 @@ namespace POS_System_EF.UI
         {
             ManagerContext db = new ManagerContext();
             var loadItem = db.Items.Where(i => i.IsDelete == false);
-            cmbItem.DataSource = loadItem.ToList();
-            cmbItem.DisplayMember = "Name";
+          
+            cmbItem.DisplayMember = "CodeName";
             cmbItem.ValueMember = "Id";
+            cmbItem.DataSource = loadItem.ToList();
             cmbItem.SelectedIndex = -1;
             
 
@@ -213,34 +215,6 @@ namespace POS_System_EF.UI
             lblTotalAmount.Text = tamount.Sum().ToString();
         }
 
-        private void cmbItem_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            try
-            {
-                var cmbId = (int)cmbItem.SelectedValue;
-                using (ManagerContext db = new ManagerContext())
-                {
-                    var objItem = db.Items.FirstOrDefault(a => a.Id == cmbId);
-
-                    if (objItem.Id > 0)
-                    {
-                        txtCostPrice.Text = objItem.CostPrice.ToString();
-                    }
-                    else
-                    {
-                        txtCostPrice.Clear();
-                    }
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void InStock()
         {
             Stock stock = new Stock();
@@ -250,6 +224,49 @@ namespace POS_System_EF.UI
             {
                 db.Stocks.Add(stock);
                 db.SaveChanges();
+            }
+        }
+
+        private void cmbItem_LocationChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int  cmbId;
+                if (cmbItem.SelectedValue != null && cmbItem.Text!="")
+                {
+                    bool isValidItemId = int.TryParse(cmbItem.SelectedValue.ToString(), out cmbId);
+                    if (isValidItemId)
+                    {
+                        using (ManagerContext db = new ManagerContext())
+                        {
+                            var objItem = db.Items.FirstOrDefault(a => a.Id == cmbId);
+
+                            if (objItem.Id > 0)
+                            {
+                                txtCostPrice.Text = objItem.CostPrice.ToString();
+                               
+                            }
+                            else
+                            {
+                                txtCostPrice.Clear();
+                               
+                            }
+                        }
+                    }
+                }
+
+                if (string.IsNullOrEmpty(cmbItem.Text))
+                {
+                    txtCostPrice.Clear();
+
+                }
+                
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
