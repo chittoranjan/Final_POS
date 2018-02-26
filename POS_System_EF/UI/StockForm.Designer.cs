@@ -30,9 +30,9 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.cmbOutlet = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvStock = new System.Windows.Forms.DataGridView();
             this.btnPrint = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -53,14 +53,15 @@
             this.cmbOutlet.Name = "cmbOutlet";
             this.cmbOutlet.Size = new System.Drawing.Size(278, 28);
             this.cmbOutlet.TabIndex = 1;
+            this.cmbOutlet.SelectedIndexChanged += new System.EventHandler(this.cmbOutlet_SelectedIndexChanged);
             // 
-            // dataGridView1
+            // dgvStock
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(35, 93);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1005, 334);
-            this.dataGridView1.TabIndex = 2;
+            this.dgvStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStock.Location = new System.Drawing.Point(35, 93);
+            this.dgvStock.Name = "dgvStock";
+            this.dgvStock.Size = new System.Drawing.Size(1005, 334);
+            this.dgvStock.TabIndex = 2;
             // 
             // btnPrint
             // 
@@ -79,13 +80,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 461);
             this.Controls.Add(this.btnPrint);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvStock);
             this.Controls.Add(this.cmbOutlet);
             this.Controls.Add(this.label1);
             this.Name = "StockForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StockForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -95,7 +96,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbOutlet;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvStock;
         private System.Windows.Forms.Button btnPrint;
     }
 }

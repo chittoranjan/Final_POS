@@ -45,11 +45,15 @@ namespace POS_System_EF.UI
                 if (count > 0)
                 {
                     MessageBox.Show("Saved Successfully");
+                    InStock();
+                    
                 }
                 else
                 {
                     MessageBox.Show("Try Again !");
                 }
+
+
             }
 
             catch (Exception ex)
@@ -211,30 +215,42 @@ namespace POS_System_EF.UI
 
         private void cmbItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-                try
+
+            try
+            {
+                var cmbId = (int)cmbItem.SelectedValue;
+                using (ManagerContext db = new ManagerContext())
                 {
-                    //TempPurchase t = new TempPurchase();
-                    //t.ItemId = (int)cmbItem.SelectedValue;
-                    //var cmbId = cmbItem.SelectedItem;
-                    using (ManagerContext db = new ManagerContext())
+                    var objItem = db.Items.FirstOrDefault(a => a.Id == cmbId);
+
+                    if (objItem.Id > 0)
                     {
-                        var objItem = db.Items.FirstOrDefault(a => a.Id == (int) cmbItem.SelectedValue);
-
-                        if (objItem!=null && objItem.Id >= 0)
-                        {
-                            txtCostPrice.Text = objItem.CostPrice.ToString();
-                        }
-                        else
-                        {
-                            txtCostPrice.Clear();
-                        }
+                        txtCostPrice.Text = objItem.CostPrice.ToString();
                     }
-
+                    else
+                    {
+                        txtCostPrice.Clear();
+                    }
                 }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show(ex.Message);
-                }        
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void InStock()
+        {
+            Stock stock = new Stock();
+            stock.ItemId = (int)listPurchase[0].ItemId;
+            stock.AvailableQuantity = listPurchase[0].Quantity;
+            using (ManagerContext db = new ManagerContext())
+            {
+                db.Stocks.Add(stock);
+                db.SaveChanges();
+            }
         }
     }
 }

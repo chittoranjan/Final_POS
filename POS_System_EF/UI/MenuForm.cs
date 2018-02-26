@@ -118,5 +118,23 @@ namespace POS_System_EF
             SalesCrystalReportForm sForm = new SalesCrystalReportForm();
             sForm.Show();
         }
+
+        private void purchaseReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PurchaseReportForm pForm = new PurchaseReportForm();
+            pForm.Show();
+        }
+
+        private void expenseReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExpenseReportForm eForm = new ExpenseReportForm();
+            eForm.Show();
+        }
+
+        private void stockReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StockForm sForm = new StockForm();
+            sForm.Show();
+        }
     }
 }
