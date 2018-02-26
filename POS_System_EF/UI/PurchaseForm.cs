@@ -227,7 +227,7 @@ namespace POS_System_EF.UI
             }
         }
 
-        private void cmbItem_LocationChanged(object sender, EventArgs e)
+        private void cmbItem_SelectedValueChanged(object sender, EventArgs e)
         {
             try
             {
@@ -261,9 +261,6 @@ namespace POS_System_EF.UI
                     txtCostPrice.Clear();
 
                 }
-
-
-
             }
             catch (Exception ex)
             {

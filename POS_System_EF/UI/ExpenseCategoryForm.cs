@@ -30,7 +30,7 @@ namespace POS_System_EF
                                 where expenseCategory.RootCategoryId == 0 && expenseCategory.IsDelete==false
                                 select expenseCategory
                 ).ToList();
-
+           
             cmbRootCategory.DataSource = loadCategory;
             cmbRootCategory.DisplayMember = "Name";
             cmbRootCategory.ValueMember = "Id";
@@ -56,6 +56,7 @@ namespace POS_System_EF
                             expenseCategory.Name = txtName.Text;
                             if (txtCodeManual.Text.Trim() != string.Empty)
                             {
+
                                 expenseCategory.Code = txtCodeManual.Text;
                             }
                             else
@@ -122,6 +123,47 @@ namespace POS_System_EF
                 {
                     TextBoxValue();
 
+                    if (rbRootCategory.Checked)
+                    {
+                        
+                        expenseCategory.Name = txtName.Text;
+                        if (txtCodeManual.Text.Trim() != string.Empty)
+                        {
+                            expenseCategory.Code = txtCodeManual.Text;
+                        }
+                        else
+                        {
+                            expenseCategory.Code = txtCode.Text;
+                        }
+
+                        expenseCategory.Description = txtDescription.Text;
+                        
+                        db.SaveChanges();                                             
+                    }
+                    else if (rbSubCategory.Checked)
+                    {
+
+                        expenseCategory.RootCategoryId = (int)cmbRootCategory.SelectedValue;
+                        expenseCategory.RootCategoryName = cmbRootCategory.Text;
+                        expenseCategory.Name = txtName.Text;
+                        if (txtCodeManual.Text.Trim() != string.Empty)
+                        {
+                            expenseCategory.Code = txtCodeManual.Text;
+                        }
+                        else
+                        {
+                            expenseCategory.Code = txtCode.Text;
+                        }
+                        expenseCategory.Description = txtDescription.Text;
+                      
+                         db.SaveChanges();
+                       
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please Select Category!");
+                    }
+
                     DialogResult dialogResult = MessageBox.Show("Are you sure want to update ?", "Information", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Information);
                     if (dialogResult == DialogResult.Yes)
@@ -171,6 +213,7 @@ namespace POS_System_EF
             txtCode.Clear();
             txtDescription.Clear();
             SetFormNewMode();
+            txtCodeManual.Clear();
         }
 
         private void SetFormNewMode()

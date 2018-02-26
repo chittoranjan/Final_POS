@@ -105,6 +105,30 @@ namespace POS_System_EF.UI
                 {
                     TextBoxValue();
 
+                    if (rbRootCategory.Checked)
+                    {   
+                        itemCategory.CategoryId = null;
+                        itemCategory.Name = txtName.Text;
+                        itemCategory.Code = itemCategory.GenearateCodeRoot(itemCategory.Name);
+                        itemCategory.Description = txtDescription.Text;
+                        db.SaveChanges();
+                       
+                    }
+                    else if (rbSubCategory.Checked)
+                    {
+                        VisibleRootCategory();
+                        itemCategory.CategoryId = (int)cmbRootCategory.SelectedValue;
+                        itemCategory.Name = txtName.Text;
+                        itemCategory.Code = itemCategory.GenearateCodeSub(itemCategory.Name);
+                        itemCategory.Description = txtDescription.Text;                                           
+                        db.SaveChanges();                                              
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please Select Category!");
+                    }
+
                     DialogResult dialogResult = MessageBox.Show("Are you sure want to update ?", "Information", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Information);
                     if (dialogResult == DialogResult.Yes)

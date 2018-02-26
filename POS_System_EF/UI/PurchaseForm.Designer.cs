@@ -294,7 +294,7 @@
             this.cmbItem.Name = "cmbItem";
             this.cmbItem.Size = new System.Drawing.Size(156, 28);
             this.cmbItem.TabIndex = 1;
-            this.cmbItem.LocationChanged += new System.EventHandler(this.cmbItem_LocationChanged);
+            this.cmbItem.SelectedValueChanged += new System.EventHandler(this.cmbItem_SelectedValueChanged);
             // 
             // label1
             // 
