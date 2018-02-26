@@ -52,10 +52,12 @@
             this.addExpenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incomeReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expenseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -252,16 +254,12 @@
             this.reportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.salesReportToolStripMenuItem,
             this.purchaseReportToolStripMenuItem,
-            this.incomeReportToolStripMenuItem});
+            this.incomeReportToolStripMenuItem,
+            this.expenseReportToolStripMenuItem,
+            this.stockReportToolStripMenuItem});
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
             this.reportToolStripMenuItem.Size = new System.Drawing.Size(62, 23);
             this.reportToolStripMenuItem.Text = "Report";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
-            this.aboutToolStripMenuItem.Text = "About";
             // 
             // salesReportToolStripMenuItem
             // 
@@ -275,12 +273,33 @@
             this.purchaseReportToolStripMenuItem.Name = "purchaseReportToolStripMenuItem";
             this.purchaseReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
             this.purchaseReportToolStripMenuItem.Text = "Purchase Report";
+            this.purchaseReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseReportToolStripMenuItem_Click);
             // 
             // incomeReportToolStripMenuItem
             // 
             this.incomeReportToolStripMenuItem.Name = "incomeReportToolStripMenuItem";
             this.incomeReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
             this.incomeReportToolStripMenuItem.Text = "Income Report";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // expenseReportToolStripMenuItem
+            // 
+            this.expenseReportToolStripMenuItem.Name = "expenseReportToolStripMenuItem";
+            this.expenseReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.expenseReportToolStripMenuItem.Text = "Expense Report";
+            this.expenseReportToolStripMenuItem.Click += new System.EventHandler(this.expenseReportToolStripMenuItem_Click);
+            // 
+            // stockReportToolStripMenuItem
+            // 
+            this.stockReportToolStripMenuItem.Name = "stockReportToolStripMenuItem";
+            this.stockReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.stockReportToolStripMenuItem.Text = "Stock Report";
+            this.stockReportToolStripMenuItem.Click += new System.EventHandler(this.stockReportToolStripMenuItem_Click);
             // 
             // OpeningForm
             // 
@@ -329,6 +348,8 @@
         private System.Windows.Forms.ToolStripMenuItem salesReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchaseReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem incomeReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem expenseReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stockReportToolStripMenuItem;
     }
 }
 

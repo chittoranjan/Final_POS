@@ -17,6 +17,7 @@ namespace POS_System_EF.UI
         {
             InitializeComponent();
             ComboBoxData();
+            LoadDataGridView();
         }
 
         private void ComboBoxData()
@@ -33,6 +34,42 @@ namespace POS_System_EF.UI
         private void btnPrint_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmbOutlet_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void LoadDataGridView()
+        {
+
+            ManagerContext db = new ManagerContext();
+            var stock = (from s in db.Stocks
+                         join i in db.Items on s.ItemId equals i.Id
+                         join sales in db.SalesItem on s.ItemId equals sales.ItemId
+                         join p in db.TempPurchases on s.ItemId equals p.ItemId
+                         select new
+                         {
+                             s.Id,
+                             s.AvailableQuantity,
+                             s.ItemId,
+                             ItemName =i.Name,
+                             i.SalePrice,
+                             SalesQty=sales.Quantity,
+                             PurchaseQuantity=p.Quantity,
+                             CurrentQuantity=p.Quantity - sales.Quantity
+                         }).ToList();
+            dgvStock.DataSource = stock;
         }
     }
 }

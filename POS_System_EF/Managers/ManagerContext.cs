@@ -25,5 +25,6 @@ namespace POS_System_EF.Managers
         public DbSet<TempPurchase> TempPurchases { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SalesItem> SalesItem { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
     }
 }

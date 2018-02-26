@@ -213,6 +213,7 @@ namespace POS_System_EF.UI
         }
         private void textSrcQuick_TextChanged(object sender, EventArgs e)
         {
+
             string textSearch = textSrcQuick.Text;
             if(textSearch.Length>2)
             { 

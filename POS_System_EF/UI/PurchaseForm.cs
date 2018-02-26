@@ -44,11 +44,15 @@ namespace POS_System_EF.UI
                 if (count > 0)
                 {
                     MessageBox.Show("Saved Successfully");
+                    InStock();
+                    
                 }
                 else
                 {
                     MessageBox.Show("Try Again !");
                 }
+
+
             }
 
             catch (Exception ex)
@@ -213,29 +217,38 @@ namespace POS_System_EF.UI
         {
             try
             {
-                    TempPurchase t = new TempPurchase();
-                    t.ItemId = (int)cmbItem.SelectedValue;
-                    using (ManagerContext db = new ManagerContext())
+                var cmbId = (int)cmbItem.SelectedValue;
+                using (ManagerContext db = new ManagerContext())
+                {
+                    var objItem = db.Items.FirstOrDefault(a => a.Id == cmbId);
+
+                    if (objItem.Id > 0)
                     {
-
-                        var objItem = db.Items.FirstOrDefault(a => a.Id == t.ItemId);
-                        t.ItemId = objItem.Id;
-
-                        if (objItem.Id > 0)
-                        {
-                            txtCostPrice.Text = objItem.CostPrice.ToString();
-                        }
-                        else
-                        {
-                            txtCostPrice.Clear();
-                        }
+                        txtCostPrice.Text = objItem.CostPrice.ToString();
                     }
-                
-                
+                    else
+                    {
+                        txtCostPrice.Clear();
+                    }
+                }
+
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void InStock()
+        {
+            Stock stock = new Stock();
+            stock.ItemId = (int)listPurchase[0].ItemId;
+            stock.AvailableQuantity = listPurchase[0].Quantity;
+            using (ManagerContext db = new ManagerContext())
+            {
+                db.Stocks.Add(stock);
+                db.SaveChanges();
             }
         }
     }

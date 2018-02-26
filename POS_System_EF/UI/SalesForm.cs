@@ -30,7 +30,7 @@ namespace POS_System_EF.UI
             try
             {
                 SalesItem item = new SalesItem();
-                item.SalesItemName = cmbSalesItem.Text;
+                item.ItemId = (int)cmbSalesItem.SelectedValue;
                 item.Quantity = Convert.ToInt32(txtSalesQty.Text);
                 if (txtSalePrice.Text == "")
                 {
@@ -45,7 +45,7 @@ namespace POS_System_EF.UI
                 using (ManagerContext db = new ManagerContext())
                 {
 
-                    var name = db.Items.Where(a => a.Name == item.SalesItemName).ToList();
+                    var name = db.Items.Where(a => a.Id == item.ItemId).ToList();
                     if (name.Count == 0)
                     {
                         MessageBox.Show("Item Does Not Found", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -54,7 +54,7 @@ namespace POS_System_EF.UI
                     else
                     {
                         item.LineTotal = item.Quantity * item.SalePrice;
-                        table.Rows.Add(item.SalesItemName, item.Quantity, item.SalePrice, item.LineTotal);
+                        table.Rows.Add(cmbSalesItem.Text, item.Quantity, item.SalePrice, item.LineTotal);
                         listOfSalesItem.Add(item);
                         totalAmount.Add(item.LineTotal);
                         dgvSalesList.DataSource = table;
@@ -204,7 +204,9 @@ namespace POS_System_EF.UI
                     int count = db.SaveChanges();
                     if (count > 0)
                     {
+                        //UpdateStock();
                         MessageBox.Show("Sales Saved Success");
+                        
                     }
                     else
                     {
@@ -234,22 +236,23 @@ namespace POS_System_EF.UI
             {
                 txtSalesQty.Text = 1.ToString();
                 SalesItem item = new SalesItem();
-                item.SalesItemName = cmbSalesItem.Text;
+                item.ItemId = (int)cmbSalesItem.SelectedValue;
                 using (ManagerContext db = new ManagerContext())
                 {
-                    var ObjItem = db.Items.FirstOrDefault(a => a.Name == item.SalesItemName);
+                    var ObjItem = db.Items.FirstOrDefault(a => a.Id == item.ItemId);
                     if (ObjItem != null)
                     {
                         txtSalePriceRO.Text = ObjItem.SalePrice.ToString();
+
                     }
 
                 }
                 using (ManagerContext db = new ManagerContext())
                 {
-                    var purchaseObj = db.TempPurchases.FirstOrDefault(a => a.Item.Name == item.SalesItemName);
+                    var purchaseObj = db.Stocks.FirstOrDefault(a => a.ItemId == item.ItemId);
                     if (purchaseObj != null)
                     {
-                        txtStock.Text = purchaseObj.Quantity.ToString();
+                        txtStock.Text = purchaseObj.AvailableQuantity.ToString();
                     }
                 }
             }
@@ -323,6 +326,19 @@ namespace POS_System_EF.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void UpdateStock()
+        {
+            Stock stock = new Stock();
+            stock.ItemId = (int)listOfSalesItem[0].ItemId;
+            stock.AvailableQuantity = listOfSalesItem[0].Quantity;
+            using (ManagerContext db = new ManagerContext())
+            {
+                db.Stocks.Attach(stock);
+                db.Entry(stock).Property(X => X.AvailableQuantity).IsModified = true;
+                db.SaveChanges();
             }
         }
     }

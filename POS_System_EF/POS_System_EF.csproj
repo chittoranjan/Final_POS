@@ -97,6 +97,7 @@
     <Compile Include="EntityModels\Purchase.cs" />
     <Compile Include="EntityModels\Sale.cs" />
     <Compile Include="EntityModels\SalesItem.cs" />
+    <Compile Include="EntityModels\Stock.cs" />
     <Compile Include="EntityModels\Supplier.cs" />
     <Compile Include="EntityModels\TempPurchase.cs" />
     <Compile Include="Migrations\201802140451580_initial_migration1.cs" />
@@ -122,6 +123,14 @@
     <Compile Include="Migrations\201802251903360_tempPurchaseClassChanged.cs" />
     <Compile Include="Migrations\201802251903360_tempPurchaseClassChanged.Designer.cs">
       <DependentUpon>201802251903360_tempPurchaseClassChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802252037592_AddStockClass.cs" />
+    <Compile Include="Migrations\201802252037592_AddStockClass.Designer.cs">
+      <DependentUpon>201802252037592_AddStockClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802252101225_SaleClassChangeAddItemIdFromItemTable.cs" />
+    <Compile Include="Migrations\201802252101225_SaleClassChangeAddItemIdFromItemTable.Designer.cs">
+      <DependentUpon>201802252101225_SaleClassChangeAddItemIdFromItemTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UI\ExpenseCategoryForm.cs">
@@ -258,6 +267,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802251903360_tempPurchaseClassChanged.resx">
       <DependentUpon>201802251903360_tempPurchaseClassChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802252037592_AddStockClass.resx">
+      <DependentUpon>201802252037592_AddStockClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802252101225_SaleClassChangeAddItemIdFromItemTable.resx">
+      <DependentUpon>201802252101225_SaleClassChangeAddItemIdFromItemTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ExpenseCategoryForm.resx">
       <DependentUpon>ExpenseCategoryForm.cs</DependentUpon>

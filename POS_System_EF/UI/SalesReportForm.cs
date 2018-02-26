@@ -90,7 +90,7 @@ namespace POS_System_EF.UI
                         itemListView.Items.Clear();
                         foreach (var i in listOfSalesItem)
                         {
-                            item[0] = i.SalesItemName;
+                            item[0] = i.ItemId.ToString();
                             item[1] = i.Quantity.ToString();
                             item[2] = i.SalePrice.ToString();
                             item[3] = i.LineTotal.ToString();
