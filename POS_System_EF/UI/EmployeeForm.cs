@@ -370,8 +370,11 @@ namespace POS_System_EF.UI
                 //print form load........
 
                 txtShowEmpName.Text = aEmployee.Name;
-                txtShowOrg.Text = dataGridViewEmployee.CurrentRow.Cells["Organization"].Value.ToString();
-                txtShowOutlet.Text = dataGridViewEmployee.CurrentRow.Cells["OutletName"].Value.ToString();
+                if (dataGridViewEmployee.CurrentRow != null)
+                {
+                    txtShowOrg.Text = dataGridViewEmployee.CurrentRow.Cells["Organization"].Value.ToString();
+                    txtShowOutlet.Text = dataGridViewEmployee.CurrentRow.Cells["OutletName"].Value.ToString();
+                }
                 txtShowDate.Text = aEmployee.JoiningDate.ToShortDateString();
                 txtShowContactNo.Text = aEmployee.ContactNo;
                 txtShowEmail.Text = aEmployee.Email;
@@ -403,12 +406,31 @@ namespace POS_System_EF.UI
         {
             tabControlEmployee.SelectedIndex = 0;
         }
+        private string SetInvioceNo()
+        {
+            var countId = db.Employees.Count();
+            countId++;
+            if (countId <= 9)
+            {
+
+                string invNo = Convert.ToString("00" + countId);
+                return invNo;
+            }
+            if (countId <= 99)
+            {
+                string invNo = Convert.ToString("0" + countId);
+                return invNo;
+            }
+            else
+            {
+                string invNo = Convert.ToString(countId);
+                return invNo;
+            }
+        }
         private void AutoCodeShow()
         {
-            int count = 1;
-            count = db.Employees.Include(c => c.Id).Count() + count;
             var firstThreeChars = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            txtCode.Text = firstThreeChars + "-" + "00" + count.ToString();
+            txtCode.Text = firstThreeChars + "-" + SetInvioceNo();
 
         }
 

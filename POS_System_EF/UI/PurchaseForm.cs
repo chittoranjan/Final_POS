@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS_System_EF.EntityModels;
 using System.Data.Entity;
+using System.Globalization;
 
 namespace POS_System_EF.UI
 {
@@ -91,10 +92,6 @@ namespace POS_System_EF.UI
                     }
                     
                 }
-                    
-                
-                
-
             }
             catch (Exception ex)
             {
@@ -161,9 +158,12 @@ namespace POS_System_EF.UI
         private void ComboBoxData()
         {
             ManagerContext db = new ManagerContext();
+            var loadItem = db.Items.Where(i => i.IsDelete == false);
+            cmbItem.DataSource = loadItem.ToList();
             cmbItem.DisplayMember = "Name";
             cmbItem.ValueMember = "Id";
-            cmbItem.DataSource = db.Items.ToList();
+            cmbItem.SelectedIndex = -1;
+            
 
 
             
@@ -209,19 +209,18 @@ namespace POS_System_EF.UI
             lblTotalAmount.Text = tamount.Sum().ToString();
         }
 
-        private void cmbItem_SelectedValueChanged(object sender, EventArgs e)
+        private void cmbItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                    TempPurchase t = new TempPurchase();
-                    t.ItemId = (int)cmbItem.SelectedValue;
+                try
+                {
+                    //TempPurchase t = new TempPurchase();
+                    //t.ItemId = (int)cmbItem.SelectedValue;
+                    //var cmbId = cmbItem.SelectedItem;
                     using (ManagerContext db = new ManagerContext())
                     {
+                        var objItem = db.Items.FirstOrDefault(a => a.Id == (int) cmbItem.SelectedValue);
 
-                        var objItem = db.Items.FirstOrDefault(a => a.Id == t.ItemId);
-                        t.ItemId = objItem.Id;
-
-                        if (objItem.Id > 0)
+                        if (objItem!=null && objItem.Id >= 0)
                         {
                             txtCostPrice.Text = objItem.CostPrice.ToString();
                         }
@@ -230,13 +229,12 @@ namespace POS_System_EF.UI
                             txtCostPrice.Clear();
                         }
                     }
-                
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.Message);
+                }        
         }
     }
 }

@@ -20,7 +20,7 @@ namespace POS_System_EF.Migrations
             DropIndex("dbo.TempPurchases", new[] { "ItemId" });
             AlterColumn("dbo.TempPurchases", "ItemId", c => c.Int(nullable: false));
             CreateIndex("dbo.TempPurchases", "ItemId");
-            AddForeignKey("dbo.TempPurchases", "ItemId", "dbo.Items", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.TempPurchases", "ItemId", "dbo.Items", "Id", cascadeDelete: false);
         }
     }
 }

@@ -171,12 +171,32 @@ namespace POS_System_EF.UI
             btnSave.Text = "Save";
             _isUpdateMode = false;
         }
+
+        private string SetInvioceNo()
+        {
+            var countId = db.Outlets.Count();
+            countId++;
+            if (countId <= 9)
+            {
+
+                string invNo = Convert.ToString("00" + countId);
+                return invNo;
+            }
+            if (countId <= 99)
+            {
+                string invNo = Convert.ToString("0" + countId);
+                return invNo;
+            }
+            else
+            {
+                string invNo = Convert.ToString(countId);
+                return invNo;
+            }
+        }
         private void AutoCodeShow()
         {
-            int count = 1;
-            count = db.Outlets.Include(c => c.Id).Count()+count;
             var firstThreeChars = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            txtOutletCode.Text = firstThreeChars + "-" + "00" + count.ToString();
+            txtOutletCode.Text = firstThreeChars + "-" + SetInvioceNo();
 
         }
         private void textBoxOutletName_TextChanged(object sender, EventArgs e)

@@ -54,7 +54,15 @@ namespace POS_System_EF
                         {
 
                             expenseCategory.Name = txtName.Text;
-                            expenseCategory.Code = expenseCategory.GenearateCodeExpRoot(expenseCategory.Name);
+                            if (txtCodeManual.Text.Trim() != string.Empty)
+                            {
+                                expenseCategory.Code = txtCodeManual.Text;
+                            }
+                            else
+                            {
+                                
+                                expenseCategory.Code = txtCode.Text;
+                            }
                             expenseCategory.Description = txtDescription.Text;
                             db.ExpenseCategories.Add(expenseCategory);
                             int count = db.SaveChanges();
@@ -74,7 +82,15 @@ namespace POS_System_EF
                             expenseCategory.RootCategoryId = (int)cmbRootCategory.SelectedValue;
                             expenseCategory.RootCategoryName = cmbRootCategory.Text;
                             expenseCategory.Name = txtName.Text;
-                            expenseCategory.Code = expenseCategory.GenearateCodeExpSub(expenseCategory.Name);
+                            if (txtCodeManual.Text.Trim() != string.Empty)
+                            {
+                                expenseCategory.Code = txtCodeManual.Text;
+                            }
+                            else
+                            {
+                                
+                                expenseCategory.Code = txtCode.Text;
+                            }
                             expenseCategory.Description = txtDescription.Text;
                             db.ExpenseCategories.Add(expenseCategory);
                             int count = db.SaveChanges();
@@ -131,6 +147,11 @@ namespace POS_System_EF
             }
             LoadDataGridView();
             ClearAllTextBox();
+            RootCategoryVisibleFalse();
+        }
+        private void rbRootCategory_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCode.Text = GenearateCodeExpRoot();
             RootCategoryVisibleFalse();
         }
         private void TextBoxValue()
@@ -227,8 +248,41 @@ namespace POS_System_EF
             {
                 RootCategoryVisibleTrue();
             }
+            txtCode.Text = GenearateCodeExpSub();
+        }
+        private string SetInvioceNo()
+        {
+            var countId = db.ExpenseCategories.Count();
+            countId++;
+            if (countId <= 9)
+            {
+
+                string invNo = Convert.ToString("00" + countId);
+                return invNo;
+            }
+            if (countId <= 99)
+            {
+                string invNo = Convert.ToString("0" + countId);
+                return invNo;
+            }
+            else
+            {
+                string invNo = Convert.ToString(countId);
+                return invNo;
+            }
+        }
+        private  string GenearateCodeExpRoot()
+        {
+
+            var firstThreeCategoryName = Name.Length <= 3 ? Name : Name.Substring(0, 3);
+            return firstThreeCategoryName + "-" + SetInvioceNo();
         }
 
+        private  string GenearateCodeExpSub()
+        {
+            var firstThreeCategoryName = Name.Length <= 3 ? Name : Name.Substring(0, 3);
+            return firstThreeCategoryName + "-" + SetInvioceNo();
+        }
         private void dgvCategoryList_DoubleClick(object sender, EventArgs e)
         {
             if (dgvCategoryList.CurrentRow != null)

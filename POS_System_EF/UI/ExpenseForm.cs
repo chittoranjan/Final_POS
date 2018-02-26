@@ -146,6 +146,7 @@ namespace POS_System_EF.UI
             var showAddItems = (from exList in expenseLists
                 select new
                 {
+                    expense.Id,
                     exList.ExpenseName,
                     exList.Qty,
                     exList.Amount,
@@ -155,6 +156,8 @@ namespace POS_System_EF.UI
 
             dgvExpense.DataSource = null;
             dgvExpense.DataSource = showAddItems;
+            var dataGridViewColumn = dgvExpense.Columns["Id"];
+            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
         }
 
         private void ShowExpenseSummary()
@@ -213,21 +216,23 @@ namespace POS_System_EF.UI
         }
         private string SetInvioceNo()
         {
-            var countId = db.Expenses.Count();
+            var countId = db.Organizations.Count();
+            countId++;
             if (countId <= 9)
             {
-                string invNO = Convert.ToString("00" + countId++);
-                return invNO;
+
+                string invNo = Convert.ToString("00" + countId);
+                return invNo;
             }
             if (countId <= 99)
             {
-                string invNO = Convert.ToString("0" + countId++);
-                return invNO;
+                string invNo = Convert.ToString("0" + countId);
+                return invNo;
             }
             else
             {
-                string invNO =Convert.ToString( countId++);
-                return invNO;
+                string invNo = Convert.ToString(countId);
+                return invNo;
             }
         }
 
@@ -281,5 +286,6 @@ namespace POS_System_EF.UI
         {
             ClearTextBoxAll();
         }
+
     }
 }
