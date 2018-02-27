@@ -55,9 +55,10 @@
             this.salesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incomeReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expenseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.barcodeMakerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -184,7 +185,8 @@
             // 
             this.purchaseManageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addPurchaseToolStripMenuItem,
-            this.purchaseDetailsToolStripMenuItem});
+            this.purchaseDetailsToolStripMenuItem,
+            this.barcodeMakerToolStripMenuItem});
             this.purchaseManageToolStripMenuItem.Name = "purchaseManageToolStripMenuItem";
             this.purchaseManageToolStripMenuItem.Size = new System.Drawing.Size(76, 23);
             this.purchaseManageToolStripMenuItem.Text = "Purchase";
@@ -281,12 +283,6 @@
             this.incomeReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
             this.incomeReportToolStripMenuItem.Text = "Income Report";
             // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
             // expenseReportToolStripMenuItem
             // 
             this.expenseReportToolStripMenuItem.Name = "expenseReportToolStripMenuItem";
@@ -300,6 +296,19 @@
             this.stockReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
             this.stockReportToolStripMenuItem.Text = "Stock Report";
             this.stockReportToolStripMenuItem.Click += new System.EventHandler(this.stockReportToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // barcodeMakerToolStripMenuItem
+            // 
+            this.barcodeMakerToolStripMenuItem.Name = "barcodeMakerToolStripMenuItem";
+            this.barcodeMakerToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
+            this.barcodeMakerToolStripMenuItem.Text = "Barcode Maker";
+            this.barcodeMakerToolStripMenuItem.Click += new System.EventHandler(this.barcodeMakerToolStripMenuItem_Click);
             // 
             // OpeningForm
             // 
@@ -350,6 +359,7 @@
         private System.Windows.Forms.ToolStripMenuItem incomeReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem expenseReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem barcodeMakerToolStripMenuItem;
     }
 }
 

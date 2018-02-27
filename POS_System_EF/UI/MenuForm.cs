@@ -136,5 +136,11 @@ namespace POS_System_EF
             StockForm sForm = new StockForm();
             sForm.Show();
         }
+
+        private void barcodeMakerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BarcodeViewForm bForm = new BarcodeViewForm();
+            bForm.Show();
+        }
     }
 }

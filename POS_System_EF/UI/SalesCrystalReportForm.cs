@@ -23,25 +23,33 @@ namespace POS_System_EF.UI
         {
             try
             {
-                int SerialNo = 1;
                 string name = cmbOutlets.Text;
-                DateTime FromDate = dtpFrom.Value.Date;
-                DateTime ToDate = dtpToDate.Value.Date;
+                //DateTime FromDate = dtpFrom.Value.Date;
+                //DateTime ToDate = dtpToDate.Value.Date;
                 using (ManagerContext db = new ManagerContext())
                 {
                     var outlet = db.Sales.Where(a => a.Outlet.Name == name).ToList();
                     if (name != null)
                     {
-                        var Data = db.Sales.AsEnumerable().Where(a => a.SalesDate.Date >= FromDate && a.SalesDate.Date <= ToDate).ToList();
-                        dgvSales.DataSource = Data;
-                        dgvSales.Columns["Id"].Visible = false;
+                        var Data = (from d in db.Sales
+                                     //d in db.Sales.AsEnumerable().Where(a => a.SalesDate.Date >= FromDate && a.SalesDate.Date <= ToDate)
+                                    join o in db.Outlets on d.OutletId equals o.Id
+                                    join emp in db.Employees on d.EmployeeId equals emp.Id
+                                    select new
+                                    {
+                                        d.InvoiceNo,
+                                        d.Customer.Name,
+                                        Outlet=d.Outlet.Name,
+                                        Employee=d.Employee.Name,
+                                        d.TotalAmount
+                                        
+                                    }).ToList();
 
-                        dgvSales.Columns["IsDelete"].Visible = false;
-                        dgvSales.Columns["CustomerId"].Visible = false;
-                        dgvSales.Columns["EmployeeId"].Visible = false;
-                        dgvSales.Columns["Vat"].Visible = false;
-                        dgvSales.Columns["SubTotal"].Visible = false;
-                        dgvSales.Columns["Discount"].Visible = false;
+                        dgvSales.DataSource = Data;
+                        foreach (var t in Data)
+                        {
+                            txtTotalSale.Text = t.TotalAmount.ToString();
+                        }
                     }
                 }
 
@@ -60,6 +68,42 @@ namespace POS_System_EF.UI
                 cmbOutlets.DataSource = outlet;
                 cmbOutlets.DisplayMember = "Name";
                 cmbOutlets.ValueMember = "Id";
+            }
+        }
+
+        private void txtSearchInvoice_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                using (ManagerContext db = new ManagerContext())
+                {
+                    var Data = (from d in db.Sales
+                                    //d in db.Sales.AsEnumerable().Where(a => a.SalesDate.Date >= FromDate && a.SalesDate.Date <= ToDate)
+                                join o in db.Outlets on d.OutletId equals o.Id
+                                join emp in db.Employees on d.EmployeeId equals emp.Id
+                                where d.InvoiceNo.ToString().StartsWith(txtSearchInvoice.Text)
+                                select new
+                                {
+                                    d.InvoiceNo,
+                                    d.Customer.Name,
+                                    Outlet = d.Outlet.Name,
+                                    Employee = d.Employee.Name,
+                                    d.TotalAmount
+
+                                }).ToList();
+
+                    dgvSales.DataSource = Data;
+                    foreach (var t in Data)
+                    {
+                        txtTotalSale.Text = t.TotalAmount.ToString();
+                    }
+                    
+                }
+                    
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

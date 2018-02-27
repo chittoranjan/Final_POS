@@ -51,6 +51,7 @@
             this.barcodePictureBox3 = new System.Windows.Forms.PictureBox();
             this.barcodePictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearchAny = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchaseReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barcodePictureBox)).BeginInit();
             this.PurchaseReportTabControl.SuspendLayout();
@@ -78,20 +79,20 @@
             // txtSearchBox
             // 
             this.txtSearchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchBox.Location = new System.Drawing.Point(865, 35);
+            this.txtSearchBox.Location = new System.Drawing.Point(935, 35);
             this.txtSearchBox.Name = "txtSearchBox";
-            this.txtSearchBox.Size = new System.Drawing.Size(229, 26);
+            this.txtSearchBox.Size = new System.Drawing.Size(175, 26);
             this.txtSearchBox.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(683, 38);
+            this.label1.Location = new System.Drawing.Point(608, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(176, 20);
+            this.label1.Size = new System.Drawing.Size(60, 20);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Search EmployeeName";
+            this.label1.Text = "Search";
             // 
             // label2
             // 
@@ -206,7 +207,7 @@
             // itemListView
             // 
             this.itemListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemListView.Location = new System.Drawing.Point(15, 189);
+            this.itemListView.Location = new System.Drawing.Point(15, 172);
             this.itemListView.Name = "itemListView";
             this.itemListView.Size = new System.Drawing.Size(501, 316);
             this.itemListView.TabIndex = 9;
@@ -305,6 +306,15 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // txtSearchAny
+            // 
+            this.txtSearchAny.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchAny.Location = new System.Drawing.Point(674, 37);
+            this.txtSearchAny.Name = "txtSearchAny";
+            this.txtSearchAny.Size = new System.Drawing.Size(229, 26);
+            this.txtSearchAny.TabIndex = 1;
+            this.txtSearchAny.TextChanged += new System.EventHandler(this.txtSearchAny_TextChanged);
+            // 
             // PurchaseReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -313,6 +323,7 @@
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.PurchaseReportTabControl);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtSearchAny);
             this.Controls.Add(this.txtSearchBox);
             this.Controls.Add(this.dgvPurchaseReport);
             this.Name = "PurchaseReportForm";
@@ -357,5 +368,6 @@
         private System.Windows.Forms.PictureBox barcodePictureBox3;
         private System.Windows.Forms.PictureBox barcodePictureBox2;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearchAny;
     }
 }

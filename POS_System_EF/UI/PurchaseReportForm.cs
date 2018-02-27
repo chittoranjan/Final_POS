@@ -238,7 +238,7 @@ namespace POS_System_EF.UI
             {
                 db = new ManagerContext();
                 var searchResult = (from p in db.Purchases
-                                    where p.Employee.Name.StartsWith(txtSearchBox.Text)
+                                    where p.InvoiceNo.ToString().StartsWith(txtSearchBox.Text)
                                     select new
                                     {
                                         p.Id,
@@ -327,6 +327,34 @@ namespace POS_System_EF.UI
             itemListView.Columns.Add("Quantity", 100);
             itemListView.Columns.Add("CostPrice", 100);
             itemListView.Columns.Add("TotalPrice", 100);
+        }
+
+        private void txtSearchAny_TextChanged(object sender, EventArgs e)
+        {
+
+            ManagerContext db = new ManagerContext();
+            var purchases = (from p in db.Purchases.Where(a => a.IsDelete == false)
+                             join outlet in db.Outlets on p.OutletId equals outlet.Id
+                             join emp in db.Employees on p.EmployeeId equals emp.Id
+                             join s in db.CustomerAndSuppliers on p.SupplierId equals s.Id
+                             where p.InvoiceNo.ToString().StartsWith(txtSearchAny.Text) || p.Outlet.Name.StartsWith(txtSearchAny.Text) || p.Employee.Name.StartsWith(txtSearchAny.Text)
+                             || p.Supplier.Name.StartsWith(txtSearchAny.Text)
+
+                             select new
+                             {
+                                 p.Id,
+                                 p.InvoiceNo,
+                                 p.PurchaseDate,
+                                 Outlet = p.Outlet.Name,
+                                 EmployeeName = p.Employee.Name,
+                                 Supplier = p.Supplier.Name,
+                                 ListOfProduct = p.ListOfPurchase,
+                                 p.TotalAmount
+
+                             }).ToList();
+
+            dgvPurchaseReport.DataSource = purchases;
+            dgvPurchaseReport.Columns["Id"].Visible = false;
         }
     }
 }
