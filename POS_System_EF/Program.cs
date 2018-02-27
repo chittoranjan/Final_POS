@@ -17,8 +17,7 @@ namespace POS_System_EF
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new LoginForm());
-            Application.Run(new PurchaseForm());
+            Application.Run(new LoginForm());
 
         }
     }

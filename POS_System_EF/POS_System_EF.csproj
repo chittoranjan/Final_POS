@@ -136,6 +136,10 @@
     <Compile Include="Migrations\201802270951016_StockClassChanged.Designer.cs">
       <DependentUpon>201802270951016_StockClassChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802271617002_SalestItemClassItemIdChanged.cs" />
+    <Compile Include="Migrations\201802271617002_SalestItemClassItemIdChanged.Designer.cs">
+      <DependentUpon>201802271617002_SalestItemClassItemIdChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UI\ExpenseCategoryForm.cs">
       <SubType>Form</SubType>
@@ -280,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802270951016_StockClassChanged.resx">
       <DependentUpon>201802270951016_StockClassChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802271617002_SalestItemClassItemIdChanged.resx">
+      <DependentUpon>201802271617002_SalestItemClassItemIdChanged.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ExpenseCategoryForm.resx">
       <DependentUpon>ExpenseCategoryForm.cs</DependentUpon>

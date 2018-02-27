@@ -173,17 +173,25 @@ namespace POS_System_EF.UI
 
         private void GridViewColumAdd()
         {
-            table.Columns.Add("Item Name", typeof(string));
-            table.Columns.Add("Quantiy", typeof(int));
-            table.Columns.Add("Cost Price", typeof(decimal));
-            table.Columns.Add("Total Price", typeof(decimal));
-            dgvPurchaseList.DataSource = table;
-            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
-            btn.HeaderText = "Action";
-            btn.Name = "btnDelete";
-            btn.Text = "Delete";
-            btn.UseColumnTextForButtonValue = true;
-            dgvPurchaseList.Columns.Add(btn);
+            try
+            {
+                table.Columns.Add("Item Name", typeof(string));
+                table.Columns.Add("Quantiy", typeof(int));
+                table.Columns.Add("Cost Price", typeof(decimal));
+                table.Columns.Add("Total Price", typeof(decimal));
+                dgvPurchaseList.DataSource = table;
+                DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+                btn.HeaderText = "Action";
+                btn.Name = "btnDelete";
+                btn.Text = "Delete";
+                btn.UseColumnTextForButtonValue = true;
+                dgvPurchaseList.Columns.Add(btn);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
         }
 
         
@@ -196,31 +204,39 @@ namespace POS_System_EF.UI
         }
         private void ComboBoxData()
         {
-            ManagerContext db = new ManagerContext();
-            var loadItem = db.Items.Where(i => i.IsDelete == false);
-          
-            cmbItem.DisplayMember = "CodeName";
-            cmbItem.ValueMember = "Id";
-            cmbItem.DataSource = loadItem.ToList();
-            cmbItem.SelectedIndex = -1;
+            try
+            {
+                ManagerContext db = new ManagerContext();
+                var loadItem = db.Items.Where(i => i.IsDelete == false);
+
+                cmbItem.DisplayMember = "CodeName";
+                cmbItem.ValueMember = "Id";
+                cmbItem.DataSource = loadItem.ToList();
+                cmbItem.SelectedIndex = -1;
+
+
+
+
+                cmbOutlet.DisplayMember = "Name";
+                cmbOutlet.ValueMember = "Id";
+                cmbOutlet.DataSource = db.Outlets.ToList();
+
+
+                cmbEmployee.DisplayMember = "Name";
+                cmbEmployee.ValueMember = "Id";
+                cmbEmployee.DataSource = db.Employees.ToList();
+
+
+
+                cmbSupplier.DisplayMember = "Name";
+                cmbSupplier.ValueMember = "Id";
+                cmbSupplier.DataSource = db.Suppliers.ToList();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             
-
-
-            
-            cmbOutlet.DisplayMember = "Name";
-            cmbOutlet.ValueMember = "Id";
-            cmbOutlet.DataSource = db.Outlets.ToList();
-
-            
-            cmbEmployee.DisplayMember = "Name";
-            cmbEmployee.ValueMember = "Id";
-            cmbEmployee.DataSource = db.Employees.ToList();
-
-
-            
-            cmbSupplier.DisplayMember = "Name";
-            cmbSupplier.ValueMember = "Id";
-            cmbSupplier.DataSource = db.Suppliers.ToList();
         }
         private void ClearTextBox()
         {
@@ -239,25 +255,40 @@ namespace POS_System_EF.UI
 
         private void dgvPurchaseList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvPurchaseList.CurrentCell.ColumnIndex.Equals(4))
-                if (dgvPurchaseList.CurrentCell != null && dgvPurchaseList.CurrentCell.Value != null)
-                {
-                    dgvPurchaseList.Rows.RemoveAt(e.RowIndex);
-                    listofstock.RemoveAt(e.RowIndex);
-                    tamount.RemoveAt(e.RowIndex);
-                }
+            try
+            {
+                if (dgvPurchaseList.CurrentCell.ColumnIndex.Equals(4))
+                    if (dgvPurchaseList.CurrentCell != null && dgvPurchaseList.CurrentCell.Value != null)
+                    {
+                        dgvPurchaseList.Rows.RemoveAt(e.RowIndex);
+                        listofstock.RemoveAt(e.RowIndex);
+                        tamount.RemoveAt(e.RowIndex);
+                    }
 
-            lblTotalAmount.Text = tamount.Sum().ToString();
+                lblTotalAmount.Text = tamount.Sum().ToString();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void InStock(int itemId, int quantity, decimal price, string name)
         {
-                    Stock stock = new Stock();
-                    stock.ItemId = itemId;
-                    stock.ItemName = name;
-                    stock.AvailableQuantity = quantity;
-                    stock.AveragePrice = price;
-                    listofstock.Add(stock);
+            try
+            {
+                Stock stock = new Stock();
+                stock.ItemId = itemId;
+                stock.ItemName = name;
+                stock.AvailableQuantity = quantity;
+                stock.AveragePrice = price;
+                listofstock.Add(stock);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
                
         }
 

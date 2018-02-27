@@ -24,6 +24,7 @@ namespace POS_System_EF.UI
         DataTable table = new DataTable();
         List<SalesItem> listOfSalesItem = new List<SalesItem>();
         List<decimal> totalAmount = new List<decimal>();
+        List<Stock> listOfStock = new List<Stock>();
 
         private void btnSalesAdd_Click_1(object sender, EventArgs e)
         {
@@ -61,6 +62,7 @@ namespace POS_System_EF.UI
                         ClearTextBox();
                         txtTotalAmount.Text = totalAmount.Sum().ToString();
                         txtSubTotal.Text = txtTotalAmount.Text;
+                        StockUpdate(item.ItemId, item.Quantity, item.SalePrice, cmbSalesItem.Text);
                     }
                 }
                 txtDiscount.Text = 0.ToString();
@@ -72,6 +74,17 @@ namespace POS_System_EF.UI
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void StockUpdate(int itemId, int quantity, decimal salePrice, string text)
+        {
+            Stock stockAfterSales = new Stock();
+            stockAfterSales.ItemId = itemId;
+            stockAfterSales.AvailableQuantity = quantity;
+            stockAfterSales.AveragePrice = salePrice;
+            stockAfterSales.ItemName = text;
+            listOfStock.Add(stockAfterSales);
+        }
+
         private void ComboBoxData()
         {
             ManagerContext db = new ManagerContext();
@@ -202,9 +215,11 @@ namespace POS_System_EF.UI
                 {
                     db.Sales.Add(sales);
                     int count = db.SaveChanges();
+                    //Update Stock Quantity In Database Method
+                    StockQuantityChange();
                     if (count > 0)
                     {
-                        //UpdateStock();
+                        
                         MessageBox.Show("Sales Saved Success");
                         
                     }
@@ -222,6 +237,31 @@ namespace POS_System_EF.UI
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void StockQuantityChange()
+        {
+            using (ManagerContext db = new ManagerContext())
+            {
+                foreach (Stock item in listOfStock)
+                {
+                    var IsAvailableItem = db.Stocks.FirstOrDefault(a => a.ItemId == item.ItemId);
+                    var quantity = item.AvailableQuantity;
+
+                    if (IsAvailableItem != null)
+                    {
+                        IsAvailableItem.AvailableQuantity -= item.AvailableQuantity;
+                    }
+                    else
+                    {
+                        MessageBox.Show("This Item Is Not Available");
+                    }
+                }
+
+                db.SaveChanges();
+
+            }
+        }
+
         private int GetInvoiceNo()
         {
             ManagerContext db = new ManagerContext();
@@ -240,6 +280,7 @@ namespace POS_System_EF.UI
                     dgvSalesList.Rows.RemoveAt(e.RowIndex);
                     totalAmount.RemoveAt(e.RowIndex);
                     listOfSalesItem.RemoveAt(e.RowIndex);
+                    listOfStock.RemoveAt(e.RowIndex);
                 }
 
             txtTotalAmount.Text = totalAmount.Sum().ToString();
@@ -301,15 +342,23 @@ namespace POS_System_EF.UI
 
         private void UpdateStock()
         {
-            Stock stock = new Stock();
-            stock.ItemId = (int)listOfSalesItem[0].ItemId;
-            stock.AvailableQuantity = listOfSalesItem[0].Quantity;
-            using (ManagerContext db = new ManagerContext())
+            try
             {
-                db.Stocks.Attach(stock);
-                db.Entry(stock).Property(X => X.AvailableQuantity).IsModified = true;
-                db.SaveChanges();
+                Stock stock = new Stock();
+                stock.ItemId = (int)listOfSalesItem[0].ItemId;
+                stock.AvailableQuantity = listOfSalesItem[0].Quantity;
+                using (ManagerContext db = new ManagerContext())
+                {
+                    db.Stocks.Attach(stock);
+                    db.Entry(stock).Property(X => X.AvailableQuantity).IsModified = true;
+                    db.SaveChanges();
+                }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void cmbSalesItem_SelectedValueChanged(object sender, EventArgs e)
