@@ -71,13 +71,35 @@ namespace POS_System_EF.UI
 
         private void SaveStock()
         {
-
-            using (ManagerContext db = new ManagerContext())
+            
+            try
             {
-                    db.Stocks.AddRange(listofstock);
+                using (ManagerContext db = new ManagerContext())
+                {
+                    foreach (Stock itemId in listofstock)
+                    {
+                        var IsAvailableItem = db.Stocks.FirstOrDefault(a => a.ItemId == itemId.ItemId);
+                        var quantity = itemId.AvailableQuantity;
+
+                        if (IsAvailableItem != null)
+                        {
+                            IsAvailableItem.AvailableQuantity += itemId.AvailableQuantity;
+                        }
+                        else
+                        {
+                            db.Stocks.AddRange(listofstock);
+                        }
+                    }
+
                     db.SaveChanges();
-                
+
+                }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
