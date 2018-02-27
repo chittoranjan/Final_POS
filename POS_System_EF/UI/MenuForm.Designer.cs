@@ -35,8 +35,6 @@
             this.addBranchToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.employeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.partySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addPartyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categorySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expenseSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,26 +121,10 @@
             // 
             // partySetupToolStripMenuItem
             // 
-            this.partySetupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addPartyToolStripMenuItem,
-            this.addCustomerToolStripMenuItem});
             this.partySetupToolStripMenuItem.Name = "partySetupToolStripMenuItem";
             this.partySetupToolStripMenuItem.Size = new System.Drawing.Size(92, 23);
             this.partySetupToolStripMenuItem.Text = "Party Setup";
-            // 
-            // addPartyToolStripMenuItem
-            // 
-            this.addPartyToolStripMenuItem.Name = "addPartyToolStripMenuItem";
-            this.addPartyToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
-            this.addPartyToolStripMenuItem.Text = "Add Party";
-            this.addPartyToolStripMenuItem.Click += new System.EventHandler(this.addPartyToolStripMenuItem_Click);
-            // 
-            // addCustomerToolStripMenuItem
-            // 
-            this.addCustomerToolStripMenuItem.Name = "addCustomerToolStripMenuItem";
-            this.addCustomerToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
-            this.addCustomerToolStripMenuItem.Text = "Add Customer";
-            this.addCustomerToolStripMenuItem.Click += new System.EventHandler(this.addCustomerToolStripMenuItem_Click);
+            this.partySetupToolStripMenuItem.Click += new System.EventHandler(this.partySetupToolStripMenuItem_Click);
             // 
             // categorySetupToolStripMenuItem
             // 
@@ -303,6 +285,7 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+
             // barcodeMakerToolStripMenuItem
             // 
             this.barcodeMakerToolStripMenuItem.Name = "barcodeMakerToolStripMenuItem";
@@ -310,6 +293,7 @@
             this.barcodeMakerToolStripMenuItem.Text = "Barcode Maker";
             this.barcodeMakerToolStripMenuItem.Click += new System.EventHandler(this.barcodeMakerToolStripMenuItem_Click);
             // 
+
             // OpeningForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -341,8 +325,6 @@
         private System.Windows.Forms.ToolStripMenuItem salesManageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addPartyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addCustomerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemSetupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addPurchaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchaseDetailsToolStripMenuItem;

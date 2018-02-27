@@ -81,6 +81,7 @@
             this.txtPresentAddress = new System.Windows.Forms.TextBox();
             this.txtEmergencyContact = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.txtShowPermanentAddress = new System.Windows.Forms.TextBox();
@@ -113,7 +114,6 @@
             this.txtShowEmail = new System.Windows.Forms.TextBox();
             this.textBoxQuickSrc = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.btnPrint = new System.Windows.Forms.Button();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployee)).BeginInit();
@@ -260,6 +260,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(230, 23);
             this.txtName.TabIndex = 91;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // label4
             // 
@@ -711,6 +712,16 @@
             this.tabPage3.Text = "Print Preview";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(911, 208);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(85, 31);
+            this.btnPrint.TabIndex = 154;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // label35
             // 
             this.label35.AutoSize = true;
@@ -1018,16 +1029,6 @@
             this.label21.Size = new System.Drawing.Size(104, 20);
             this.label21.TabIndex = 127;
             this.label21.Text = "Quick Search";
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Location = new System.Drawing.Point(911, 208);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(85, 31);
-            this.btnPrint.TabIndex = 154;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // printPreviewDialog
             // 

@@ -278,6 +278,7 @@
             this.dataGridView.Location = new System.Drawing.Point(460, 54);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersVisible = false;
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(600, 329);
             this.dataGridView.TabIndex = 52;
             this.dataGridView.DoubleClick += new System.EventHandler(this.dataGridView_DoubleClick);
@@ -285,7 +286,7 @@
             // btnSrcClear
             // 
             this.btnSrcClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSrcClear.Location = new System.Drawing.Point(985, 17);
+            this.btnSrcClear.Location = new System.Drawing.Point(985, 12);
             this.btnSrcClear.Name = "btnSrcClear";
             this.btnSrcClear.Size = new System.Drawing.Size(75, 31);
             this.btnSrcClear.TabIndex = 56;
@@ -295,10 +296,10 @@
             // 
             // textBoxSrc
             // 
+            this.textBoxSrc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSrc.Location = new System.Drawing.Point(760, 17);
-            this.textBoxSrc.Multiline = true;
             this.textBoxSrc.Name = "textBoxSrc";
-            this.textBoxSrc.Size = new System.Drawing.Size(219, 28);
+            this.textBoxSrc.Size = new System.Drawing.Size(219, 26);
             this.textBoxSrc.TabIndex = 55;
             this.textBoxSrc.TextChanged += new System.EventHandler(this.textBoxSrc_TextChanged);
             // 

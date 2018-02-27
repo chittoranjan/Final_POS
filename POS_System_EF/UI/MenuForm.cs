@@ -45,13 +45,7 @@ namespace POS_System_EF
             ItemForm iForm = new ItemForm();
             iForm.Show();
         }
-        private void addCustomerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SupplierCustomerForm partyForm = new SupplierCustomerForm();
-            partyForm.Show();
-        }
-
-        private void addPartyToolStripMenuItem_Click(object sender, EventArgs e)
+        private void partySetupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SupplierCustomerForm partyForm = new SupplierCustomerForm();
             partyForm.Show();
@@ -137,10 +131,12 @@ namespace POS_System_EF
             sForm.Show();
         }
 
+
         private void barcodeMakerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BarcodeViewForm bForm = new BarcodeViewForm();
             bForm.Show();
         }
+
     }
 }
