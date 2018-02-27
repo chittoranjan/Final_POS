@@ -32,38 +32,58 @@ namespace POS_System_EF.UI
 
         private void dgvPurchaseReport_DoubleClick(object sender, EventArgs e)
         {
-            
-
-
-            ManagerContext db = new ManagerContext();
-           
-            int selectedId = (int)dgvPurchaseReport.CurrentRow.Cells["Id"].Value;
-            
-           
-            if(selectedId>0)
+            try
             {
-                txtInvoiceNo.Text = dgvPurchaseReport.CurrentRow.Cells["InvoiceNo"].Value.ToString();
-                purchaseDate.Text = dgvPurchaseReport.CurrentRow.Cells["PurchaseDate"].Value.ToString();
-                outletName.Text = dgvPurchaseReport.CurrentRow.Cells["Outlet"].Value.ToString();
-                lblemployeeName.Text = dgvPurchaseReport.CurrentRow.Cells["EmployeeName"].Value.ToString();
-                lblsupplierName.Text = dgvPurchaseReport.CurrentRow.Cells["Supplier"].Value.ToString();
-            
-
-            List<TempPurchase> purchases = db.TempPurchases.Where(c => c.PurchaseId == selectedId).ToList();
-                string[] itms = new string[4];
-                ListViewItem lItem;
-                itemListView.Items.Clear();
-                foreach (var o in purchases)
+                using (ManagerContext db = new ManagerContext())
                 {
+                    int selectedId = (int)dgvPurchaseReport.CurrentRow.Cells["Id"].Value;
+                    
+                    if (selectedId > 0)
+                    {
+                        txtInvoiceNo.Text = dgvPurchaseReport.CurrentRow.Cells["InvoiceNo"].Value.ToString();
+                        purchaseDate.Text = dgvPurchaseReport.CurrentRow.Cells["PurchaseDate"].Value.ToString();
+                        outletName.Text = dgvPurchaseReport.CurrentRow.Cells["Outlet"].Value.ToString();
+                        lblemployeeName.Text = dgvPurchaseReport.CurrentRow.Cells["EmployeeName"].Value.ToString();
+                        lblsupplierName.Text = dgvPurchaseReport.CurrentRow.Cells["Supplier"].Value.ToString();
 
-                    itms[0] = o.ItemId.ToString();
-                    itms[1] = o.Quantity.ToString();
-                    itms[2] = o.CostPrice.ToString();
-                    itms[3] = o.TotalPrice.ToString();
-                    lItem = new ListViewItem(itms);
-                    itemListView.Items.Add(lItem);
-                    btnPdf.Visible = true;
+
+                        //List<TempPurchase> purchases = db.TempPurchases.Include(o=>o.Item).Where(c => c.PurchaseId == selectedId).ToList();
+                        var purchases = (from tp in db.TempPurchases
+                                                        join itm in db.Items on tp.ItemId equals itm.Id
+                                                        where tp.PurchaseId == selectedId
+                                                        select new
+                                                        {
+                                                            itm.Name,
+                                                            tp.Quantity,
+                                                            tp.CostPrice,
+                                                            tp.TotalPrice
+                                                        }).ToList();
+
+
+
+
+
+                        string[] itms = new string[4];
+                        ListViewItem lItem;
+                        itemListView.Items.Clear();
+                        foreach (var o in purchases)
+                        {
+
+                            itms[0] = o.Name.ToString();
+                            itms[1] = o.Quantity.ToString();
+                            itms[2] = o.CostPrice.ToString();
+                            itms[3] = o.TotalPrice.ToString();
+                            lItem = new ListViewItem(itms);
+                            itemListView.Items.Add(lItem);
+                            btnPdf.Visible = true;
+                        }
+                    }
                 }
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
