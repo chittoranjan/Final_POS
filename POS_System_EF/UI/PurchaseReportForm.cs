@@ -271,7 +271,8 @@ namespace POS_System_EF.UI
             var purchases = (from p in db.Purchases.Where(a => a.IsDelete == false)
                              join outlet in db.Outlets on p.OutletId equals outlet.Id
                              join emp in db.Employees on p.EmployeeId equals emp.Id
-                             join s in db.Suppliers on p.SupplierId equals s.Id
+                             join s in db.CustomerAndSuppliers on p.SupplierId equals s.Id
+                             where s.Type !="Customr"
 
                              select new
                              {
@@ -288,6 +289,7 @@ namespace POS_System_EF.UI
 
             dgvPurchaseReport.DataSource = purchases;
             dgvPurchaseReport.Columns["Id"].Visible = false;
+
             DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
             btn.HeaderText = "Action";
             btn.Name = "btnDelete";

@@ -230,7 +230,7 @@ namespace POS_System_EF.UI
 
                 cmbSupplier.DisplayMember = "Name";
                 cmbSupplier.ValueMember = "Id";
-                cmbSupplier.DataSource = db.Suppliers.ToList();
+                cmbSupplier.DataSource = db.CustomerAndSuppliers.ToList();
             }
             catch(Exception ex)
             {

@@ -84,7 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityModels\Customer.cs" />
+    <Compile Include="EntityModels\CustomerAndSupplier.cs" />
     <Compile Include="EntityModels\Employee.cs" />
     <Compile Include="EntityModels\Expense.cs" />
     <Compile Include="EntityModels\ExpenseCategory.cs" />
@@ -98,7 +98,6 @@
     <Compile Include="EntityModels\Sale.cs" />
     <Compile Include="EntityModels\SalesItem.cs" />
     <Compile Include="EntityModels\Stock.cs" />
-    <Compile Include="EntityModels\Supplier.cs" />
     <Compile Include="EntityModels\TempPurchase.cs" />
     <Compile Include="Migrations\201802140451580_initial_migration1.cs" />
     <Compile Include="Migrations\201802140451580_initial_migration1.Designer.cs">
@@ -139,6 +138,10 @@
     <Compile Include="Migrations\201802271617002_SalestItemClassItemIdChanged.cs" />
     <Compile Include="Migrations\201802271617002_SalestItemClassItemIdChanged.Designer.cs">
       <DependentUpon>201802271617002_SalestItemClassItemIdChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802271831566_supplier_class_remove_and_customer_class_modified.cs" />
+    <Compile Include="Migrations\201802271831566_supplier_class_remove_and_customer_class_modified.Designer.cs">
+      <DependentUpon>201802271831566_supplier_class_remove_and_customer_class_modified.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UI\ExpenseCategoryForm.cs">
@@ -287,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802271617002_SalestItemClassItemIdChanged.resx">
       <DependentUpon>201802271617002_SalestItemClassItemIdChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802271831566_supplier_class_remove_and_customer_class_modified.resx">
+      <DependentUpon>201802271831566_supplier_class_remove_and_customer_class_modified.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ExpenseCategoryForm.resx">
       <DependentUpon>ExpenseCategoryForm.cs</DependentUpon>
