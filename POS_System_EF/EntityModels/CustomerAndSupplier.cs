@@ -8,7 +8,7 @@ using POS_System_EF.Managers;
 
 namespace POS_System_EF.EntityModels
 {
-    public class Customer
+    public class CustomerAndSupplier
     {
         public int Id { get; set; }
         [Required]
@@ -17,6 +17,7 @@ namespace POS_System_EF.EntityModels
         [Required]
         [MaxLength(12)]
         public string Code { get; set; }
+        public string Type { get; set; }
         [Required]
         [MaxLength(11)]
         public string ContactNo { get; set; }
@@ -24,10 +25,10 @@ namespace POS_System_EF.EntityModels
         public string Address { get; set; }
         public bool IsDelete { get; set; }
 
-        ManagerContext db =new ManagerContext();
-        private string SetInvioceNo()
+        public string SetInvioceNo()
         {
-            var countId = db.Customers.Count();
+            ManagerContext db = new ManagerContext();
+            var countId = db.CustomerAndSuppliers.Count();
             countId++;
             if (countId <= 9)
             {
@@ -44,11 +45,6 @@ namespace POS_System_EF.EntityModels
                 string invNo = Convert.ToString(countId);
                 return invNo;
             }
-        }
-        public string GenerateCode(string Name)
-        {
-            var firstThreeChars = Name.Length <= 3 ? Name : Name.Substring(0, 3);
-            return firstThreeChars + "-" + SetInvioceNo();
         }
     }
 }

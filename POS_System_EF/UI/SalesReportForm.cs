@@ -28,7 +28,7 @@ namespace POS_System_EF.UI
             var salesList = (from s in db.Sales
                              join o in db.Outlets on s.OutletId equals o.Id
                              join emp in db.Employees on s.EmployeeId equals emp.Id
-                             join cus in db.Customers on s.CustomerId equals cus.Id
+                             join cus in db.CustomerAndSuppliers on s.CustomerId equals cus.Id
                              select new
                              {
                                  s.Id,

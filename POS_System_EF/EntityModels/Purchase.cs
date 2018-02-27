@@ -28,7 +28,7 @@ namespace POS_System_EF.EntityModels
         public Employee Employee { get; set; }
         [ForeignKey("Supplier")]
         public int? SupplierId { get; set; }
-        public Supplier Supplier { get; set; }
+        public CustomerAndSupplier Supplier { get; set; }
         public bool IsDelete { get; set; }
         [Required]
         public decimal TotalAmount { get; set; }

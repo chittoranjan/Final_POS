@@ -13,7 +13,7 @@ namespace POS_System_EF.EntityModels
         public string InvoiceNo { get; set; }
         public string Remarks { get; set; }
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public CustomerAndSupplier Customer { get; set; }
         public DateTime SalesDate { get; set; }
         public decimal SubTotal { get; set; }
         public decimal TotalAmount { get; set; }

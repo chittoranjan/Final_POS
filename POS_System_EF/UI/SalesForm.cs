@@ -182,13 +182,14 @@ namespace POS_System_EF.UI
 
                 if (lblCustomerId.Text == "")
                 {
-                    Customer cus = new Customer();
+                    CustomerAndSupplier cus = new CustomerAndSupplier();
                     cus.ContactNo = txtContactNo.Text;
                     cus.Name = txtCustomerName.Text;
-                    cus.Code = cus.GenerateCode(cus.Name);
+                    cus.Code = "Party" + "-" + cus.SetInvioceNo();
+                    cus.Type = "Customer";
                     using (ManagerContext db = new ManagerContext())
                     {
-                        bool customerIdExist = db.Customers.Count(a => a.ContactNo == cus.ContactNo) > 0;
+                        bool customerIdExist = db.CustomerAndSuppliers.Count(a => a.ContactNo == cus.ContactNo) > 0;
                         if (customerIdExist)
                         {
                             MessageBox.Show("This number is Exist");
@@ -197,9 +198,9 @@ namespace POS_System_EF.UI
                         else
                         {
 
-                            db.Customers.Add(cus);
+                            db.CustomerAndSuppliers.Add(cus);
                             db.SaveChanges();
-                            sales.CustomerId = db.Customers.Count();
+                            sales.CustomerId = db.CustomerAndSuppliers.Count();
                         }
 
                     }
@@ -311,7 +312,7 @@ namespace POS_System_EF.UI
         {
             using (ManagerContext db = new ManagerContext())
             {
-                var customer = db.Customers.FirstOrDefault(a => a.ContactNo == txtContactNo.Text);
+                var customer = db.CustomerAndSuppliers.FirstOrDefault(a => a.ContactNo == txtContactNo.Text);
                 if (customer != null)
                 {
                     txtCustomerName.Text = customer.Name;
