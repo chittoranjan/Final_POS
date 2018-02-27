@@ -78,12 +78,17 @@ namespace POS_System_EF.UI
                 {
                     foreach (Stock itemId in listofstock)
                     {
+                        List<TempPurchase> listofTemp = db.TempPurchases.Where(a=>a.ItemId==itemId.ItemId).ToList();
+
+                        decimal avg = listofTemp.Sum(a => a.TotalPrice) / listofTemp.Sum(a => a.Quantity);
                         var IsAvailableItem = db.Stocks.FirstOrDefault(a => a.ItemId == itemId.ItemId);
                         var quantity = itemId.AvailableQuantity;
 
                         if (IsAvailableItem != null)
                         {
                             IsAvailableItem.AvailableQuantity += itemId.AvailableQuantity;
+                            IsAvailableItem.AveragePrice = avg;
+
                         }
                         else
                         {
