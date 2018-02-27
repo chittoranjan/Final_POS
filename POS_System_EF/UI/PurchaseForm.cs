@@ -27,6 +27,7 @@ namespace POS_System_EF.UI
         DataTable table = new DataTable();
         List<TempPurchase> listPurchase = new List<TempPurchase>();
         List<decimal> tamount = new List<decimal>();
+        List<Stock> listofstock = new List<Stock>();
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -45,9 +46,9 @@ namespace POS_System_EF.UI
                 int count = db.SaveChanges();
                 if (count > 0)
                 {
+                    //Save Stock into Database
+                    SaveStock();
                     MessageBox.Show("Saved Successfully");
-                    InStock();
-                    
                 }
                 else
                 {
@@ -68,6 +69,16 @@ namespace POS_System_EF.UI
             ClearTextBox();
         }
 
+        private void SaveStock()
+        {
+
+            using (ManagerContext db = new ManagerContext())
+            {
+                    db.Stocks.AddRange(listofstock);
+                    db.SaveChanges();
+                
+            }
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -92,8 +103,9 @@ namespace POS_System_EF.UI
                         listPurchase.Add(temp);
                         tamount.Add(temp.TotalPrice);
                         dgvPurchaseList.DataSource = table;
-                        ClearTextBox();
                         lblTotalAmount.Text = tamount.Sum().ToString();
+                        InStock(temp.ItemId, temp.Quantity, temp.CostPrice,cmbItem.Text);
+                        ClearTextBox();
                     }
                     
                 }
@@ -209,23 +221,25 @@ namespace POS_System_EF.UI
                 if (dgvPurchaseList.CurrentCell != null && dgvPurchaseList.CurrentCell.Value != null)
                 {
                     dgvPurchaseList.Rows.RemoveAt(e.RowIndex);
+                    listofstock.RemoveAt(e.RowIndex);
                     tamount.RemoveAt(e.RowIndex);
                 }
 
             lblTotalAmount.Text = tamount.Sum().ToString();
         }
 
-        private void InStock()
+        private void InStock(int itemId, int quantity, decimal price, string name)
         {
-            Stock stock = new Stock();
-            stock.ItemId = (int)listPurchase[0].ItemId;
-            stock.AvailableQuantity = listPurchase[0].Quantity;
-            using (ManagerContext db = new ManagerContext())
-            {
-                db.Stocks.Add(stock);
-                db.SaveChanges();
-            }
+                    Stock stock = new Stock();
+                    stock.ItemId = itemId;
+                    stock.ItemName = name;
+                    stock.AvailableQuantity = quantity;
+                    stock.AveragePrice = price;
+                    listofstock.Add(stock);
+               
         }
+
+        
 
         private void cmbItem_SelectedValueChanged(object sender, EventArgs e)
         {
