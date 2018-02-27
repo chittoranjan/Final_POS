@@ -165,11 +165,12 @@ namespace POS_System_EF.UI
         private void textBoxSrc_TextChanged(object sender, EventArgs e)
         {
             string textSearch = textBoxSrc.Text;
-            if (Equals(dataGridView.DataSource, db.CustomerAndSuppliers))
+            if (textSearch.Length>2)
             {
                 var srcData = (from c in db.CustomerAndSuppliers
                                where c.Name.StartsWith(textSearch) && c.IsDelete == false || c.Code.StartsWith(textSearch) && c.IsDelete == false
                                || c.ContactNo.StartsWith(textSearch) && c.IsDelete == false || c.Email.StartsWith(textSearch) && c.IsDelete == false
+                               ||c.Type.StartsWith(textSearch) && c.IsDelete==false
                                select new
                                {
                                    c.Id,
@@ -181,7 +182,8 @@ namespace POS_System_EF.UI
                                    c.Address
                                }).ToList();
                 dataGridView.DataSource = srcData;
-                dataGridView.Columns["Id"].Visible = false;
+                var dataGridViewColumn = dataGridView.Columns["Id"];
+                if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
             }
         }
 

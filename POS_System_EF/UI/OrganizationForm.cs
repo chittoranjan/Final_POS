@@ -219,7 +219,8 @@ namespace POS_System_EF.UI
             { 
                 ManagerContext db = new ManagerContext();
                 var organization = (from org in db.Organizations
-                                    where org.Name.StartsWith(textSearch) || org.Address.StartsWith(textSearch) || org.ContactNo.StartsWith(textSearch)||org.Code.StartsWith(textSearch)
+                                    where org.Name.StartsWith(textSearch) && org.IsDelete == false || org.Address.StartsWith(textSearch) && org.IsDelete == false
+                                    || org.ContactNo.StartsWith(textSearch) && org.IsDelete == false || org.Code.StartsWith(textSearch) && org.IsDelete == false
                                     select new
                                     {
                                         org.Id,

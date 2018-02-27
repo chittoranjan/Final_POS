@@ -49,8 +49,16 @@ namespace POS_System_EF.UI
                         if (rbRootCategory.Checked)
                         {
                             itemCategory.Name = txtName.Text;
-                            itemCategory.Code = itemCategory.GenearateCodeRoot(itemCategory.Name);
+                            if (txtCodeManual.Text.Trim() != string.Empty)
+                            {
+                                itemCategory.Code = txtCodeManual.Text;
+                            }
+                            else
+                            {
+                                itemCategory.Code = txtCode.Text;
+                            }
                             itemCategory.Description = txtDescription.Text;
+
                             db.ItemCategories.Add(itemCategory);
                             int count = db.SaveChanges();
                             if (count > 0)
@@ -68,9 +76,15 @@ namespace POS_System_EF.UI
                             VisibleRootCategory();
                             itemCategory.CategoryId = (int) cmbRootCategory.SelectedValue;
                             itemCategory.Name = txtName.Text;
-                            itemCategory.Code = itemCategory.GenearateCodeSub(itemCategory.Name);
+                            if (txtCodeManual.Text.Trim() != string.Empty)
+                            {
+                                itemCategory.Code = txtCodeManual.Text;
+                            }
+                            else
+                            {
+                                itemCategory.Code = txtCode.Text;
+                            }
                             itemCategory.Description = txtDescription.Text;
-                            //itemCategory.listOfSubCategory.Add(itemCategory);
 
                             DialogResult dialogResult = MessageBox.Show("Are you sure want to save ?", "Information",
                                 MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -87,7 +101,6 @@ namespace POS_System_EF.UI
                                     MessageBox.Show("Save failed!");
                                 }
                             }
-
                         }
                         else
                         {
@@ -109,7 +122,14 @@ namespace POS_System_EF.UI
                     {   
                         itemCategory.CategoryId = null;
                         itemCategory.Name = txtName.Text;
-                        itemCategory.Code = itemCategory.GenearateCodeRoot(itemCategory.Name);
+                        if (txtCodeManual.Text.Trim() != string.Empty)
+                        {
+                            itemCategory.Code = txtCodeManual.Text;
+                        }
+                        else
+                        {
+                            itemCategory.Code = txtCode.Text;
+                        }
                         itemCategory.Description = txtDescription.Text;
                         db.SaveChanges();
                        
@@ -119,7 +139,14 @@ namespace POS_System_EF.UI
                         VisibleRootCategory();
                         itemCategory.CategoryId = (int)cmbRootCategory.SelectedValue;
                         itemCategory.Name = txtName.Text;
-                        itemCategory.Code = itemCategory.GenearateCodeSub(itemCategory.Name);
+                        if (txtCodeManual.Text.Trim() != string.Empty)
+                        {
+                            itemCategory.Code = txtCodeManual.Text;
+                        }
+                        else
+                        {
+                            itemCategory.Code = txtCode.Text;
+                        }
                         itemCategory.Description = txtDescription.Text;                                           
                         db.SaveChanges();                                              
 
@@ -178,6 +205,7 @@ namespace POS_System_EF.UI
             cmbRootCategory.SelectedIndex = -1;
             txtName.Clear();
             txtCode.Clear();
+            txtCodeManual.Clear();
             txtDescription.Clear();
         }
         private void TextBoxValue()
@@ -202,7 +230,8 @@ namespace POS_System_EF.UI
                            }).ToList();
 
             dgvCategoryList.DataSource = dgvLoad;
-            dgvCategoryList.Columns["Id"].Visible = false;
+            var dataGridViewColumn = dgvCategoryList.Columns["Id"];
+            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
         }
         private void buttonHome_Click_1(object sender, EventArgs e)
         {
@@ -237,6 +266,7 @@ namespace POS_System_EF.UI
             if(rbRootCategory.Checked)
             {
                 HideRootCategory();
+                txtCode.Text=itemCategory.GenearateCodeRoot(rbRootCategory.Text);
             }
         }
 
@@ -246,6 +276,7 @@ namespace POS_System_EF.UI
             {
                 VisibleRootCategory();
                 LoadCombobox();
+                txtCode.Text=itemCategory.GenearateCodeSub(rbSubCategory.Text);
             }
         }
 
@@ -267,8 +298,11 @@ namespace POS_System_EF.UI
             DialogResult dialogResult = MessageBox.Show("Are you sure want to delete ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
-                int id = (int)dgvCategoryList.CurrentRow.Cells["Id"].Value;
-                itemCategory = db.ItemCategories.FirstOrDefault(c => c.Id == id);
+                if (dgvCategoryList.CurrentRow != null)
+                {
+                    int id = (int)dgvCategoryList.CurrentRow.Cells["Id"].Value;
+                    itemCategory = db.ItemCategories.FirstOrDefault(c => c.Id == id);
+                }
                 if (itemCategory != null)
                 {
                     itemCategory.IsDelete = true;

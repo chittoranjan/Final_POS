@@ -232,8 +232,8 @@ namespace POS_System_EF.UI
                 ManagerContext db = new ManagerContext();
                 var organization = (from outlet in db.Outlets
                     where
-                        outlet.Name.StartsWith(textSearch) || outlet.Address.StartsWith(textSearch) ||
-                        outlet.ContactNo.StartsWith(textSearch) || outlet.Code.StartsWith(textSearch)
+                        outlet.Name.StartsWith(textSearch) && outlet.IsDelete == false || outlet.Address.StartsWith(textSearch) && outlet.IsDelete == false
+                        || outlet.ContactNo.StartsWith(textSearch) && outlet.IsDelete == false || outlet.Code.StartsWith(textSearch) && outlet.IsDelete == false
                     select new
                     {
                         outlet.Id,
@@ -244,6 +244,8 @@ namespace POS_System_EF.UI
                         outlet.Address
                     }).ToList();
                 dgvOutlet.DataSource = organization;
+                var dataGridViewColumn = dgvOutlet.Columns["Id"];
+                if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
             }
         }
 

@@ -451,9 +451,9 @@
             // 
             // btnHome
             // 
-            this.btnHome.Location = new System.Drawing.Point(1086, 451);
+            this.btnHome.Location = new System.Drawing.Point(1072, 451);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(75, 23);
+            this.btnHome.Size = new System.Drawing.Size(89, 32);
             this.btnHome.TabIndex = 130;
             this.btnHome.Text = "Home";
             this.btnHome.UseVisualStyleBackColor = true;
@@ -463,7 +463,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 486);
+            this.ClientSize = new System.Drawing.Size(1200, 495);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.TabControlOrgPrint);

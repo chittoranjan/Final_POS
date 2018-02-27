@@ -47,6 +47,8 @@
             this.labeRootCat = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.txtCodeManual = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategoryList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -85,9 +87,10 @@
             // 
             // textBoxSrc
             // 
+            this.textBoxSrc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSrc.Location = new System.Drawing.Point(709, 34);
             this.textBoxSrc.Name = "textBoxSrc";
-            this.textBoxSrc.Size = new System.Drawing.Size(193, 20);
+            this.textBoxSrc.Size = new System.Drawing.Size(193, 26);
             this.textBoxSrc.TabIndex = 31;
             this.textBoxSrc.TextChanged += new System.EventHandler(this.textBoxSrc_TextChanged);
             // 
@@ -101,9 +104,11 @@
             this.groupBox1.Controls.Add(this.rbRootCategory);
             this.groupBox1.Controls.Add(this.txtDescription);
             this.groupBox1.Controls.Add(this.txtCode);
+            this.groupBox1.Controls.Add(this.txtCodeManual);
             this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.labeRootCat);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 34);
@@ -157,7 +162,7 @@
             // rbSubCategory
             // 
             this.rbSubCategory.AutoSize = true;
-            this.rbSubCategory.Location = new System.Drawing.Point(221, 52);
+            this.rbSubCategory.Location = new System.Drawing.Point(226, 52);
             this.rbSubCategory.Name = "rbSubCategory";
             this.rbSubCategory.Size = new System.Drawing.Size(89, 17);
             this.rbSubCategory.TabIndex = 48;
@@ -169,7 +174,7 @@
             // rbRootCategory
             // 
             this.rbRootCategory.AutoSize = true;
-            this.rbRootCategory.Location = new System.Drawing.Point(117, 52);
+            this.rbRootCategory.Location = new System.Drawing.Point(122, 52);
             this.rbRootCategory.Name = "rbRootCategory";
             this.rbRootCategory.Size = new System.Drawing.Size(93, 17);
             this.rbRootCategory.TabIndex = 47;
@@ -188,10 +193,10 @@
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(117, 172);
+            this.txtCode.Location = new System.Drawing.Point(221, 172);
             this.txtCode.Name = "txtCode";
             this.txtCode.ReadOnly = true;
-            this.txtCode.Size = new System.Drawing.Size(193, 20);
+            this.txtCode.Size = new System.Drawing.Size(89, 20);
             this.txtCode.TabIndex = 45;
             // 
             // txtName
@@ -248,6 +253,23 @@
             this.label4.TabIndex = 42;
             this.label4.Text = "Quick Search";
             // 
+            // txtCodeManual
+            // 
+            this.txtCodeManual.Location = new System.Drawing.Point(117, 172);
+            this.txtCodeManual.Name = "txtCodeManual";
+            this.txtCodeManual.Size = new System.Drawing.Size(98, 20);
+            this.txtCodeManual.TabIndex = 46;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(28, 52);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 13);
+            this.label5.TabIndex = 40;
+            this.label5.Text = "Select Category";
+            this.label5.Visible = false;
+            // 
             // ItemCategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,5 +313,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtCodeManual;
+        private System.Windows.Forms.Label label5;
     }
 }

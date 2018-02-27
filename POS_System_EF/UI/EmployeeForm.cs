@@ -433,7 +433,10 @@ namespace POS_System_EF.UI
             txtCode.Text = firstThreeChars + "-" + SetInvioceNo();
 
         }
-
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            AutoCodeShow();
+        }
         private void btnDelete_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Are you sure want to delete ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -498,6 +501,8 @@ namespace POS_System_EF.UI
             e.Graphics.DrawString("Permanent Address       :  " + txtShowPermanentAddress.Text, new Font("Arial", 18, FontStyle.Bold), Brushes.Black, new Point(30, 800));
 
         }
+
+        
 
     }
 }

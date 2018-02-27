@@ -35,8 +35,6 @@
             this.addBranchToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.employeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.partySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addPartyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categorySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expenseSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,9 +53,9 @@
             this.salesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incomeReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expenseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,26 +120,10 @@
             // 
             // partySetupToolStripMenuItem
             // 
-            this.partySetupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addPartyToolStripMenuItem,
-            this.addCustomerToolStripMenuItem});
             this.partySetupToolStripMenuItem.Name = "partySetupToolStripMenuItem";
             this.partySetupToolStripMenuItem.Size = new System.Drawing.Size(92, 23);
             this.partySetupToolStripMenuItem.Text = "Party Setup";
-            // 
-            // addPartyToolStripMenuItem
-            // 
-            this.addPartyToolStripMenuItem.Name = "addPartyToolStripMenuItem";
-            this.addPartyToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
-            this.addPartyToolStripMenuItem.Text = "Add Party";
-            this.addPartyToolStripMenuItem.Click += new System.EventHandler(this.addPartyToolStripMenuItem_Click);
-            // 
-            // addCustomerToolStripMenuItem
-            // 
-            this.addCustomerToolStripMenuItem.Name = "addCustomerToolStripMenuItem";
-            this.addCustomerToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
-            this.addCustomerToolStripMenuItem.Text = "Add Customer";
-            this.addCustomerToolStripMenuItem.Click += new System.EventHandler(this.addCustomerToolStripMenuItem_Click);
+            this.partySetupToolStripMenuItem.Click += new System.EventHandler(this.partySetupToolStripMenuItem_Click);
             // 
             // categorySetupToolStripMenuItem
             // 
@@ -281,12 +263,6 @@
             this.incomeReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
             this.incomeReportToolStripMenuItem.Text = "Income Report";
             // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
             // expenseReportToolStripMenuItem
             // 
             this.expenseReportToolStripMenuItem.Name = "expenseReportToolStripMenuItem";
@@ -300,6 +276,12 @@
             this.stockReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
             this.stockReportToolStripMenuItem.Text = "Stock Report";
             this.stockReportToolStripMenuItem.Click += new System.EventHandler(this.stockReportToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
+            this.aboutToolStripMenuItem.Text = "About";
             // 
             // OpeningForm
             // 
@@ -332,8 +314,6 @@
         private System.Windows.Forms.ToolStripMenuItem salesManageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addPartyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addCustomerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemSetupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addPurchaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchaseDetailsToolStripMenuItem;
