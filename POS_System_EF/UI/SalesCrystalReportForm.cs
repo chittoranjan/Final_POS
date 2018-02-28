@@ -106,5 +106,10 @@ namespace POS_System_EF.UI
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

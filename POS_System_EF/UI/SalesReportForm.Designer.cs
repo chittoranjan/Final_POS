@@ -262,9 +262,9 @@
             // btnHome
             // 
             this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHome.Location = new System.Drawing.Point(1261, 502);
+            this.btnHome.Location = new System.Drawing.Point(1259, 498);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(89, 28);
+            this.btnHome.Size = new System.Drawing.Size(91, 32);
             this.btnHome.TabIndex = 41;
             this.btnHome.Text = "Home";
             this.btnHome.UseVisualStyleBackColor = true;

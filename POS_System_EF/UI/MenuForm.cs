@@ -109,7 +109,7 @@ namespace POS_System_EF
 
         private void salesReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SalesCrystalReportForm sForm = new SalesCrystalReportForm();
+            SalesReportForm sForm = new SalesReportForm();
             sForm.Show();
         }
 
@@ -136,6 +136,12 @@ namespace POS_System_EF
         {
             BarcodeViewForm bForm = new BarcodeViewForm();
             bForm.Show();
+        }
+
+        private void salesCrystalReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SalesCrystalReportForm salesCrystal=new SalesCrystalReportForm();
+            salesCrystal.Show();
         }
 
     }

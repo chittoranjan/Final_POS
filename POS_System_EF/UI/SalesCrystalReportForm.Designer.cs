@@ -31,13 +31,14 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvSales = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtSearchInvoice = new System.Windows.Forms.TextBox();
             this.btnShow = new System.Windows.Forms.Button();
             this.cmbOutlets = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtSearchInvoice = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTotalSale = new System.Windows.Forms.TextBox();
+            this.btnHome = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -76,12 +77,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sales Result";
             // 
+            // txtSearchInvoice
+            // 
+            this.txtSearchInvoice.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchInvoice.Location = new System.Drawing.Point(786, 37);
+            this.txtSearchInvoice.Name = "txtSearchInvoice";
+            this.txtSearchInvoice.Size = new System.Drawing.Size(234, 27);
+            this.txtSearchInvoice.TabIndex = 8;
+            this.txtSearchInvoice.TextChanged += new System.EventHandler(this.txtSearchInvoice_TextChanged);
+            // 
             // btnShow
             // 
             this.btnShow.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnShow.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShow.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnShow.Location = new System.Drawing.Point(301, 25);
+            this.btnShow.Location = new System.Drawing.Point(333, 25);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(111, 39);
             this.btnShow.TabIndex = 7;
@@ -95,20 +105,10 @@
             this.cmbOutlets.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbOutlets.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbOutlets.FormattingEnabled = true;
-            this.cmbOutlets.Location = new System.Drawing.Point(88, 31);
+            this.cmbOutlets.Location = new System.Drawing.Point(101, 32);
             this.cmbOutlets.Name = "cmbOutlets";
             this.cmbOutlets.Size = new System.Drawing.Size(200, 29);
             this.cmbOutlets.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(21, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 21);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Outlet";
             // 
             // label2
             // 
@@ -120,14 +120,15 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Search By Invoice";
             // 
-            // txtSearchInvoice
+            // label1
             // 
-            this.txtSearchInvoice.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchInvoice.Location = new System.Drawing.Point(786, 37);
-            this.txtSearchInvoice.Name = "txtSearchInvoice";
-            this.txtSearchInvoice.Size = new System.Drawing.Size(234, 27);
-            this.txtSearchInvoice.TabIndex = 8;
-            this.txtSearchInvoice.TextChanged += new System.EventHandler(this.txtSearchInvoice_TextChanged);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(21, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 21);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Outlet";
             // 
             // label3
             // 
@@ -149,18 +150,30 @@
             this.txtTotalSale.TabIndex = 8;
             this.txtTotalSale.TextChanged += new System.EventHandler(this.txtSearchInvoice_TextChanged);
             // 
+            // btnHome
+            // 
+            this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHome.Location = new System.Drawing.Point(28, 415);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(97, 34);
+            this.btnHome.TabIndex = 9;
+            this.btnHome.Text = "Home";
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            // 
             // SalesCrystalReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 461);
+            this.Controls.Add(this.btnHome);
             this.Controls.Add(this.txtTotalSale);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
             this.Name = "SalesCrystalReportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SalesCrystalReportForm";
+            this.Text = "Sales Crystal Report Form";
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -182,5 +195,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtTotalSale;
+        private System.Windows.Forms.Button btnHome;
     }
 }

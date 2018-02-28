@@ -43,6 +43,7 @@
             this.purchaseManageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addPurchaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.barcodeMakerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesManageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,7 @@
             this.expenseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.barcodeMakerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesCrystalReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -187,6 +188,13 @@
             this.purchaseDetailsToolStripMenuItem.Text = "Purchase Record";
             this.purchaseDetailsToolStripMenuItem.Click += new System.EventHandler(this.purchaseDetailsToolStripMenuItem_Click);
             // 
+            // barcodeMakerToolStripMenuItem
+            // 
+            this.barcodeMakerToolStripMenuItem.Name = "barcodeMakerToolStripMenuItem";
+            this.barcodeMakerToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
+            this.barcodeMakerToolStripMenuItem.Text = "Barcode Maker";
+            this.barcodeMakerToolStripMenuItem.Click += new System.EventHandler(this.barcodeMakerToolStripMenuItem_Click);
+            // 
             // salesManageToolStripMenuItem
             // 
             this.salesManageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -236,11 +244,12 @@
             // reportToolStripMenuItem
             // 
             this.reportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.salesReportToolStripMenuItem,
             this.purchaseReportToolStripMenuItem,
-            this.incomeReportToolStripMenuItem,
+            this.stockReportToolStripMenuItem,
+            this.salesReportToolStripMenuItem,
+            this.salesCrystalReportToolStripMenuItem,
             this.expenseReportToolStripMenuItem,
-            this.stockReportToolStripMenuItem});
+            this.incomeReportToolStripMenuItem});
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
             this.reportToolStripMenuItem.Size = new System.Drawing.Size(62, 23);
             this.reportToolStripMenuItem.Text = "Report";
@@ -248,34 +257,34 @@
             // salesReportToolStripMenuItem
             // 
             this.salesReportToolStripMenuItem.Name = "salesReportToolStripMenuItem";
-            this.salesReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.salesReportToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.salesReportToolStripMenuItem.Text = "Sales Report";
             this.salesReportToolStripMenuItem.Click += new System.EventHandler(this.salesReportToolStripMenuItem_Click);
             // 
             // purchaseReportToolStripMenuItem
             // 
             this.purchaseReportToolStripMenuItem.Name = "purchaseReportToolStripMenuItem";
-            this.purchaseReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.purchaseReportToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.purchaseReportToolStripMenuItem.Text = "Purchase Report";
             this.purchaseReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseReportToolStripMenuItem_Click);
             // 
             // incomeReportToolStripMenuItem
             // 
             this.incomeReportToolStripMenuItem.Name = "incomeReportToolStripMenuItem";
-            this.incomeReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.incomeReportToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.incomeReportToolStripMenuItem.Text = "Income Report";
             // 
             // expenseReportToolStripMenuItem
             // 
             this.expenseReportToolStripMenuItem.Name = "expenseReportToolStripMenuItem";
-            this.expenseReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.expenseReportToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.expenseReportToolStripMenuItem.Text = "Expense Report";
             this.expenseReportToolStripMenuItem.Click += new System.EventHandler(this.expenseReportToolStripMenuItem_Click);
             // 
             // stockReportToolStripMenuItem
             // 
             this.stockReportToolStripMenuItem.Name = "stockReportToolStripMenuItem";
-            this.stockReportToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.stockReportToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.stockReportToolStripMenuItem.Text = "Stock Report";
             this.stockReportToolStripMenuItem.Click += new System.EventHandler(this.stockReportToolStripMenuItem_Click);
             // 
@@ -285,15 +294,13 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-
-            // barcodeMakerToolStripMenuItem
+            // salesCrystalReportToolStripMenuItem
             // 
-            this.barcodeMakerToolStripMenuItem.Name = "barcodeMakerToolStripMenuItem";
-            this.barcodeMakerToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
-            this.barcodeMakerToolStripMenuItem.Text = "Barcode Maker";
-            this.barcodeMakerToolStripMenuItem.Click += new System.EventHandler(this.barcodeMakerToolStripMenuItem_Click);
+            this.salesCrystalReportToolStripMenuItem.Name = "salesCrystalReportToolStripMenuItem";
+            this.salesCrystalReportToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
+            this.salesCrystalReportToolStripMenuItem.Text = "Sales Crystal Report";
+            this.salesCrystalReportToolStripMenuItem.Click += new System.EventHandler(this.salesCrystalReportToolStripMenuItem_Click);
             // 
-
             // OpeningForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -342,6 +349,7 @@
         private System.Windows.Forms.ToolStripMenuItem expenseReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem barcodeMakerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salesCrystalReportToolStripMenuItem;
     }
 }
 
