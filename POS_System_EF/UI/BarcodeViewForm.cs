@@ -43,10 +43,10 @@ namespace POS_System_EF.UI
             {
                 for (int i = 0; i <= qty; i++)
                 {
-                    Bitmap bitmap = new Bitmap(item.Length * 40, 150);
+                    Bitmap bitmap = new Bitmap(item.Length * 40, 70);
                     using (Graphics graphics = Graphics.FromImage(bitmap))
                     {
-                        System.Drawing.Font font = new System.Drawing.Font("IDAutomationHC39M", 20);
+                        System.Drawing.Font font = new System.Drawing.Font("IDAHC39M Code 39 Barcode", 20);
                         PointF point = new PointF(2f, 2f);
                         SolidBrush black = new SolidBrush(Color.Black);
                         SolidBrush white = new SolidBrush(Color.White);
