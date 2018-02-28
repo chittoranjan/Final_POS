@@ -374,7 +374,7 @@ namespace POS_System_EF.UI
                             {
                                 txtSalePriceRO.Text = objItem.SalePrice.ToString();
                                 txtSalesQty.Text = 1.ToString();
-                                var stock = db.Stocks.FirstOrDefault(b => b.Id == cmbId);
+                                var stock = db.Stocks.FirstOrDefault(b => b.ItemId == cmbId);
                                 txtStock.Text = stock.AvailableQuantity.ToString();
                             }
                             else

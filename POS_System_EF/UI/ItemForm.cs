@@ -142,6 +142,7 @@ namespace POS_System_EF.UI
                         where items.IsDelete == false
                         select new
                         {
+                            
                             items.Id,
                             items.Name,
                             items.Code,

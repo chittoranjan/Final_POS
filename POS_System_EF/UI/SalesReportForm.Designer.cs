@@ -49,6 +49,8 @@
             this.richTextBoxSalesList = new System.Windows.Forms.RichTextBox();
             this.dgvSalesList = new System.Windows.Forms.DataGridView();
             this.btnHome = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtSearchAny = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -251,11 +253,11 @@
             this.dgvSalesList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSalesList.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvSalesList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSalesList.Location = new System.Drawing.Point(486, 29);
+            this.dgvSalesList.Location = new System.Drawing.Point(459, 100);
             this.dgvSalesList.Name = "dgvSalesList";
             this.dgvSalesList.RowHeadersVisible = false;
             this.dgvSalesList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSalesList.Size = new System.Drawing.Size(867, 455);
+            this.dgvSalesList.Size = new System.Drawing.Size(867, 392);
             this.dgvSalesList.TabIndex = 21;
             this.dgvSalesList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesList_CellDoubleClick);
             // 
@@ -270,11 +272,32 @@
             this.btnHome.UseVisualStyleBackColor = true;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(478, 11);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(104, 20);
+            this.label5.TabIndex = 45;
+            this.label5.Text = "Quick Search";
+            // 
+            // txtSearchAny
+            // 
+            this.txtSearchAny.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchAny.Location = new System.Drawing.Point(482, 48);
+            this.txtSearchAny.Name = "txtSearchAny";
+            this.txtSearchAny.Size = new System.Drawing.Size(250, 26);
+            this.txtSearchAny.TabIndex = 42;
+            this.txtSearchAny.TextChanged += new System.EventHandler(this.txtSearchAny_TextChanged);
+            // 
             // SalesReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 542);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtSearchAny);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblTotal);
@@ -329,6 +352,7 @@
         private System.Windows.Forms.RichTextBox richTextBoxSalesList;
         private System.Windows.Forms.DataGridView dgvSalesList;
         private System.Windows.Forms.Button btnHome;
-
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtSearchAny;
     }
 }

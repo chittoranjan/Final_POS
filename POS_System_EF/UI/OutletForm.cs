@@ -45,7 +45,6 @@ namespace POS_System_EF.UI
                            join org in db.Organizations on outlet.OrganizationId equals org.Id
                            select new
                            {
-
                                outlet.Id,
                                Organization = org.Name,
                                Outlet=outlet.Name,

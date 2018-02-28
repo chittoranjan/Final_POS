@@ -42,50 +42,55 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label3.Location = new System.Drawing.Point(779, 268);
+            this.label3.Location = new System.Drawing.Point(789, 256);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
+            this.label3.Size = new System.Drawing.Size(68, 21);
             this.label3.TabIndex = 18;
             this.label3.Text = "Position";
             // 
             // cmbPosition
             // 
             this.cmbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPosition.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPosition.FormattingEnabled = true;
             this.cmbPosition.Items.AddRange(new object[] {
             "Manager",
             "User/Salesman"});
-            this.cmbPosition.Location = new System.Drawing.Point(859, 265);
+            this.cmbPosition.Location = new System.Drawing.Point(859, 252);
             this.cmbPosition.Name = "cmbPosition";
-            this.cmbPosition.Size = new System.Drawing.Size(174, 21);
+            this.cmbPosition.Size = new System.Drawing.Size(174, 29);
             this.cmbPosition.TabIndex = 17;
             // 
             // txtPassword
             // 
             this.txtPassword.BackColor = System.Drawing.SystemColors.Menu;
+            this.txtPassword.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(859, 330);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(174, 20);
+            this.txtPassword.Size = new System.Drawing.Size(174, 27);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // txtUserName
             // 
             this.txtUserName.BackColor = System.Drawing.SystemColors.Menu;
+            this.txtUserName.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserName.Location = new System.Drawing.Point(859, 292);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(174, 20);
+            this.txtUserName.Size = new System.Drawing.Size(174, 27);
             this.txtUserName.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label2.Location = new System.Drawing.Point(779, 333);
+            this.label2.Location = new System.Drawing.Point(774, 333);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.Size = new System.Drawing.Size(82, 21);
             this.label2.TabIndex = 13;
             this.label2.Text = "Password";
             // 
@@ -93,20 +98,22 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label1.Location = new System.Drawing.Point(779, 295);
+            this.label1.Location = new System.Drawing.Point(764, 295);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.Size = new System.Drawing.Size(94, 21);
             this.label1.TabIndex = 14;
             this.label1.Text = "User Name";
             // 
             // btnSignIn
             // 
-            this.btnSignIn.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnSignIn.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSignIn.Location = new System.Drawing.Point(956, 368);
+            this.btnSignIn.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSignIn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSignIn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSignIn.Location = new System.Drawing.Point(859, 374);
             this.btnSignIn.Name = "btnSignIn";
-            this.btnSignIn.Size = new System.Drawing.Size(77, 27);
+            this.btnSignIn.Size = new System.Drawing.Size(174, 30);
             this.btnSignIn.TabIndex = 2;
             this.btnSignIn.Text = "Sign In";
             this.btnSignIn.UseVisualStyleBackColor = false;
@@ -114,11 +121,12 @@
             // 
             // btnSignOut
             // 
-            this.btnSignOut.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnSignOut.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSignOut.Location = new System.Drawing.Point(859, 368);
+            this.btnSignOut.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSignOut.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSignOut.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSignOut.Location = new System.Drawing.Point(859, 410);
             this.btnSignOut.Name = "btnSignOut";
-            this.btnSignOut.Size = new System.Drawing.Size(77, 27);
+            this.btnSignOut.Size = new System.Drawing.Size(174, 28);
             this.btnSignOut.TabIndex = 3;
             this.btnSignOut.Text = "Sign Out";
             this.btnSignOut.UseVisualStyleBackColor = false;

@@ -96,6 +96,7 @@
             this.label1.Size = new System.Drawing.Size(104, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Quick Search";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -328,6 +329,7 @@
             this.label7.Size = new System.Drawing.Size(114, 20);
             this.label7.TabIndex = 2;
             this.label7.Text = "Invoice Search";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // PurchaseReportForm
             // 
