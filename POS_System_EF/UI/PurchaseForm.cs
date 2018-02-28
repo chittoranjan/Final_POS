@@ -236,7 +236,7 @@ namespace POS_System_EF.UI
 
                 cmbSupplier.DisplayMember = "Name";
                 cmbSupplier.ValueMember = "Id";
-                cmbSupplier.DataSource = db.CustomerAndSuppliers.ToList();
+                cmbSupplier.DataSource = db.CustomerAndSuppliers.Where(a=>a.Type != "Customer").ToList();
             }
             catch(Exception ex)
             {
