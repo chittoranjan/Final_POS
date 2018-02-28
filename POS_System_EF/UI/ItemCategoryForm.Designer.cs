@@ -41,23 +41,24 @@
             this.rbRootCategory = new System.Windows.Forms.RadioButton();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.txtCode = new System.Windows.Forms.TextBox();
+            this.txtCodeManual = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.labeRootCat = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtCodeManual = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategoryList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonSrcClear
             // 
-            this.buttonSrcClear.Location = new System.Drawing.Point(947, 31);
+            this.buttonSrcClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSrcClear.Location = new System.Drawing.Point(936, 31);
             this.buttonSrcClear.Name = "buttonSrcClear";
-            this.buttonSrcClear.Size = new System.Drawing.Size(75, 23);
+            this.buttonSrcClear.Size = new System.Drawing.Size(86, 29);
             this.buttonSrcClear.TabIndex = 38;
             this.buttonSrcClear.Text = "Clear";
             this.buttonSrcClear.UseVisualStyleBackColor = true;
@@ -65,9 +66,10 @@
             // 
             // buttonHome
             // 
+            this.buttonHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHome.Location = new System.Drawing.Point(947, 402);
             this.buttonHome.Name = "buttonHome";
-            this.buttonHome.Size = new System.Drawing.Size(75, 23);
+            this.buttonHome.Size = new System.Drawing.Size(75, 31);
             this.buttonHome.TabIndex = 36;
             this.buttonHome.Text = "Home";
             this.buttonHome.UseVisualStyleBackColor = true;
@@ -81,7 +83,7 @@
             this.dgvCategoryList.Name = "dgvCategoryList";
             this.dgvCategoryList.RowHeadersVisible = false;
             this.dgvCategoryList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategoryList.Size = new System.Drawing.Size(623, 292);
+            this.dgvCategoryList.Size = new System.Drawing.Size(623, 310);
             this.dgvCategoryList.TabIndex = 37;
             this.dgvCategoryList.DoubleClick += new System.EventHandler(this.dgvCategoryList_DoubleClick);
             // 
@@ -120,9 +122,10 @@
             // 
             // buttonDelete
             // 
+            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.Location = new System.Drawing.Point(43, 300);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.Size = new System.Drawing.Size(75, 31);
             this.buttonDelete.TabIndex = 52;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -131,9 +134,10 @@
             // 
             // btnSaveCategory
             // 
+            this.btnSaveCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveCategory.Location = new System.Drawing.Point(235, 300);
             this.btnSaveCategory.Name = "btnSaveCategory";
-            this.btnSaveCategory.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveCategory.Size = new System.Drawing.Size(75, 31);
             this.btnSaveCategory.TabIndex = 51;
             this.btnSaveCategory.Text = "Save";
             this.btnSaveCategory.UseVisualStyleBackColor = true;
@@ -141,9 +145,10 @@
             // 
             // btnClear
             // 
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.Location = new System.Drawing.Point(135, 300);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(75, 31);
             this.btnClear.TabIndex = 50;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -199,6 +204,13 @@
             this.txtCode.Size = new System.Drawing.Size(89, 20);
             this.txtCode.TabIndex = 45;
             // 
+            // txtCodeManual
+            // 
+            this.txtCodeManual.Location = new System.Drawing.Point(117, 172);
+            this.txtCodeManual.Name = "txtCodeManual";
+            this.txtCodeManual.Size = new System.Drawing.Size(98, 20);
+            this.txtCodeManual.TabIndex = 46;
+            // 
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(117, 132);
@@ -223,6 +235,16 @@
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 43;
             this.label2.Text = "Code";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(28, 52);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 13);
+            this.label5.TabIndex = 40;
+            this.label5.Text = "Select Category";
+            this.label5.Visible = false;
             // 
             // labeRootCat
             // 
@@ -252,23 +274,6 @@
             this.label4.Size = new System.Drawing.Size(93, 17);
             this.label4.TabIndex = 42;
             this.label4.Text = "Quick Search";
-            // 
-            // txtCodeManual
-            // 
-            this.txtCodeManual.Location = new System.Drawing.Point(117, 172);
-            this.txtCodeManual.Name = "txtCodeManual";
-            this.txtCodeManual.Size = new System.Drawing.Size(98, 20);
-            this.txtCodeManual.TabIndex = 46;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 52);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 13);
-            this.label5.TabIndex = 40;
-            this.label5.Text = "Select Category";
-            this.label5.Visible = false;
             // 
             // ItemCategoryForm
             // 

@@ -19,9 +19,9 @@ namespace POS_System_EF.UI
         public PurchaseForm()
         {
             InitializeComponent();
-            //ClearTextBox();
             ComboBoxData();
             txtQty.Text = 1.ToString();
+            ClearTextBox();
         }
 
         DataTable table = new DataTable();
@@ -81,13 +81,13 @@ namespace POS_System_EF.UI
                         List<TempPurchase> listofTemp = db.TempPurchases.Where(a=>a.ItemId==itemId.ItemId).ToList();
 
                         decimal avg = listofTemp.Sum(a => a.TotalPrice) / listofTemp.Sum(a => a.Quantity);
-                        var IsAvailableItem = db.Stocks.FirstOrDefault(a => a.ItemId == itemId.ItemId);
+                        var isAvailableItem = db.Stocks.FirstOrDefault(a => a.ItemId == itemId.ItemId);
                         var quantity = itemId.AvailableQuantity;
 
-                        if (IsAvailableItem != null)
+                        if (isAvailableItem != null)
                         {
-                            IsAvailableItem.AvailableQuantity += itemId.AvailableQuantity;
-                            IsAvailableItem.AveragePrice = avg;
+                            isAvailableItem.AvailableQuantity += itemId.AvailableQuantity;
+                            isAvailableItem.AveragePrice = avg;
 
                         }
                         else
@@ -204,7 +204,8 @@ namespace POS_System_EF.UI
         {
             ManagerContext db = new ManagerContext();
             int no = db.Purchases.Count();
-            no = 100 + no++;
+            no++;
+            no = 100 + no;
             return no;
         }
         private void ComboBoxData()
@@ -339,6 +340,12 @@ namespace POS_System_EF.UI
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 
  }

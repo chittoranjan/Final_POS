@@ -97,83 +97,82 @@ namespace POS_System_EF.UI
                     {
                         using (ManagerContext db = new ManagerContext())
                         {
-
-
-
-                            int selectedId = (int)dgvPurchaseReport.CurrentRow.Cells[0].Value;
-                            if (selectedId > 0)
+                            if (dgvPurchaseReport.CurrentRow != null)
                             {
-                                string invoiceNo = dgvPurchaseReport.CurrentRow.Cells["InvoiceNo"].Value.ToString();
-                                string i = "Invoice No: " + invoiceNo;
-                                string supplier = dgvPurchaseReport.CurrentRow.Cells["Supplier"].Value.ToString();
-                                string s = "Supplier Name: " + supplier;
-                                string outletName = dgvPurchaseReport.CurrentRow.Cells["Outlet"].Value.ToString();
-                                string o = "Outlet Name: " + outletName;
-                                string employeeName = dgvPurchaseReport.CurrentRow.Cells["EmployeeName"].Value.ToString();
-                                string emp = "Employee Name: " + employeeName;
-                                string purchaseDate = dgvPurchaseReport.CurrentRow.Cells["PurchaseDate"].Value.ToString();
-                                string pDate = "Purchase Date: " + purchaseDate;
-                                Document pdfDocument = new Document(iTextSharp.text.PageSize.A4, 20, 20, 42, 35);
-                                PdfWriter pdfwriter = PdfWriter.GetInstance(pdfDocument, new FileStream(sfd.FileName, FileMode.Create));
-                                pdfDocument.Open();
-                                pdfDocument.NewPage();
-                                pdfDocument.AddAuthor("POS");
-                                pdfDocument.AddCreator("LanguageIntegratedDevelopmentTeam");
-                                pdfDocument.AddSubject("PurchaseReport");
-                                Paragraph heading = new Paragraph("Purchase Details");
-                                heading.Alignment = Element.ALIGN_CENTER;
-                                heading.SpacingAfter = 18f;
-                                pdfDocument.Add(heading);
-
-                                Paragraph invoice = new Paragraph(i);
-                                invoice.Alignment = Element.ALIGN_CENTER;
-                                invoice.SpacingAfter = 18f;
-                                pdfDocument.Add(invoice);
-
-                                Paragraph supp = new Paragraph(s);
-                                supp.Alignment = Element.ALIGN_CENTER;
-                                supp.SpacingAfter = 18f;
-                                pdfDocument.Add(supp);
-
-                                Paragraph para = new Paragraph(o);
-                                para.Alignment = Element.ALIGN_CENTER;
-                                para.SpacingAfter = 18f;
-                                pdfDocument.Add(para);
-                                Paragraph para2 = new Paragraph(emp);
-                                para2.Alignment = Element.ALIGN_CENTER;
-                                para2.SpacingAfter = 18f;
-                                pdfDocument.Add(para2);
-                                Paragraph para3 = new Paragraph(pDate);
-                                para3.Alignment = Element.ALIGN_CENTER;
-                                para3.SpacingAfter = 18f;
-                                pdfDocument.Add(para3);
-
-
-                                PdfPTable table = new PdfPTable(4);
-
-                                table.SpacingAfter = 30f;
-
-                                PdfPCell cell = new PdfPCell(new Phrase("Product Details"));
-
-                                cell.Colspan = 4;
-                                cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                                table.AddCell(cell);
-                                table.AddCell("Name");
-
-                                table.AddCell("Quantity");
-
-                                table.AddCell("Cost Price");
-
-                                table.AddCell("Total Price");
-
-
-                                foreach (ListViewItem item in itemListView.Items)
+                                int selectedId = (int)dgvPurchaseReport.CurrentRow.Cells[0].Value;
+                                if (selectedId > 0)
                                 {
-                                    foreach (var itm in item.SubItems)
+                                    string invoiceNo = dgvPurchaseReport.CurrentRow.Cells["InvoiceNo"].Value.ToString();
+                                    string i = "Invoice No: " + invoiceNo;
+                                    string supplier = dgvPurchaseReport.CurrentRow.Cells["Supplier"].Value.ToString();
+                                    string s = "Supplier Name: " + supplier;
+                                    string outletName = dgvPurchaseReport.CurrentRow.Cells["Outlet"].Value.ToString();
+                                    string o = "Outlet Name: " + outletName;
+                                    string employeeName = dgvPurchaseReport.CurrentRow.Cells["EmployeeName"].Value.ToString();
+                                    string emp = "Employee Name: " + employeeName;
+                                    string purchaseDate = dgvPurchaseReport.CurrentRow.Cells["PurchaseDate"].Value.ToString();
+                                    string pDate = "Purchase Date: " + purchaseDate;
+                                    Document pdfDocument = new Document(iTextSharp.text.PageSize.A4, 20, 20, 42, 35);
+                                    PdfWriter pdfwriter = PdfWriter.GetInstance(pdfDocument, new FileStream(sfd.FileName, FileMode.Create));
+                                    pdfDocument.Open();
+                                    pdfDocument.NewPage();
+                                    pdfDocument.AddAuthor("POS");
+                                    pdfDocument.AddCreator("LanguageIntegratedDevelopmentTeam");
+                                    pdfDocument.AddSubject("PurchaseReport");
+                                    Paragraph heading = new Paragraph("Purchase Details");
+                                    heading.Alignment = Element.ALIGN_CENTER;
+                                    heading.SpacingAfter = 18f;
+                                    pdfDocument.Add(heading);
+
+                                    Paragraph invoice = new Paragraph(i);
+                                    invoice.Alignment = Element.ALIGN_CENTER;
+                                    invoice.SpacingAfter = 18f;
+                                    pdfDocument.Add(invoice);
+
+                                    Paragraph supp = new Paragraph(s);
+                                    supp.Alignment = Element.ALIGN_CENTER;
+                                    supp.SpacingAfter = 18f;
+                                    pdfDocument.Add(supp);
+
+                                    Paragraph para = new Paragraph(o);
+                                    para.Alignment = Element.ALIGN_CENTER;
+                                    para.SpacingAfter = 18f;
+                                    pdfDocument.Add(para);
+                                    Paragraph para2 = new Paragraph(emp);
+                                    para2.Alignment = Element.ALIGN_CENTER;
+                                    para2.SpacingAfter = 18f;
+                                    pdfDocument.Add(para2);
+                                    Paragraph para3 = new Paragraph(pDate);
+                                    para3.Alignment = Element.ALIGN_CENTER;
+                                    para3.SpacingAfter = 18f;
+                                    pdfDocument.Add(para3);
+
+
+                                    PdfPTable table = new PdfPTable(4);
+
+                                    table.SpacingAfter = 30f;
+
+                                    PdfPCell cell = new PdfPCell(new Phrase("Product Details"));
+
+                                    cell.Colspan = 4;
+                                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                    table.AddCell(cell);
+                                    table.AddCell("Name");
+
+                                    table.AddCell("Quantity");
+
+                                    table.AddCell("Cost Price");
+
+                                    table.AddCell("Total Price");
+
+
+                                    foreach (ListViewItem item in itemListView.Items)
                                     {
-                                        table.AddCell(((ListViewItem.ListViewSubItem)itm).Text);
+                                        foreach (var itm in item.SubItems)
+                                        {
+                                            table.AddCell(((ListViewItem.ListViewSubItem)itm).Text);
+                                        }
                                     }
-                                }
                                     pdfDocument.Add(table);
 
 
@@ -181,8 +180,8 @@ namespace POS_System_EF.UI
                                     MessageBox.Show("Your PDF File Has Been Ready....!");
 
                                 }
-
                             }
+                        }
 
                         }
                     }
@@ -231,29 +230,7 @@ namespace POS_System_EF.UI
             }
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            ManagerContext db;
-            if(txtSearchBox.Text!=null)
-            {
-                db = new ManagerContext();
-                var searchResult = (from p in db.Purchases
-                                    where p.InvoiceNo.ToString().StartsWith(txtSearchBox.Text)
-                                    select new
-                                    {
-                                        p.Id,
-                                        p.InvoiceNo,
-                                        p.PurchaseDate,
-                                        Outlet = p.Outlet.Name,
-                                        EmployeeName=p.Employee.Name,
-                                        Supplier = p.Supplier.Name
-                                        
-
-                                    }).ToList();
-                dgvPurchaseReport.DataSource = searchResult;
-                dgvPurchaseReport.Columns["Id"].Visible = false;
-            }
-        }
+        
 
         private void dgvPurchaseReport_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -261,25 +238,28 @@ namespace POS_System_EF.UI
             {
                 if(dgvPurchaseReport.CurrentCell!=null && dgvPurchaseReport.CurrentCell.Value!=null)
                 {
-                    int id = (int)dgvPurchaseReport.CurrentRow.Cells[0].Value;
-                    
-                    using (ManagerContext db = new ManagerContext())
+                    if (dgvPurchaseReport.CurrentRow != null)
                     {
-                        var purchaseId = db.Purchases.FirstOrDefault(c => c.Id == id); ;
-                        if(purchaseId!=null)
+                        int id = (int)dgvPurchaseReport.CurrentRow.Cells[0].Value;
+                    
+                        using (ManagerContext db = new ManagerContext())
                         {
-                            purchaseId.IsDelete = true;
-                            int count = db.SaveChanges();
-                            if (count > 0)
+                            var purchaseId = db.Purchases.FirstOrDefault(c => c.Id == id); ;
+                            if(purchaseId!=null)
                             {
-                                MessageBox.Show("Successfully Deleted");
+                                purchaseId.IsDelete = true;
+                                int count = db.SaveChanges();
+                                if (count > 0)
+                                {
+                                    MessageBox.Show("Successfully Deleted");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Operation Failed");
+                                }
                             }
-                            else
-                            {
-                                MessageBox.Show("Operation Failed");
-                            }
-                        }
                        
+                        }
                     }
                 }
             }
@@ -292,7 +272,7 @@ namespace POS_System_EF.UI
                              join outlet in db.Outlets on p.OutletId equals outlet.Id
                              join emp in db.Employees on p.EmployeeId equals emp.Id
                              join s in db.CustomerAndSuppliers on p.SupplierId equals s.Id
-                             where s.Type !="Customr"
+                             where s.Type != "Customr"
 
                              select new
                              {
@@ -308,7 +288,8 @@ namespace POS_System_EF.UI
                              }).ToList();
 
             dgvPurchaseReport.DataSource = purchases;
-            dgvPurchaseReport.Columns["Id"].Visible = false;
+            var dataGridViewColumn = dgvPurchaseReport.Columns["Id"];
+            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
 
             DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
             btn.HeaderText = "Action";
@@ -337,8 +318,8 @@ namespace POS_System_EF.UI
                              join outlet in db.Outlets on p.OutletId equals outlet.Id
                              join emp in db.Employees on p.EmployeeId equals emp.Id
                              join s in db.CustomerAndSuppliers on p.SupplierId equals s.Id
-                             where p.InvoiceNo.ToString().StartsWith(txtSearchAny.Text) || p.Outlet.Name.StartsWith(txtSearchAny.Text) || p.Employee.Name.StartsWith(txtSearchAny.Text)
-                             || p.Supplier.Name.StartsWith(txtSearchAny.Text)
+                             where p.InvoiceNo.ToString().StartsWith(txtSearchAny.Text) && p.IsDelete == false || p.Outlet.Name.StartsWith(txtSearchAny.Text) && p.IsDelete == false
+                             || p.Employee.Name.StartsWith(txtSearchAny.Text) && p.IsDelete == false || p.Supplier.Name.StartsWith(txtSearchAny.Text) && p.IsDelete == false
 
                              select new
                              {
@@ -354,7 +335,38 @@ namespace POS_System_EF.UI
                              }).ToList();
 
             dgvPurchaseReport.DataSource = purchases;
-            dgvPurchaseReport.Columns["Id"].Visible = false;
+            var dataGridViewColumn = dgvPurchaseReport.Columns["Id"];
+            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
         }
+        private void txtSearchBox_TextChanged(object sender, EventArgs e)
+        {
+            ManagerContext db;
+            if (txtSearchBox.Text != null)
+            {
+                db = new ManagerContext();
+                var searchResult = (from p in db.Purchases
+                                    where p.InvoiceNo.ToString().StartsWith(txtSearchBox.Text) && p.IsDelete == false
+                                    select new
+                                    {
+                                        p.Id,
+                                        p.InvoiceNo,
+                                        p.PurchaseDate,
+                                        Outlet = p.Outlet.Name,
+                                        EmployeeName = p.Employee.Name,
+                                        Supplier = p.Supplier.Name
+
+
+                                    }).ToList();
+                dgvPurchaseReport.DataSource = searchResult;
+                var dataGridViewColumn = dgvPurchaseReport.Columns["Id"];
+                if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
+            }
+        }
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            txtSearchAny.Clear();
+            txtSearchBox.Clear();
+        }
+        
     }
 }

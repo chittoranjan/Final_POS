@@ -38,9 +38,10 @@ namespace POS_System_EF.EntityModels
                 return invNo;
             }
         }
-        internal string GenearateExpItemCode( string Name)
+        internal string GenearateExpItemCode( )
         {
-            var firstThreeCategoryName = Name.Length <= 3 ? Name : Name.Substring(0, 3);
+            //var firstThreeCategoryName = Name.Length <= 3 ? Name : Name.Substring(0, 3);
+            var firstThreeCategoryName = "ExI";
             return firstThreeCategoryName + "-" +SetInvioceNo() ;
         }
     }

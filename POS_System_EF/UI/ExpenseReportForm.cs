@@ -49,28 +49,31 @@ namespace POS_System_EF.UI
         {
             try
             {
-                int selectedId = (int)dgvExpenseReport.CurrentRow.Cells["Id"].Value;
+                if (dgvExpenseReport.CurrentRow != null)
+                {
+                    int selectedId = (int)dgvExpenseReport.CurrentRow.Cells["Id"].Value;
 
-                txtShowInvioceNo.Text = dgvExpenseReport.CurrentRow.Cells["InvoiceNo"].Value.ToString();
-                txtShowOrg.Text = dgvExpenseReport.CurrentRow.Cells["OrganizationName"].Value.ToString();
-                txtShowOutlet.Text = dgvExpenseReport.CurrentRow.Cells["OutletName"].Value.ToString();
-                txtShowEmployee.Text = dgvExpenseReport.CurrentRow.Cells["EmployeeName"].Value.ToString();
-                txtShowDate.Text = dgvExpenseReport.CurrentRow.Cells["Date"].Value.ToString();
+                    txtShowInvioceNo.Text = dgvExpenseReport.CurrentRow.Cells["InvoiceNo"].Value.ToString();
+                    txtShowOrg.Text = dgvExpenseReport.CurrentRow.Cells["OrganizationName"].Value.ToString();
+                    txtShowOutlet.Text = dgvExpenseReport.CurrentRow.Cells["OutletName"].Value.ToString();
+                    txtShowEmployee.Text = dgvExpenseReport.CurrentRow.Cells["EmployeeName"].Value.ToString();
+                    txtShowDate.Text = dgvExpenseReport.CurrentRow.Cells["Date"].Value.ToString();
 
-                List<ExpenseList> expenseItemLst = db.ExpenseLists.Where(ex => ex.ExpenseId == selectedId).ToList();
+                    List<ExpenseList> expenseItemLst = db.ExpenseLists.Where(ex => ex.ExpenseId == selectedId).ToList();
 
-                var loadListItem = (from exLst in expenseItemLst
-                                    select new
-                                    {
-                                        exLst.ExpenseName,
-                                        exLst.Qty,
-                                        exLst.Amount,
-                                        exLst.Paid,
-                                        exLst.Due,
-                                    }).
-                ToList();
-                dgvExpensePrint.DataSource = null;
-                dgvExpensePrint.DataSource = loadListItem;
+                    var loadListItem = (from exLst in expenseItemLst
+                        select new
+                        {
+                            exLst.ExpenseName,
+                            exLst.Qty,
+                            exLst.Amount,
+                            exLst.Paid,
+                            exLst.Due,
+                        }).
+                        ToList();
+                    dgvExpensePrint.DataSource = null;
+                    dgvExpensePrint.DataSource = loadListItem;
+                }
             }
             catch (Exception ex)
             {
@@ -82,8 +85,9 @@ namespace POS_System_EF.UI
         private void txtSrcExpense_TextChanged(object sender, EventArgs e)
         {
             var srcData = (from exp in db.Expenses
-                           where exp.Employee.Name.StartsWith(txtSrcExpense.Text) || exp.Organization.Name.StartsWith(txtSrcExpense.Text) ||
-                           exp.Outlet.Name.StartsWith(txtSrcExpense.Text)|| exp.InvoiceNo.StartsWith(txtSrcExpense.Text)||exp.TotalAmount.ToString().StartsWith(txtSrcExpense.Text)
+                           where exp.Employee.Name.StartsWith(txtSrcExpense.Text) && exp.IsDelete == false || exp.Organization.Name.StartsWith(txtSrcExpense.Text) && exp.IsDelete == false
+                           || exp.Outlet.Name.StartsWith(txtSrcExpense.Text) && exp.IsDelete == false || exp.InvoiceNo.StartsWith(txtSrcExpense.Text) && exp.IsDelete == false
+                           || exp.TotalAmount.ToString().StartsWith(txtSrcExpense.Text) && exp.IsDelete == false
 
                            select new
                            {
@@ -107,6 +111,11 @@ namespace POS_System_EF.UI
         private void btnPrint_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

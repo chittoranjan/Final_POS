@@ -46,6 +46,8 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnClear = new System.Windows.Forms.Button();
             this.txtSrcExpense = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnHome = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExpenseReport)).BeginInit();
             this.PrintPriview.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -60,7 +62,7 @@
             this.dgvExpenseReport.Name = "dgvExpenseReport";
             this.dgvExpenseReport.RowHeadersVisible = false;
             this.dgvExpenseReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvExpenseReport.Size = new System.Drawing.Size(500, 399);
+            this.dgvExpenseReport.Size = new System.Drawing.Size(500, 389);
             this.dgvExpenseReport.TabIndex = 3;
             this.dgvExpenseReport.DoubleClick += new System.EventHandler(this.dgvExpenseReport_DoubleClick);
             // 
@@ -236,20 +238,43 @@
             // txtSrcExpense
             // 
             this.txtSrcExpense.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSrcExpense.Location = new System.Drawing.Point(707, 12);
+            this.txtSrcExpense.Location = new System.Drawing.Point(717, 12);
             this.txtSrcExpense.Multiline = true;
             this.txtSrcExpense.Name = "txtSrcExpense";
             this.txtSrcExpense.Size = new System.Drawing.Size(254, 32);
             this.txtSrcExpense.TabIndex = 4;
             this.txtSrcExpense.TextChanged += new System.EventHandler(this.txtSrcExpense_TextChanged);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(584, 17);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 20);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Quick Search";
+            // 
+            // btnHome
+            // 
+            this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHome.Location = new System.Drawing.Point(987, 455);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(85, 32);
+            this.btnHome.TabIndex = 5;
+            this.btnHome.Text = "Home";
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            // 
             // ExpenseReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 461);
+            this.ClientSize = new System.Drawing.Size(1095, 495);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.dgvExpenseReport);
             this.Controls.Add(this.PrintPriview);
+            this.Controls.Add(this.btnHome);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.txtSrcExpense);
             this.Name = "ExpenseReportForm";
@@ -284,5 +309,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.TextBox txtSrcExpense;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnHome;
     }
 }

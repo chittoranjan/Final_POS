@@ -72,6 +72,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnHome = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbCustomerDetails.SuspendLayout();
             this.gbSalesSummary.SuspendLayout();
@@ -182,7 +183,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(923, 564);
+            this.button4.Location = new System.Drawing.Point(867, 564);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(86, 35);
             this.button4.TabIndex = 40;
@@ -193,7 +194,7 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(821, 564);
+            this.btnSave.Location = new System.Drawing.Point(974, 564);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(86, 35);
             this.btnSave.TabIndex = 41;
@@ -321,34 +322,35 @@
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRemarks.Location = new System.Drawing.Point(183, 149);
+            this.txtRemarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRemarks.Location = new System.Drawing.Point(183, 135);
+            this.txtRemarks.Multiline = true;
             this.txtRemarks.Name = "txtRemarks";
-            this.txtRemarks.Size = new System.Drawing.Size(206, 26);
+            this.txtRemarks.Size = new System.Drawing.Size(206, 57);
             this.txtRemarks.TabIndex = 9;
             // 
             // dtpSales
             // 
-            this.dtpSales.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpSales.Location = new System.Drawing.Point(183, 105);
+            this.dtpSales.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpSales.Location = new System.Drawing.Point(183, 91);
             this.dtpSales.Name = "dtpSales";
-            this.dtpSales.Size = new System.Drawing.Size(206, 26);
+            this.dtpSales.Size = new System.Drawing.Size(206, 20);
             this.dtpSales.TabIndex = 12;
             // 
             // cmbEmployee
             // 
-            this.cmbEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEmployee.FormattingEnabled = true;
-            this.cmbEmployee.Location = new System.Drawing.Point(183, 65);
+            this.cmbEmployee.Location = new System.Drawing.Point(183, 56);
             this.cmbEmployee.Name = "cmbEmployee";
-            this.cmbEmployee.Size = new System.Drawing.Size(202, 28);
+            this.cmbEmployee.Size = new System.Drawing.Size(202, 24);
             this.cmbEmployee.TabIndex = 11;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(100, 152);
+            this.label9.Location = new System.Drawing.Point(100, 138);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 20);
             this.label9.TabIndex = 10;
@@ -358,7 +360,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(80, 111);
+            this.label8.Location = new System.Drawing.Point(80, 97);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(88, 20);
             this.label8.TabIndex = 10;
@@ -368,7 +370,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(88, 67);
+            this.label5.Location = new System.Drawing.Point(88, 58);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 20);
             this.label5.TabIndex = 10;
@@ -376,11 +378,11 @@
             // 
             // cmbOutlet
             // 
-            this.cmbOutlet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbOutlet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbOutlet.FormattingEnabled = true;
             this.cmbOutlet.Location = new System.Drawing.Point(183, 19);
             this.cmbOutlet.Name = "cmbOutlet";
-            this.cmbOutlet.Size = new System.Drawing.Size(202, 28);
+            this.cmbOutlet.Size = new System.Drawing.Size(202, 24);
             this.cmbOutlet.TabIndex = 9;
             // 
             // label4
@@ -540,11 +542,23 @@
             this.label7.TabIndex = 32;
             this.label7.Text = "Total Amount";
             // 
+            // btnHome
+            // 
+            this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHome.Location = new System.Drawing.Point(777, 564);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(75, 35);
+            this.btnHome.TabIndex = 42;
+            this.btnHome.Text = "Home";
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            // 
             // SalesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1083, 620);
+            this.Controls.Add(this.btnHome);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbCustomerDetails);
             this.Controls.Add(this.txtTotalAmount);
@@ -622,6 +636,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnHome;
 
     }
 }

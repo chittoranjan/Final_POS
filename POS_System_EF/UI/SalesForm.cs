@@ -66,8 +66,6 @@ namespace POS_System_EF.UI
                     }
                 }
                 txtDiscount.Text = 0.ToString();
-
-
             }
             catch (Exception ex)
             {
@@ -228,8 +226,6 @@ namespace POS_System_EF.UI
                     {
                         MessageBox.Show("Operation Failed");
                     }
-
-
                 }
                 ClearAllBox();
             }
@@ -267,7 +263,8 @@ namespace POS_System_EF.UI
         {
             ManagerContext db = new ManagerContext();
             int no = db.Sales.Count();
-            no = 100 + no++;
+            no++;
+            no = 100 + no;
             return no;
         }
 
@@ -340,7 +337,6 @@ namespace POS_System_EF.UI
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void UpdateStock()
         {
             try
@@ -359,9 +355,7 @@ namespace POS_System_EF.UI
             {
                 MessageBox.Show(ex.Message);
             }
-            
         }
-
         private void cmbSalesItem_SelectedValueChanged(object sender, EventArgs e)
         {
             try
@@ -382,7 +376,6 @@ namespace POS_System_EF.UI
                                 txtSalesQty.Text = 1.ToString();
                                 var stock = db.Stocks.FirstOrDefault(b => b.Id == cmbId);
                                 txtStock.Text = stock.AvailableQuantity.ToString();
-
                             }
                             else
                             {
@@ -398,14 +391,16 @@ namespace POS_System_EF.UI
                     txtSalePriceRO.Clear();
 
                 }
-
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
        

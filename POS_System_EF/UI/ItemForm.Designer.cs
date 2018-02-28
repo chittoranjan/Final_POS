@@ -47,6 +47,8 @@
             this.textBoxSrc = new System.Windows.Forms.TextBox();
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtCodeManual = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,10 +130,10 @@
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(96, 202);
+            this.txtCode.Location = new System.Drawing.Point(216, 202);
             this.txtCode.Name = "txtCode";
             this.txtCode.ReadOnly = true;
-            this.txtCode.Size = new System.Drawing.Size(213, 20);
+            this.txtCode.Size = new System.Drawing.Size(93, 20);
             this.txtCode.TabIndex = 3;
             // 
             // txtDescription
@@ -153,9 +155,10 @@
             // 
             // btnSave
             // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Location = new System.Drawing.Point(234, 353);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(75, 34);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -163,9 +166,10 @@
             // 
             // btnClear
             // 
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.Location = new System.Drawing.Point(142, 353);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(75, 34);
             this.btnClear.TabIndex = 4;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -177,6 +181,7 @@
             this.dgvItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItem.Location = new System.Drawing.Point(378, 81);
             this.dgvItem.Name = "dgvItem";
+            this.dgvItem.RowHeadersVisible = false;
             this.dgvItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvItem.Size = new System.Drawing.Size(664, 295);
             this.dgvItem.TabIndex = 5;
@@ -184,26 +189,30 @@
             // 
             // buttonSrcClear
             // 
-            this.buttonSrcClear.Location = new System.Drawing.Point(967, 39);
+            this.buttonSrcClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSrcClear.Location = new System.Drawing.Point(948, 39);
             this.buttonSrcClear.Name = "buttonSrcClear";
-            this.buttonSrcClear.Size = new System.Drawing.Size(75, 23);
+            this.buttonSrcClear.Size = new System.Drawing.Size(94, 29);
             this.buttonSrcClear.TabIndex = 40;
             this.buttonSrcClear.Text = "Clear";
             this.buttonSrcClear.UseVisualStyleBackColor = true;
+            this.buttonSrcClear.Click += new System.EventHandler(this.buttonSrcClear_Click);
             // 
             // textBoxSrc
             // 
-            this.textBoxSrc.Location = new System.Drawing.Point(749, 42);
+            this.textBoxSrc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxSrc.Location = new System.Drawing.Point(734, 42);
             this.textBoxSrc.Name = "textBoxSrc";
-            this.textBoxSrc.Size = new System.Drawing.Size(193, 20);
+            this.textBoxSrc.Size = new System.Drawing.Size(193, 26);
             this.textBoxSrc.TabIndex = 39;
             this.textBoxSrc.TextChanged += new System.EventHandler(this.textBoxSrc_TextChanged);
             // 
             // buttonHome
             // 
-            this.buttonHome.Location = new System.Drawing.Point(967, 400);
+            this.buttonHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonHome.Location = new System.Drawing.Point(963, 400);
             this.buttonHome.Name = "buttonHome";
-            this.buttonHome.Size = new System.Drawing.Size(75, 23);
+            this.buttonHome.Size = new System.Drawing.Size(79, 29);
             this.buttonHome.TabIndex = 41;
             this.buttonHome.Text = "Home";
             this.buttonHome.UseVisualStyleBackColor = true;
@@ -211,14 +220,32 @@
             // 
             // buttonDelete
             // 
+            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.Location = new System.Drawing.Point(52, 353);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.Size = new System.Drawing.Size(75, 34);
             this.buttonDelete.TabIndex = 42;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Visible = false;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(609, 47);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(104, 20);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Quick Search";
+            // 
+            // txtCodeManual
+            // 
+            this.txtCodeManual.Location = new System.Drawing.Point(96, 202);
+            this.txtCodeManual.Name = "txtCodeManual";
+            this.txtCodeManual.Size = new System.Drawing.Size(114, 20);
+            this.txtCodeManual.TabIndex = 3;
             // 
             // ItemForm
             // 
@@ -233,6 +260,7 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtDescription);
+            this.Controls.Add(this.txtCodeManual);
             this.Controls.Add(this.txtSalePrice);
             this.Controls.Add(this.txtCode);
             this.Controls.Add(this.txtCostPrice);
@@ -242,6 +270,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ItemForm";
@@ -274,5 +303,7 @@
         private System.Windows.Forms.TextBox textBoxSrc;
         private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtCodeManual;
     }
 }

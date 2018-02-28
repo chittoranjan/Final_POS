@@ -39,13 +39,7 @@ namespace POS_System_EF.UI
                 {
                     try
                     {
-                        item.ItemCategoryId = (int)cmbCategory.SelectedValue;
-                        item.Name = txtName.Text;
-                        item.CostPrice = Convert.ToDecimal(txtCostPrice.Text);
-                        item.SalePrice = Convert.ToDecimal(txtSalePrice.Text);
-                        item.Code = item.GenearateCode(item.Name);
-                        item.Description = txtDescription.Text;
-
+                        TextBoxValue();
                         db.Items.Add(item);
                         int count = db.SaveChanges();
                         if (count > 0)
@@ -67,16 +61,15 @@ namespace POS_System_EF.UI
 
                 if (_isUpdateMode)
                 {
-                    TextBoxValue();
-
                     DialogResult dialogResult = MessageBox.Show("Are you sure want to update ?", "Information", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Information);
                     if (dialogResult == DialogResult.Yes)
                     {
+                        TextBoxValue();
                         db.Items.Attach(item);
                         db.Entry(item).State = System.Data.Entity.EntityState.Modified;
-
                         int count = db.SaveChanges();
+
                         if (count > 0)
                         {
                             MessageBox.Show("item updated");
@@ -87,9 +80,9 @@ namespace POS_System_EF.UI
                         }
                     }
                 }
-
-                LoadDataGridViewItem();
                 ClearAllTextBox();
+                LoadDataGridViewItem();
+                
             }
             catch (Exception ex)
             {
@@ -100,10 +93,19 @@ namespace POS_System_EF.UI
         private void TextBoxValue()
         {
 
+            item.ItemCategoryId = (int)cmbCategory.SelectedValue;
             item.Name = txtName.Text;
             item.CostPrice = Convert.ToDecimal(txtCostPrice.Text);
             item.SalePrice = Convert.ToDecimal(txtSalePrice.Text);
-            item.Code = item.GenearateCode(item.Name);
+            if (txtCodeManual.Text.Trim() != string.Empty)
+            {
+                item.Code = txtCodeManual.Text;
+            }
+            else
+            {
+                item.Code = txtCode.Text;
+            }
+            
             item.Description = txtDescription.Text;
 
         }
@@ -113,6 +115,7 @@ namespace POS_System_EF.UI
             txtCostPrice.Clear();
             txtSalePrice.Clear();
             txtCode.Clear();
+            txtCodeManual.Clear();
             txtDescription.Clear();
             cmbCategory.SelectedIndex = -1;
             SetFormNewMode();
@@ -127,7 +130,7 @@ namespace POS_System_EF.UI
 
         private void ComboxData()
         {
-            var cat= db.ItemCategories.Where(c => c.CategoryId >0 &&c.IsDelete==false).ToList();
+            var cat= db.ItemCategories.Where(c => c.CategoryId >0 && c.IsDelete==false).ToList();
             cmbCategory.DataSource = cat;
             cmbCategory.DisplayMember = "Name";
             cmbCategory.ValueMember = "Id";
@@ -147,7 +150,8 @@ namespace POS_System_EF.UI
                             items.Description
                         }).ToList();
             dgvItem.DataSource = item;
-            dgvItem.Columns["Id"].Visible = false;
+            var dataGridViewColumn = dgvItem.Columns["Id"];
+            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
         }
 
         private void buttonHome_Click(object sender, EventArgs e)
@@ -160,27 +164,32 @@ namespace POS_System_EF.UI
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearAllTextBox();
+            LoadDataGridViewItem();
         }
 
         private void textBoxSrc_TextChanged(object sender, EventArgs e)
         {
-            string textSearch = textBoxSrc.Text;
             ManagerContext db = new ManagerContext();
+            string textSearch = textBoxSrc.Text;
+
             var item = (from i in db.Items
-                                where i.Name.StartsWith(textSearch)&&i.IsDelete==false||i.Code.StartsWith(textSearch)&&i.IsDelete==false
+                                where i.Name.StartsWith(textSearch) && i.IsDelete==false||i.Code.StartsWith(textSearch) && i.IsDelete==false
                                 select new
                                 {
+                                    i.Id,
                                     i.Name,
                                     i.Code,
                                     i.CostPrice,
                                     i.SalePrice,
                                 }).ToList();
             dgvItem.DataSource = item;
+            var dataGridViewColumn = dgvItem.Columns["Id"];
+            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
         }
 
         private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            txtCode.Text =item.GenearateCode(cmbCategory.Text);
         }
 
         private void dgvItem_DoubleClick(object sender, EventArgs e)
@@ -194,6 +203,7 @@ namespace POS_System_EF.UI
 
                 if (item != null)
                 {
+                    cmbCategory.SelectedValue = item.ItemCategoryId;
                     txtName.Text = item.Name;
                     txtCostPrice.Text = item.CostPrice.ToString();
                     txtSalePrice.Text = item.SalePrice.ToString();
@@ -227,6 +237,13 @@ namespace POS_System_EF.UI
                 }
             }
             ClearAllTextBox();
+            LoadDataGridViewItem();
+            SetFormNewMode();
+        }
+
+        private void buttonSrcClear_Click(object sender, EventArgs e)
+        {
+            textBoxSrc.Clear();
             LoadDataGridViewItem();
         }
     }

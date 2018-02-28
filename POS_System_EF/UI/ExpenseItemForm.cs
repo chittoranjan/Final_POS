@@ -39,7 +39,14 @@ namespace POS_System_EF.UI
             {
                 expenseItem.ExpenseCategoryId = (int)cmbCategory.SelectedValue;
                 expenseItem.Name = txtName.Text;
-                expenseItem.Code = expenseItem.GenearateExpItemCode(expenseItem.Name);
+                if (txtCodeManual.Text.Trim()!=String.Empty)
+                {
+                    expenseItem.Code = txtCodeManual.Text;
+                }else
+                {
+                    expenseItem.Code = txtCode.Text;
+                }
+                
                 expenseItem.Description = txtDescription.Text;
 
                 db.ExpenseItems.Add(expenseItem);
@@ -52,8 +59,9 @@ namespace POS_System_EF.UI
                 {
                     MessageBox.Show("Failed Insertion");
                 }
-                LoadDataGridViewItem();
                 ClearAllTextBox();
+                LoadDataGridViewItem();
+                
             }
             catch (Exception ex)
             {
@@ -63,29 +71,38 @@ namespace POS_System_EF.UI
         }
         private void ClearAllTextBox()
         {
+            cmbCategory.SelectedIndex = -1;
             txtName.Clear();
             txtCode.Clear();
+            txtCodeManual.Clear();
             txtDescription.Clear();
-            cmbCategory.SelectedIndex = -1;
+            
         }
 
-
+        private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtCode.Text = expenseItem.GenearateExpItemCode();
+        }
         private void LoadDataGridViewItem()
         {
-            var item = (from expItems in db.ExpenseItems
+            var item = (from expItems in db.ExpenseItems where expItems.IsDelete==false
                         select new
                         {
+                            expItems.Id,
                             expItems.Name,
                             expItems.Code,
                             expItems.Description,
                             ExpenseCategoryName = expItems.ExpenseCategory.Name
                         }).ToList();
             dgvItem.DataSource = item;
+            var dataGridViewColumn = dgvItem.Columns["Id"];
+            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearAllTextBox();
+            LoadDataGridViewItem();
         }
 
         private void buttonHome_Click(object sender, EventArgs e)
@@ -102,12 +119,15 @@ namespace POS_System_EF.UI
                         where ei.Name.StartsWith(textSearch)&& ei.IsDelete==false||ei.Code.StartsWith(textSearch)&&ei.IsDelete==false
                         select new
                         {
+                            ei.Id,
                             ei.Name,
                             ei.Code,
                             ei.Description,
                             ExpenseCategoryName = ei.ExpenseCategory.Name
                         }).ToList();
             dgvItem.DataSource = item;
+            var dataGridViewColumn = dgvItem.Columns["Id"];
+            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
         }
 
         private void buttonSrcClear_Click(object sender, EventArgs e)
@@ -115,5 +135,7 @@ namespace POS_System_EF.UI
             textBoxSrc.Clear();
             LoadDataGridViewItem();
         }
+
+       
     }
 }

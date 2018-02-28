@@ -48,6 +48,7 @@
             this.txtInvoiceNo = new System.Windows.Forms.TextBox();
             this.richTextBoxSalesList = new System.Windows.Forms.RichTextBox();
             this.dgvSalesList = new System.Windows.Forms.DataGridView();
+            this.btnHome = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -247,19 +248,34 @@
             // 
             // dgvSalesList
             // 
+            this.dgvSalesList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSalesList.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvSalesList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSalesList.Location = new System.Drawing.Point(486, 29);
             this.dgvSalesList.Name = "dgvSalesList";
+            this.dgvSalesList.RowHeadersVisible = false;
+            this.dgvSalesList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSalesList.Size = new System.Drawing.Size(867, 455);
             this.dgvSalesList.TabIndex = 21;
             this.dgvSalesList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesList_CellDoubleClick);
+            // 
+            // btnHome
+            // 
+            this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHome.Location = new System.Drawing.Point(1261, 502);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(89, 28);
+            this.btnHome.TabIndex = 41;
+            this.btnHome.Text = "Home";
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // SalesReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 542);
+            this.Controls.Add(this.btnHome);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.lblLineTotal);
@@ -312,6 +328,7 @@
         private System.Windows.Forms.TextBox txtInvoiceNo;
         private System.Windows.Forms.RichTextBox richTextBoxSalesList;
         private System.Windows.Forms.DataGridView dgvSalesList;
+        private System.Windows.Forms.Button btnHome;
 
     }
 }
