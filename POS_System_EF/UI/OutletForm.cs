@@ -109,7 +109,7 @@ namespace POS_System_EF.UI
                 if (_isUpdateMode)
                 {
                     TextBoxValue();
-                    bool isExistContactNo = db.Outlets.Count(c => c.ContactNo == _outlet.ContactNo) > 1;
+                    bool isExistContactNo = db.Outlets.Count(c => c.ContactNo == _outlet.ContactNo && c.Id!=_outlet.Id) > 0;
                     if (isExistContactNo)
                     {
                         MessageBox.Show("Contact no already exist");

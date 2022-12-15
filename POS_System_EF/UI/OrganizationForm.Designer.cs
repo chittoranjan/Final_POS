@@ -76,9 +76,10 @@
             // 
             // btnClear
             // 
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.Location = new System.Drawing.Point(201, 365);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(75, 28);
             this.btnClear.TabIndex = 26;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -86,9 +87,10 @@
             // 
             // btnSave
             // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Location = new System.Drawing.Point(282, 365);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(75, 28);
             this.btnSave.TabIndex = 27;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -181,9 +183,10 @@
             // 
             // buttonUpload
             // 
-            this.buttonUpload.Location = new System.Drawing.Point(295, 198);
+            this.buttonUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonUpload.Location = new System.Drawing.Point(291, 198);
             this.buttonUpload.Name = "buttonUpload";
-            this.buttonUpload.Size = new System.Drawing.Size(62, 23);
+            this.buttonUpload.Size = new System.Drawing.Size(66, 23);
             this.buttonUpload.TabIndex = 30;
             this.buttonUpload.Text = "Upload";
             this.buttonUpload.UseVisualStyleBackColor = true;
@@ -191,9 +194,10 @@
             // 
             // btnClearImage
             // 
-            this.btnClearImage.Location = new System.Drawing.Point(233, 198);
+            this.btnClearImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearImage.Location = new System.Drawing.Point(220, 198);
             this.btnClearImage.Name = "btnClearImage";
-            this.btnClearImage.Size = new System.Drawing.Size(56, 23);
+            this.btnClearImage.Size = new System.Drawing.Size(69, 23);
             this.btnClearImage.TabIndex = 125;
             this.btnClearImage.Text = "Clear";
             this.btnClearImage.UseVisualStyleBackColor = true;
@@ -210,7 +214,7 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(137, 92);
             this.textBox1.TabIndex = 124;
-            this.textBox1.Text = "\r\nImage size must  300 X 300 PX and image format JPEG/JPG.Image size MAX 100KB.";
+            this.textBox1.Text = "Image size must  300 X 300 PX and image format JPEG/JPG.Image size MAX 100KB.";
             // 
             // label7
             // 
@@ -234,9 +238,10 @@
             // 
             // btnDelete
             // 
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Location = new System.Drawing.Point(120, 365);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(75, 28);
             this.btnDelete.TabIndex = 126;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -371,7 +376,6 @@
             this.label6.Size = new System.Drawing.Size(104, 20);
             this.label6.TabIndex = 20;
             this.label6.Text = "Quick Search";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // textSrcQuick
             // 

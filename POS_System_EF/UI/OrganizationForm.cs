@@ -98,7 +98,7 @@ namespace POS_System_EF.UI
                     if (_isUpdateMode)
                     {
                         TextBoxValue();
-                        bool isContactNoExist = db.Organizations.Count(c => c.ContactNo == org.ContactNo) > 1;
+                        bool isContactNoExist = db.Organizations.Count(c => c.ContactNo == org.ContactNo && c.Id!=org.Id) > 0;
                         if (isContactNoExist )
                         {
                             MessageBox.Show("Contact No Allready Exist");
@@ -409,9 +409,5 @@ namespace POS_System_EF.UI
             this.Hide();
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }  
     }
 }

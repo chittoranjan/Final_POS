@@ -502,7 +502,5 @@ namespace POS_System_EF.UI
 
         }
 
-        
-
     }
 }
